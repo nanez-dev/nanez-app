@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
+import LoginLogo from '../../components/LoginLogo/LoginLogo';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -16,15 +17,9 @@ const LoginPage = () => {
   };
   return (
     <Container>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <FastImage
-          source={require('../../assets/images/login_logo.png')}
-          style={{ width: 175, height: 100 }}
-          resizeMode={FastImage.resizeMode.contain}
-        />
-        <Text>향수 통합 플랫폼</Text>
-      </View>
-      <View style={{ flex: 1, paddingHorizontal: 16 }}>
+      {/* 로그인 로고 */}
+      <LoginLogo />
+      <View style={{ flex: 1 }}>
         <TextInput
           autoCapitalize="none"
           autoComplete={'off'}
@@ -80,5 +75,6 @@ export default LoginPage;
 
 const Container = styled.View`
   flex: 1;
+  padding: 0px 16px;
   background-color: white;
 `;

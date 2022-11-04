@@ -11,7 +11,9 @@ function ProgressBar({ step, totalStep }: IProgressBar) {
   const screenWidth = Dimensions.get('screen').width;
   const width = totalStep ? Math.round(screenWidth / totalStep) * step : 0;
 
-  if (!totalStep) return null;
+  if (!totalStep) {
+    return null;
+  }
 
   return (
     <View

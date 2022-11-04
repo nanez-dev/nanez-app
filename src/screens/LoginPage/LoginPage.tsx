@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { useRef, useState } from 'react';
+import { TextInput, Alert } from 'react-native';
 import styled from 'styled-components/native';
-import FastImage from 'react-native-fast-image';
 import LoginLogo from '../../components/LoginLogo/LoginLogo';
+import { useSetRecoilState } from 'recoil';
+import { loginCheck } from '../../atoms/loginCheck';
+import IdAndPwInput from '../../components/IdAndPwInput/IdAndPwInput';
+import LoginBtn from '../../components/LoginBtn/LoginBtn';
+import RegisterBtn from '../../components/RegisterBtn/RegisterBtn';
 
-const LoginPage = () => {
+type LoginScreenProps = NativeStackScreenProps<ParamListBase, 'LoginPage'>;
+
+const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
+  const setIsLogin = useSetRecoilState(loginCheck);
+  const passwordRef = useRef<TextInput>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,58 +25,41 @@ const LoginPage = () => {
   const onChangePasswordValue = (text: string) => {
     setPassword(text);
   };
+
+  const onSubmitEmailEditing = () => {
+    passwordRef.current?.focus();
+  };
+  const onSubmitPasswordEditing = () => {
+    if (email === '' || password === '') {
+      // 추후 모달창으로 디자인틱하게 변경하기
+      return Alert.alert('로그인 에러');
+    } else {
+      setIsLogin(true);
+    }
+  };
+
+  const goToRegister = () => {
+    navigate('Auth', { screen: 'RegisterPage' });
+  };
+
   return (
     <Container>
       {/* 로그인 로고 */}
       <LoginLogo />
-      <View style={{ flex: 1 }}>
-        <TextInput
-          autoCapitalize="none"
-          autoComplete={'off'}
-          autoCorrect={false}
-          placeholder="아이디를 입력해주세요"
-          value={email}
-          onChangeText={onChangeEmailValue}
-          style={{
-            padding: 12,
-            borderWidth: 1,
-            borderColor: '#EFEFEF',
-            borderRadius: 40,
-            marginBottom: 8,
-          }}
-        />
-        <TextInput
-          autoCapitalize="none"
-          autoComplete={'off'}
-          autoCorrect={false}
-          placeholder="패스워드를 입력해주세요"
-          value={password}
-          onChangeText={onChangePasswordValue}
-          secureTextEntry={true}
-          style={{ padding: 12, borderWidth: 1, borderColor: '#EFEFEF', borderRadius: 40 }}
-        />
-        <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 60 }}>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              padding: 12,
-              borderWidth: 1,
-              borderColor: '#EFEFEF',
-              borderRadius: 40,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#65BFC4',
-            }}
-          >
-            <Text style={{ color: 'white', fontSize: 14, fontWeight: '700' }}>로그인</Text>
-          </TouchableOpacity>
-          <Text>회원 정보를 잊으셨나요?</Text>
-        </View>
-      </View>
-      {/* <View style={{ flex: 1, padding: 16, alignItems: 'center', justifyContent: 'center' }}></View> */}
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>나네를 아직 시작하지 않으셨나요?</Text>
-      </View>
+      {/* id, pw */}
+      <IdAndPwInput
+        email={email}
+        onChangeEmailValue={onChangeEmailValue}
+        onSubmitEmailEditing={onSubmitEmailEditing}
+        passwordRef={passwordRef}
+        password={password}
+        onChangePasswordValue={onChangePasswordValue}
+        onSubmitPasswordEditing={onSubmitPasswordEditing}
+      />
+      {/* login btn */}
+      <LoginBtn onSubmitPasswordEditing={onSubmitPasswordEditing} />
+      {/* register */}
+      <RegisterBtn onPress={goToRegister} />
     </Container>
   );
 };

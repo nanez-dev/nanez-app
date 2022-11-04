@@ -14,7 +14,6 @@ const isAxiosError = (error: any): error is AxiosError => {
 const request = async (config: AxiosRequestConfig) => {
   try {
     const response = await axios(config);
-
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {

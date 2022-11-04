@@ -18,7 +18,7 @@ const PerfumeRegProduct = ({ route: { params } }: any) => {
     } else {
       setInputCheck(false);
     }
-  }, [textValue.length]);
+  }, [setInputCheck, textValue.length]);
 
   const goToNextStep = () => {
     if (textValue.length > 1) {

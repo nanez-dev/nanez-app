@@ -7,17 +7,18 @@ import MyPage from '../screens/MyPage/MyPage';
 import COLORS from '../constants/colors';
 import SearchList from '../screens/SearchList/SearchList';
 
-import { useRecoilValue } from 'recoil';
-import { tokenCheck } from '../atoms/tokenCheck';
+// import { useRecoilValue } from 'recoil';
+// import { tokenCheck } from '../atoms/tokenCheck';
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   const isDark = useColorScheme() === 'dark';
-  const isLogin = useRecoilValue(tokenCheck);
+  // const isLogin = useRecoilValue(tokenCheck);
 
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       sceneContainerStyle={{
         backgroundColor: isDark ? COLORS.BLACK_COLOR : COLORS.WHITE_COLOR,
       }}

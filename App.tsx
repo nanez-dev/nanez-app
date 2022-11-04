@@ -1,22 +1,36 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
-import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components/native';
+import Auth from './src/navigation/Auth';
 import Root from './src/navigation/Root';
 import { darkTheme, lightTheme } from './theme';
-import Auth from './src/navigation/Auth';
+import { useRecoilValue } from 'recoil';
+import { loginCheck } from './src/atoms/loginCheck';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => {
+  const navigation = useNavigation();
+  const checkLogin = useRecoilValue(loginCheck);
   const [appIsReady, setAppIsReady] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+
   useEffect(() => {
-    async function prepare() {
+    function prepare() {
       try {
-        // load할 라이브러리들 작성
+        if (checkLogin) {
+          //@ts-ignore
+          navigation.navigate('Tabs', { screen: 'Home' });
+        }
       } catch (e) {
         console.warn(e);
       } finally {
@@ -24,21 +38,20 @@ const App = () => {
       }
     }
     prepare();
-  }, []);
+  }, [checkLogin, navigation]);
 
   const isDark = useColorScheme() === 'dark';
 
   if (!appIsReady) {
     return null;
   }
+
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-          <NavigationContainer>{isLogin ? <Root /> : <Auth />}</NavigationContainer>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        {checkLogin ? <Root /> : <Auth />}
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

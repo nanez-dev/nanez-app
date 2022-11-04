@@ -13,6 +13,7 @@ import {
 } from './MyPage.styles';
 import MenuTab from '../../components/MenuTab/MenuTab';
 import ServiceTab from '../../components/ServiceTab/ServiceTab';
+
 const tempImage = require('../../assets/images/temp_latte.jpeg');
 
 interface IMenuTabProps {
@@ -26,7 +27,7 @@ interface IServiceTabProps {
   title: string;
 }
 
-const MypageView = ({ navigation: { navigate } }: any) => {
+const MypageView = () => {
   const ImageArr: IMenuTabProps[] = [
     {
       title: '위시리스트',

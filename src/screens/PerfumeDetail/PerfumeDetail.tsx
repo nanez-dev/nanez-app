@@ -14,7 +14,7 @@ import {
   NoteImage,
 } from './PerfumeDetail.styles';
 import { useQuery } from '@tanstack/react-query';
-import GoToHomeBtn from '../../components/GoToHomeBtn/GoToHomeBtn';
+import GoToHomeBtn from '../../components/@shared/Button/GoToHomeBtn/GoToHomeBtn';
 import { useNavigation } from '@react-navigation/native';
 import numberWithCommas from '../../utils/numberWithCommas';
 import API from '../../apis/apis';

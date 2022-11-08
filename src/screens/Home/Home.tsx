@@ -6,7 +6,7 @@ import BannerContent from '../../components/@shared/BannerContet/BannerContent';
 import Carousel from '../../components/Carousel/Carousel';
 import Recommend from '../../components/Recommend/Recommend';
 import RecommendBrand from '../../components/Brand/Brand';
-import ProductAddButton from '../../components/ProductAddButton/ProductAddButton';
+import ProductAddButton from '../../components/@shared/Button/ProductAddButton/ProductAddButton';
 
 import RecommendAccord from '../../components/Accord/Accord';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Dimensions } from 'react-native';
-import NextBtn from '../../components/NextBtn/NextBtn';
+import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
 import { useNavigation } from '@react-navigation/native';
 
 const PerfumeRegSuccess = ({ route: { params } }: any) => {

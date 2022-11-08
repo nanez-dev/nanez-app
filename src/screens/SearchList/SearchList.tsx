@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import SearchInput from '../../components/@shared/SearchInput/SearchInput';
-import ProductAddButton from '../../components/ProductAddButton/ProductAddButton';
+import ProductAddButton from '../../components/@shared/Button/ProductAddButton/ProductAddButton';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 

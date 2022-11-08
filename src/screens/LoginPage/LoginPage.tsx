@@ -4,8 +4,6 @@ import React, { useRef, useState } from 'react';
 import { TextInput, Alert } from 'react-native';
 import styled from 'styled-components/native';
 import LoginLogo from '../../components/LoginLogo/LoginLogo';
-import { useSetRecoilState } from 'recoil';
-import { loginCheck } from '../../atoms/loginCheck';
 import IdAndPwInput from '../../components/IdAndPwInput/IdAndPwInput';
 import LoginBtn from '../../components/@shared/Button/LoginBtn/LoginBtn';
 import RegisterBtn from '../../components/@shared/Button/RegisterBtn/RegisterBtn';
@@ -13,7 +11,6 @@ import RegisterBtn from '../../components/@shared/Button/RegisterBtn/RegisterBtn
 type LoginScreenProps = NativeStackScreenProps<ParamListBase, 'LoginPage'>;
 
 const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
-  const setIsLogin = useSetRecoilState(loginCheck);
   const passwordRef = useRef<TextInput>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,7 +31,7 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
       // 추후 모달창으로 디자인틱하게 변경하기
       return Alert.alert('로그인 에러');
     } else {
-      setIsLogin(true);
+      navigate('PublicRouter', { screen: 'Home' });
     }
   };
 

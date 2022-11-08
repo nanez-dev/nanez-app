@@ -21,24 +21,6 @@ const Setting = ({ navigation: { setOptions } }: any) => {
     });
   }, []);
 
-  // const signOutWithKakao = async (): Promise<void> => {
-  //   try {
-  //     const message = await logout();
-
-  //     setIsLogin(false);
-  //     await AsyncStorage.removeItem(STORAGE_KEY, () =>
-  //       //@ts-ignore
-  //       navigation.navigate('Auth', {
-  //         screen: 'OAuth',
-  //       })
-  //     );
-  //     console.log(message);
-  //   } catch (err) {
-  //     // eslint-disable-next-line no-console
-  //     console.error('signOut error', err);
-  //   }
-  // };
-
   return (
     <View style={{ backgroundColor: 'white', height }}>
       <ServiceWrapper>

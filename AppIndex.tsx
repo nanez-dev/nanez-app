@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useColorScheme } from 'react-native';
@@ -10,6 +10,13 @@ import RegisterPage from './src/screens/RegisterPage/RegisterPage';
 import HomeStack from './src/navigation/HomeStack';
 import SearchStack from './src/navigation/SearchStack';
 import MyPageStack from './src/navigation/MyPageStack';
+import OnboardingEmail from './src/screens/RegisterPage/OnboardingEmail';
+import OnboardingPw from './src/screens/RegisterPage/OnboardingPw';
+import OnboardingRePw from './src/screens/RegisterPage/OnboardingRePw';
+import OnboardingGender from './src/screens/RegisterPage/OnboardingGender';
+import OnboardingAge from './src/screens/RegisterPage/OnboardingAge';
+import OnboardingNickname from './src/screens/RegisterPage/OnboardingNickname';
+import OnboardingAccord from './src/screens/RegisterPage/OnboardingAccord';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -104,16 +111,37 @@ const PublicRouter = () => {
 };
 
 const PrivateRouter = () => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator initialRouteName="LoginPage">
-      <Stack.Screen name="LoginPage" component={LoginPage} />
-      <Stack.Screen
-        options={{
+      <Stack.Group screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="LoginPage" component={LoginPage} />
+      </Stack.Group>
+      <Stack.Group
+        screenOptions={{
           title: '회원가입',
+          headerLeft: () => {
+            return (
+              <Ionicons
+                name="chevron-back-outline"
+                size={28}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            );
+          },
         }}
-        name="RegisterPage"
-        component={RegisterPage}
-      />
+      >
+        <Stack.Screen name="RegisterPage" component={RegisterPage} />
+        <Stack.Screen name="OnboardingEmail" component={OnboardingEmail} />
+        <Stack.Screen name="OnboardingPw" component={OnboardingPw} />
+        <Stack.Screen name="OnboardingRePw" component={OnboardingRePw} />
+        <Stack.Screen name="OnboardingGender" component={OnboardingGender} />
+        <Stack.Screen name="OnboardingAge" component={OnboardingAge} />
+        <Stack.Screen name="OnboardingNickname" component={OnboardingNickname} />
+        <Stack.Screen name="OnboardingAccord" component={OnboardingAccord} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };

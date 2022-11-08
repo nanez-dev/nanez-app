@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
-import NextBtn from '../../components/NextBtn/NextBtn';
+import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
 import { useNavigation } from '@react-navigation/native';
 import { useRecoilState } from 'recoil';
 import { isTextWrite } from '../../atoms/atoms';

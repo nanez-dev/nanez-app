@@ -7,8 +7,8 @@ import LoginLogo from '../../components/LoginLogo/LoginLogo';
 import { useSetRecoilState } from 'recoil';
 import { loginCheck } from '../../atoms/loginCheck';
 import IdAndPwInput from '../../components/IdAndPwInput/IdAndPwInput';
-import LoginBtn from '../../components/LoginBtn/LoginBtn';
-import RegisterBtn from '../../components/RegisterBtn/RegisterBtn';
+import LoginBtn from '../../components/@shared/Button/LoginBtn/LoginBtn';
+import RegisterBtn from '../../components/@shared/Button/RegisterBtn/RegisterBtn';
 
 type LoginScreenProps = NativeStackScreenProps<ParamListBase, 'LoginPage'>;
 
@@ -39,7 +39,7 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   };
 
   const goToRegister = () => {
-    navigate('Auth', { screen: 'RegisterPage' });
+    navigate('RegisterPage');
   };
 
   return (

@@ -1,10 +1,12 @@
 import { registerRootComponent } from 'expo';
 
-// import App from './App';
-import AppIndex from './AppIndex';
+// import { AppRegistry } from 'react-native';
+
+import App from './App';
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriately
 
-registerRootComponent(AppIndex);
+registerRootComponent(App);
+// AppRegistry.registerComponent('nanez', () => App);

@@ -66,9 +66,9 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
               <AgreeListContainer key={index} type={i.type}>
                 <Text>{i.content}</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  {i.type !== -1 ? (
+                  {i.type !== -1 && (
                     <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
-                  ) : null}
+                  )}
                   <CheckBox
                     lineWidth={0.5}
                     boxType={'square'}
@@ -81,7 +81,7 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
             );
           })}
         </Wrapper>
-        <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 50 }}>
+        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
           <NextBtn title="동의합니다" bgColor="#65BFC4" onPress={goToNext} />
         </View>
       </Container>
@@ -91,7 +91,7 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
 
 export default RegisterPage;
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
   flex: 1;
   background-color: white;
 `;

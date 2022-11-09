@@ -62,6 +62,19 @@ const API = {
   getPerfumeData: () => {
     return request({ method: 'GET' as Method, url: `${API_KEY}/perfume/information` });
   },
+  postUserEmailSend: <D>(data: D) => {
+    return request({
+      method: 'POST' as Method,
+      url: `${API_KEY}/users/email-send`,
+      data,
+    });
+  },
+  postUserEmailVerify: <T>({ email, code }: { email: T; code: T }) => {
+    return request({
+      method: 'POST' as Method,
+      url: `${API_KEY}/users/email-verify?email=${email}&code=${code}`,
+    });
+  },
 };
 
 export default API;

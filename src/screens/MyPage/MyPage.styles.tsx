@@ -1,25 +1,17 @@
 import styled from 'styled-components/native';
-import { StyleSheet, Image } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import COLORS from '../../constants/colors';
 
-export const styles = StyleSheet.create({
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 16,
-  },
-});
-export const ProfileImage = styled.Image`
+const ProfileImage = styled.Image`
   width: 100px;
   height: 100px;
   border-radius: 50px;
   margin-bottom: 16px;
-` as unknown as typeof Image;
+` as unknown as typeof FastImage;
 
-export const Container = styled.ScrollView``;
+const Container = styled.ScrollView``;
 
-export const Header = styled.View`
+const Header = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -28,29 +20,26 @@ export const Header = styled.View`
   margin-bottom: 16px;
 `;
 
-export const HeaderTitle = styled.Text`
+const HeaderTitle = styled.Text`
   font-size: 20px;
   font-weight: 700;
 `;
 
-export const UserInfo = styled.View`
+const UserInfo = styled.View`
   margin-top: 20px;
   display: flex;
   align-items: center;
 `;
 
-export const UserName = styled.Text`
-  font-size: 20px;
-  font-weight: 700;
-`;
+const UserName = styled(HeaderTitle)``;
 
-export const UserEmail = styled.Text`
+const UserEmail = styled.Text`
   color: #666666;
   font-weight: 400;
   font-size: 14px;
 `;
 
-export const ListCollection = styled.View`
+const ListCollection = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -61,15 +50,26 @@ export const ListCollection = styled.View`
   border-bottom-color: ${COLORS.BORDER_COLOR};
 `;
 
-export const ServiceCollection = styled.View`
+const ServiceCollection = styled.View`
   margin-top: 20px;
   height: 200px;
   display: flex;
   justify-content: space-between;
 `;
 
-export const ServiceTitle = styled.Text`
+const ServiceTitle = styled(HeaderTitle)`
   padding: 24px 16px;
-  font-size: 20px;
-  font-weight: 700;
 `;
+
+export {
+  ProfileImage,
+  Container,
+  Header,
+  HeaderTitle,
+  UserInfo,
+  UserName,
+  UserEmail,
+  ListCollection,
+  ServiceCollection,
+  ServiceTitle,
+};

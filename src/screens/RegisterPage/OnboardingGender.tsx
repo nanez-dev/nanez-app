@@ -8,14 +8,30 @@ import RegisterGenderInput from '../../components/@shared/RegisterGenderInput/Re
 
 type OnboardingGenderScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingGender'>;
 const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderScreenProps) => {
-  console.log(route.params);
+  const [selectedGender, setSelectedGender] = useState('');
+
+  const handleSelectedGender = (text: string) => {
+    setSelectedGender(text);
+  };
+
+  const goToNext = () => {
+    navigate('OnboardingAge', {
+      selectedGender,
+      ...route.params,
+    });
+  };
+
   return (
     <>
       <ProgressBar step={4} totalStep={7} />
       <Container>
         <RegisterHeader title={'성별을\n선택해주세요!'} subtitle={'향수 추천에 사용됩니다'} />
-
-        <RegisterGenderInput label="성별" />
+        <RegisterGenderInput
+          handleSelectedGender={handleSelectedGender}
+          selectedGender={selectedGender}
+          label="성별"
+          goToNext={goToNext}
+        />
       </Container>
     </>
   );

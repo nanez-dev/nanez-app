@@ -1,4 +1,4 @@
-import { TextInput } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.SafeAreaView`
@@ -23,4 +23,20 @@ const Input = styled.TextInput`
   margin-bottom: 8px;
 ` as unknown as typeof TextInput;
 
-export { Container, Label, Input };
+const AuthButton = styled.TouchableOpacity`
+  background-color: #65bfc4;
+  width: 100%;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  margin-top: 8px;
+` as unknown as typeof TouchableOpacity;
+
+const ButtonText = styled.Text`
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+`;
+
+export { Container, Label, Input, AuthButton, ButtonText };

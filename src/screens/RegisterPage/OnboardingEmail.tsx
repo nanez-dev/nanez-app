@@ -1,50 +1,83 @@
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import API from '../../apis/apis';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
+import RegisterEmailInput from '../../components/@shared/RegisterEmailInput/RegisterEmailInput';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
-import RegisterInput from '../../components/@shared/RegisterInput/RegisterInput';
 
-const OnboardingEmail = () => {
-  const [isWrite, setIsWrite] = useState(false);
+type OnboardingEmailScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingEmail'>;
+const OnboardingEmail = ({ navigation: { navigate } }: OnboardingEmailScreenProps) => {
   const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [emailAuth, setEmailAuth] = useState(false);
 
-  const { mutate } = useMutation(() => API.postUserEmailSend<{ email: string }>({ email }), {
-    onSuccess: () => {
-      console.log('success');
-    },
-    onError: (error) => {
-      console.log('error', error);
-    },
-  });
+  const { mutate: onSubmitEmail } = useMutation(
+    () => API.postUserEmailSend<{ email: string }>({ email }),
+    {
+      onSettled: () => {
+        setEmailAuth(true);
+        console.log('success');
+      },
+      onSuccess: () => {
+        setEmailAuth(true);
+        console.log('success');
+      },
+      onError: (error) => {
+        console.log('error', error);
+      },
+    }
+  );
 
-  const onCreate = () => {
-    mutate();
-  };
+  const { mutate: onSubmitAuthNumber } = useMutation(
+    () => API.postUserEmailVerify({ email, code }),
+    {
+      onSettled: () => {
+        navigate('OnboardingPw', {
+          email: email,
+        });
+      },
+      onSuccess: () => {
+        navigate('OnboardingPw', {
+          email: email,
+        });
+      },
+      onError: (error) => {
+        console.log('error', error);
+      },
+    }
+  );
 
   const handleEmailValue = (text: string) => {
     setEmail(text);
   };
 
+  const handleAuthValue = (text: string) => {
+    setCode(text);
+  };
+
   return (
     <>
-      <ProgressBar step={2} totalStep={6} />
+      <ProgressBar step={2} totalStep={7} />
       <Container>
         <RegisterHeader
           title={'로그인에 사용할\n이메일을 입력해주세요!'}
           subtitle={'아이디로 사용됩니다.'}
         />
-        <RegisterInput
+        <RegisterEmailInput
           label="이메일"
-          placeholder="이메일을 입력해주세요"
-          value={email}
+          emailPlaceholder="이메일을 입력해주세요"
+          authPlaceholder="인증번호를 입력해주세요."
+          emailValue={email}
+          authValue={code}
           handleEmailValue={handleEmailValue}
-          onSubmitEmail={onCreate}
+          handleAuthValue={handleAuthValue}
+          onSubmitEmail={onSubmitEmail}
+          onSubmitAuthNumber={onSubmitAuthNumber}
+          emailAuth={emailAuth}
         />
-        <Button isWrite={isWrite}>
-          <DefaultText>다음으로</DefaultText>
-        </Button>
       </Container>
     </>
   );
@@ -57,19 +90,4 @@ const Container = styled.View`
   padding-top: 44px;
   flex: 1;
   background-color: white;
-`;
-
-const Button = styled.TouchableOpacity<{ isWrite: boolean }>`
-  padding: 12px 0px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => (props.isWrite ? '#65BFC4' : '#dbdbdb')};
-  margin-bottom: 40px;
-  border-radius: 50px;
-`;
-
-const DefaultText = styled.Text`
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
 `;

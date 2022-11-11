@@ -69,10 +69,10 @@ const API = {
       data,
     });
   },
-  postUserEmailVerify: <T>({ email, code }: { email: T; code: T }) => {
+  postUserEmailVerify: ({ email, code }: { email: string; code: string }) => {
     return request({
       method: 'POST' as Method,
-      url: `${API_KEY}/users/email-verify?email=${email}&code=${code}`,
+      url: `${API_KEY}/users/email-verify?email=${email && ''}&code=${code && ''}`,
     });
   },
 };

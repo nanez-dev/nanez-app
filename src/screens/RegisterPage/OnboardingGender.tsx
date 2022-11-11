@@ -1,12 +1,31 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
+import styled from 'styled-components/native';
+import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ParamListBase } from '@react-navigation/native';
+import RegisterGenderInput from '../../components/@shared/RegisterGenderInput/RegisterGenderInput';
 
-const OnboardingGender = () => {
+type OnboardingGenderScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingGender'>;
+const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderScreenProps) => {
+  console.log(route.params);
   return (
-    <View>
-      <Text>Hello OnboardingGender page</Text>
-    </View>
+    <>
+      <ProgressBar step={4} totalStep={7} />
+      <Container>
+        <RegisterHeader title={'성별을\n선택해주세요!'} subtitle={'향수 추천에 사용됩니다'} />
+
+        <RegisterGenderInput label="성별" />
+      </Container>
+    </>
   );
 };
 
 export default OnboardingGender;
+
+const Container = styled.View`
+  padding: 0px 16px;
+  padding-top: 44px;
+  flex: 1;
+  background-color: white;
+`;

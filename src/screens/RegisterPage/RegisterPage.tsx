@@ -38,7 +38,7 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
 
   return (
     <>
-      <ProgressBar step={1} totalStep={6} />
+      <ProgressBar step={1} totalStep={7} />
       <Container>
         <Wrapper>
           <FastImage

@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Label, Input, NextButton, ButtonText } from './RegisterPwInput.styles';
+import { Container, Label, Input, NextButton, ButtonText } from './RegisterNicknameInput.styles';
 
-interface IRegisterPwInput {
+interface IRegisterNicknameInput {
   label: string;
   placeholder: string;
-  password: string;
-  handlePasswordValue: (text: string) => void;
+  nickname: string;
+  handleNicknameValue: (text: string) => void;
   goToNext: () => void;
 }
 
-const RegisterPwInput = ({
+const RegisterNicknameInput = ({
   label,
   placeholder,
-  password,
-  handlePasswordValue,
+  nickname,
+  handleNicknameValue,
   goToNext,
-}: IRegisterPwInput) => {
+}: IRegisterNicknameInput) => {
   useEffect(() => {
-    if (password.length > 7) {
+    if (nickname.length > 0) {
       setIsWrite(true);
     } else {
       setIsWrite(false);
     }
-  }, [password]);
+  }, [nickname]);
   const [isWrite, setIsWrite] = useState(false);
   return (
     <Container>
@@ -33,9 +33,8 @@ const RegisterPwInput = ({
         autoCorrect={false}
         placeholderTextColor={'#999999'}
         placeholder={placeholder}
-        value={password}
-        onChangeText={handlePasswordValue}
-        secureTextEntry={true}
+        value={nickname}
+        onChangeText={handleNicknameValue}
       />
       <NextButton onPress={isWrite ? goToNext : null} isWrite={isWrite}>
         <ButtonText>다음으로</ButtonText>
@@ -44,4 +43,4 @@ const RegisterPwInput = ({
   );
 };
 
-export default RegisterPwInput;
+export default RegisterNicknameInput;

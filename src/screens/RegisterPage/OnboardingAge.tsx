@@ -23,7 +23,7 @@ const OnboardingAge = ({ navigation: { navigate }, route }: OnboardingAgeScreenP
 
   return (
     <>
-      <ProgressBar step={5} totalStep={7} />
+      <ProgressBar step={5} totalStep={8} />
       <Container>
         <RegisterHeader title={'연령대를 \n선택해주세요'} subtitle="향수 추천에 사용됩니다." />
         <RegisterAgeInput

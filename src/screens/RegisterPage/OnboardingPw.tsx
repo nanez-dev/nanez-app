@@ -30,7 +30,7 @@ const OnboardingPw = ({ navigation: { navigate }, route }: OnboardingPwScreenPro
 
   return (
     <>
-      <ProgressBar step={3} totalStep={7} />
+      <ProgressBar step={3} totalStep={8} />
       <Container>
         <RegisterHeader
           title={'로그인에 사용할\n비밀번호를 입력해주세요!'}

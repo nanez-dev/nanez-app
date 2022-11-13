@@ -31,7 +31,7 @@ const OnboardingNickname = ({ navigation: { navigate }, route }: OnboardingNickn
 
   return (
     <>
-      <ProgressBar step={6} totalStep={7} />
+      <ProgressBar step={6} totalStep={8} />
       <Container>
         <RegisterHeader title={'나네에서 부를\n이름을 정해주세요!'} subtitle="별명도 좋아요" />
         <RegisterNicknameInput

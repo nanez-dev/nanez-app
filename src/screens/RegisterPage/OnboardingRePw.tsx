@@ -30,7 +30,7 @@ const OnboardingRePw = ({ navigation: { navigate }, route }: OnboardingRePwScree
 
   return (
     <>
-      <ProgressBar step={3} totalStep={7} />
+      <ProgressBar step={3} totalStep={8} />
       <Container>
         <RegisterHeader
           title={'비밀번호를\n다시 한 번 입력해주세요!'}

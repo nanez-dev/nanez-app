@@ -60,7 +60,7 @@ const OnboardingEmail = ({ navigation: { navigate } }: OnboardingEmailScreenProp
 
   return (
     <>
-      <ProgressBar step={2} totalStep={7} />
+      <ProgressBar step={2} totalStep={8} />
       <Container>
         <RegisterHeader
           title={'로그인에 사용할\n이메일을 입력해주세요!'}

@@ -23,7 +23,7 @@ const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderS
 
   return (
     <>
-      <ProgressBar step={4} totalStep={7} />
+      <ProgressBar step={4} totalStep={8} />
       <Container>
         <RegisterHeader title={'성별을\n선택해주세요!'} subtitle={'향수 추천에 사용됩니다'} />
         <RegisterGenderInput

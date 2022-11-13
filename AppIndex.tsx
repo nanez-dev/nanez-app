@@ -17,6 +17,7 @@ import OnboardingGender from './src/screens/RegisterPage/OnboardingGender';
 import OnboardingAge from './src/screens/RegisterPage/OnboardingAge';
 import OnboardingNickname from './src/screens/RegisterPage/OnboardingNickname';
 import OnboardingAccord from './src/screens/RegisterPage/OnboardingAccord';
+import OnboardingResult from './src/screens/RegisterPage/OnboardingResult';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -141,6 +142,7 @@ const PrivateRouter = () => {
         <Stack.Screen name="OnboardingAge" component={OnboardingAge} />
         <Stack.Screen name="OnboardingNickname" component={OnboardingNickname} />
         <Stack.Screen name="OnboardingAccord" component={OnboardingAccord} />
+        <Stack.Screen name="OnboardingResult" component={OnboardingResult} />
       </Stack.Group>
     </Stack.Navigator>
   );

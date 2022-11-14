@@ -30,7 +30,7 @@ type RootStackParamList = {
 
 type DetailScreenProps = NativeStackScreenProps<RootStackParamList, 'PerfumeDetail'>;
 
-const PerfumeDetail = ({ route: { params } }: any) => {
+const PerfumeDetail = ({ route: { params } }: DetailScreenProps) => {
   const navigation = useNavigation<any>();
   const goToHome = () => {
     navigation.navigate('Tabs', {

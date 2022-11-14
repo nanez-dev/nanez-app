@@ -114,7 +114,7 @@ const PublicRouter = () => {
 const PrivateRouter = () => {
   const navigation = useNavigation();
   return (
-    <Stack.Navigator initialRouteName="LoginPage">
+    <Stack.Navigator initialRouteName="OnboardingAccord">
       <Stack.Group screenOptions={{ headerShown: false }}>
         <Stack.Screen name="LoginPage" component={LoginPage} />
       </Stack.Group>

@@ -7,11 +7,11 @@ import { ActivityIndicator, Image, Text, View } from 'react-native';
 import FlexBox from '../../components/@shared/FlexBox/FlexBox';
 import COLORS from '../../constants/colors';
 
-interface IAccords {
+export interface IAccords {
   accords: IAccord[];
 }
 
-interface IAccord {
+export interface IAccord {
   eng: string;
   id: number;
   image: string;

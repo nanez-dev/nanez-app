@@ -37,7 +37,7 @@ const RegisterNicknameInput = ({
         onChangeText={handleNicknameValue}
       />
       <NextButton onPress={isWrite ? goToNext : null} isWrite={isWrite}>
-        <ButtonText>다음으로</ButtonText>
+        <ButtonText>정했어요!</ButtonText>
       </NextButton>
     </Container>
   );

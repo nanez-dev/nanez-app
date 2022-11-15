@@ -17,10 +17,6 @@ const OnboardingEmail = ({ navigation: { navigate } }: OnboardingEmailScreenProp
   const { mutate: onSubmitEmail } = useMutation(
     () => API.postUserEmailSend<{ email: string }>({ email }),
     {
-      onSettled: () => {
-        setEmailAuth(true);
-        console.log('success');
-      },
       onSuccess: () => {
         setEmailAuth(true);
         console.log('success');
@@ -34,11 +30,6 @@ const OnboardingEmail = ({ navigation: { navigate } }: OnboardingEmailScreenProp
   const { mutate: onSubmitAuthNumber } = useMutation(
     () => API.postUserEmailVerify({ email, code }),
     {
-      onSettled: () => {
-        navigate('OnboardingPw', {
-          email: email,
-        });
-      },
       onSuccess: () => {
         navigate('OnboardingPw', {
           email: email,

@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useColorScheme } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { darkTheme, lightTheme } from './theme';
@@ -12,6 +12,8 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
+      suspense: true,
+      retry: 2,
     },
   },
 });
@@ -21,9 +23,11 @@ const Nanez = () => {
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <AppIndex />
-        </QueryClientProvider>
+        <Suspense fallback={null}>
+          <QueryClientProvider client={queryClient}>
+            <AppIndex />
+          </QueryClientProvider>
+        </Suspense>
       </RecoilRoot>
     </ThemeProvider>
   );

@@ -10,7 +10,7 @@ interface NextBtnProps {
 
 const NextBtn = ({ title, onPress, bgColor }: NextBtnProps) => {
   return (
-    <Pressable onPress={onPress} style={{ width: '100%', alignItems: 'center' }}>
+    <Pressable onPress={onPress} style={{ width: '100%', alignItems: 'center', flex: 0.4 }}>
       <NextButton color={bgColor}>
         <ButtonContent>{title}</ButtonContent>
       </NextButton>

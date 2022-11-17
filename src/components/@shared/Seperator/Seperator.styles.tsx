@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components/native";
+import React from 'react';
+import styled from 'styled-components/native';
 
 export const Seperator = styled.View<React.CSSProperties>`
   width: ${(props) => props.width ?? 0};

@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, ScrollView, SafeAreaView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { IData } from '../../components/Recommend/Recommend';
 import { isClick } from '../../atoms/atoms';
 import { useRecoilState } from 'recoil';
 import {
@@ -15,36 +14,30 @@ import {
 } from './PerfumeDetail.styles';
 import { useQuery } from '@tanstack/react-query';
 import GoToHomeBtn from '../../components/@shared/Button/GoToHomeBtn/GoToHomeBtn';
-import { useNavigation } from '@react-navigation/native';
+import { ParamListBase } from '@react-navigation/native';
 import numberWithCommas from '../../utils/numberWithCommas';
 import API from '../../apis/apis';
 
 const imagePath1 = require('../../assets/images/perfume01.png');
-const imagePath2 = require('../../assets/images/perfume02.png');
-const imagePath3 = require('../../assets/images/perfume02.png');
+// const imagePath2 = require('../../assets/images/perfume02.png');
+// const imagePath3 = require('../../assets/images/perfume02.png');
 
-type RootStackParamList = {
-  // screen이름 : Params
-  PerfumeDetail: IData;
-};
+type DetailScreenProps = NativeStackScreenProps<ParamListBase, 'PerfumeDetail'>;
+const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScreenProps) => {
+  const { brand, kor, eng, volume, cost }: any = params;
+  const [isClickCheck, setIsClickCheck] = useRecoilState(isClick);
 
-type DetailScreenProps = NativeStackScreenProps<RootStackParamList, 'PerfumeDetail'>;
-
-const PerfumeDetail = ({ route: { params } }: DetailScreenProps) => {
-  const navigation = useNavigation<any>();
   const goToHome = () => {
-    navigation.navigate('Tabs', {
-      screen: 'Home',
-    });
+    goBack();
   };
-  const [isClickCheck, setIsClickCheck] = useRecoilState<boolean>(isClick);
+
   const handleClickCheck = () => {
     setIsClickCheck((prev) => !prev);
   };
 
   const { isLoading: accordLoading, data: accordData } = useQuery(['accord'], API.getAllAccords);
   const { isLoading: noteLoading, data: noteData } = useQuery(['note'], API.getAllNotes);
-  const { isLoading: perfumeLoading, data: perfumeData } = useQuery(['note'], API.getPerfumeData);
+  // const { isLoading: perfumeLoading, data: perfumeData } = useQuery(['note'], API.getPerfumeData);
 
   const loading = accordLoading || noteLoading;
   return loading ? (
@@ -59,16 +52,14 @@ const PerfumeDetail = ({ route: { params } }: DetailScreenProps) => {
         </View>
         <ProductInfo>
           <View>
-            <Text style={{ fontSize: 11, fontWeight: '400', color: '#666666' }}>
-              {params.brand}
-            </Text>
-            <Text style={{ fontSize: 16, fontWeight: '700', marginTop: 4 }}>{params.eng}</Text>
+            <Text style={{ fontSize: 11, fontWeight: '400', color: '#666666' }}>{brand}</Text>
+            <Text style={{ fontSize: 16, fontWeight: '700', marginTop: 4 }}>{eng}</Text>
             <Text style={{ fontSize: 16, fontWeight: '700', marginBottom: 8 }}>
-              {params.kor}
-              {params.volume}
+              {kor}
+              {volume}
             </Text>
             <Text style={{ fontSize: 24, fontWeight: '700', color: '#F05028' }}>
-              {numberWithCommas(params.cost)}
+              {numberWithCommas(cost)}
             </Text>
           </View>
           <Pressable style={{ flexDirection: 'row' }}>

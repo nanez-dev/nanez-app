@@ -10,7 +10,7 @@ import {
   ServiceCollection,
   ServiceTitle,
   ProfileImage,
-} from './MyPage.styles';
+} from './ProfilePage.styles';
 import MenuTab from '../../components/MenuTab/MenuTab';
 import ServiceTab from '../../components/ServiceTab/ServiceTab';
 
@@ -27,7 +27,7 @@ interface IServiceTabProps {
   title: string;
 }
 
-const MypageView = () => {
+const ProfilePage = () => {
   const ImageArr: IMenuTabProps[] = [
     {
       title: '위시리스트',
@@ -48,11 +48,6 @@ const MypageView = () => {
       icon: 'volume-high',
       screen: 'Notice',
       title: '공지사항',
-    },
-    {
-      icon: 'create',
-      screen: 'Terms',
-      title: '이용약관',
     },
     {
       icon: 'settings',
@@ -90,4 +85,4 @@ const MypageView = () => {
   );
 };
 
-export default MypageView;
+export default ProfilePage;

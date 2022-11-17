@@ -6,7 +6,7 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   font-size: 20px;
-  padding: 0 16px;
+  padding: 0 24px;
   font-weight: 700;
   margin-bottom: 16px;
 `;

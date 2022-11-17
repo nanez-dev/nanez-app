@@ -3,10 +3,10 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { CSSProperties } from 'styled-components';
 
 export const ProductButton = styled.TouchableOpacity<CSSProperties>`
-  width: 80%;
+  width: 88%;
   height: 40px;
-  background: #e7862d;
-  border-radius: 8px;
+  background: #65bfc4;
+  border-radius: 50px;
   justify-content: center;
   align-items: center;
 ` as unknown as typeof TouchableOpacity;

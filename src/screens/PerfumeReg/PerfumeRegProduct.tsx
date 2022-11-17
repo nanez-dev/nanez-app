@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Dimensions } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
-import { useNavigation } from '@react-navigation/native';
+import { ParamListBase } from '@react-navigation/native';
 import { useRecoilState } from 'recoil';
 import { isTextWrite } from '../../atoms/atoms';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const PerfumeRegProduct = ({ route: { params } }: any) => {
+type RegProductScreenProps = NativeStackScreenProps<ParamListBase, 'AddProduct'>;
+const PerfumeRegProduct = ({ navigation: { navigate }, route }: RegProductScreenProps) => {
   const { height: screenHeight } = Dimensions.get('screen');
   const [inputCheck, setInputCheck] = useRecoilState(isTextWrite);
   const [textValue, setTextValue] = useState('');
-  const navigation = useNavigation();
   useEffect(() => {
     if (textValue.length > 1) {
       setInputCheck(true);
@@ -22,13 +22,9 @@ const PerfumeRegProduct = ({ route: { params } }: any) => {
 
   const goToNextStep = () => {
     if (textValue.length > 1) {
-      //@ts-ignore
-      navigation.navigate('Perfume', {
-        screen: 'addPerfumeSuccess',
-        params: {
-          ...params,
-          product: textValue,
-        },
+      navigate('AddSuccess', {
+        product: textValue,
+        ...route.params,
       });
     } else {
       return null;
@@ -60,7 +56,7 @@ const PerfumeRegProduct = ({ route: { params } }: any) => {
         />
       </View>
       <NextBtn
-        bgColor={inputCheck ? '#e7862d' : '#DBDBDB'}
+        bgColor={inputCheck ? '#65BFC4' : '#DBDBDB'}
         title="요청하기"
         onPress={goToNextStep}
       />

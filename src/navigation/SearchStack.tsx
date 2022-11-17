@@ -5,8 +5,8 @@ import SearchList from '../screens/SearchList/SearchList';
 const Stack = createNativeStackNavigator();
 const SearchStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="SeachList" component={SearchList} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="SearchPage" component={SearchList} />
     </Stack.Navigator>
   );
 };

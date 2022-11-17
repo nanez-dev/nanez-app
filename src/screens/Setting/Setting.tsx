@@ -15,12 +15,6 @@ const Setting = ({ navigation: { setOptions } }: any) => {
   const setIsLogin = useSetRecoilState(loginCheck);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  useEffect(() => {
-    setOptions({
-      title: '설정',
-    });
-  }, []);
-
   return (
     <View style={{ backgroundColor: 'white', height }}>
       <ServiceWrapper>

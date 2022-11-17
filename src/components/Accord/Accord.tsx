@@ -47,7 +47,7 @@ const RecommendAccord = ({ title, text }: IRecommendAccord) => {
       <FlatList<{ image: string; kor: string }>
         data={accordData.accords}
         contentContainerStyle={{
-          paddingHorizontal: 12,
+          paddingHorizontal: 24,
         }}
         renderItem={({ item }) => <AccordCard item={item} />}
         showsHorizontalScrollIndicator={false}

@@ -1,9 +1,8 @@
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  padding-top: 16px;
   align-items: center;
-  margin: 0 8px;
+  margin-right: 8px;
   align-items: center;
 `;
 

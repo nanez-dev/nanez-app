@@ -1,7 +1,6 @@
 import React from 'react';
-import { Dimensions, ImageSourcePropType, ViewStyle } from 'react-native';
+import { ImageSourcePropType, ViewStyle } from 'react-native';
 import { PageItem, Banner } from './CarouselCard.styles';
-import Swiper from 'react-native-swiper';
 
 interface IProps {
   item: {

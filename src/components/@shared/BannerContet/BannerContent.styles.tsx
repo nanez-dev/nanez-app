@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const BannerContainer = styled.View`
   padding-left: 24px;
   margin-top: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 `;
 
 export const BannerContentTitle = styled.Text`

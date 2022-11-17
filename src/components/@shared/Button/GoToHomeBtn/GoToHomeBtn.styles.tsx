@@ -5,7 +5,7 @@ import { CSSProperties } from 'styled-components';
 export const GoToHomeButton = styled.View<CSSProperties>`
   width: 80%;
   height: 40px;
-  background: #e7862d;
+  background: #65bfc4;
   border-radius: 8px;
   justify-content: center;
   align-items: center;

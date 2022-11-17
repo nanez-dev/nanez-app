@@ -1,9 +1,9 @@
-import { TextInput } from 'react-native';
 import styled from 'styled-components/native';
 
-const Container = styled.SafeAreaView`
+const Container = styled.View`
   flex: 1;
-  margin-top: 60px;
+  align-items: center;
+  margin: 20px 0px; ;
 `;
 
 const SearchBox = styled.View`
@@ -18,10 +18,10 @@ const SearchBox = styled.View`
   align-items: center;
 `;
 
-const SearchTextInput = styled.TextInput`
+const SearchText = styled.Text`
   font-size: 14px;
   color: #999999;
   margin-left: 8px;
-` as unknown as typeof TextInput;
+`;
 
-export { SearchBox, SearchTextInput, Container };
+export { SearchBox, SearchText, Container };

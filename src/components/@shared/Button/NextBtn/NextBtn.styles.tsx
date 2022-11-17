@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
 import { CSSProperties } from 'styled-components';
@@ -7,7 +6,7 @@ export const NextButton = styled.View<CSSProperties>`
   width: 80%;
   height: 40px;
   background: ${(props) => props.color};
-  border-radius: 8px;
+  border-radius: 50px;
   justify-content: center;
   align-items: center;
 `;

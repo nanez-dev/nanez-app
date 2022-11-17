@@ -7,6 +7,8 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'off',
         'react-native/no-inline-styles': 0,
         '@typescript-eslint/no-shadow': ['error'],
         'no-shadow': 'off',

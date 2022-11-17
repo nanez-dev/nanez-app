@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
-import { useNavigation } from '@react-navigation/native';
+import { ParamListBase } from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+const RegLogo = require('../../assets/images/logo.jpeg');
 
-const PerfumeRegSuccess = ({ route: { params } }: any) => {
+type RegSuccessScreenProps = NativeStackScreenProps<ParamListBase, 'AddSuccess'>;
+const PerfumeRegSuccess = ({ navigation: { navigate }, route }: RegSuccessScreenProps) => {
   const { height: screenHeight } = Dimensions.get('screen');
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    console.log(params);
-  }, []);
+  console.log(route);
 
   const goToHome = () => {
-    //@ts-ignore
-    navigation.navigate('Tabs', {
-      screen: 'Home',
-    });
+    navigate('HomePage');
   };
 
   return (
@@ -27,8 +24,9 @@ const PerfumeRegSuccess = ({ route: { params } }: any) => {
         <Text style={{ fontSize: 14, fontWeight: '400', color: '#999999', marginBottom: 48 }}>
           등록이 완료되면 알려드리도록 할게요.
         </Text>
+        <FastImage source={RegLogo} style={{ width: 240, height: 240, borderRadius: 120 }} />
       </View>
-      <NextBtn bgColor="#e7862d" title="메인으로" onPress={goToHome} />
+      <NextBtn bgColor="#65BFC4" title="메인으로" onPress={goToHome} />
     </View>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 
 import BannerContent from '../../components/@shared/BannerContet/BannerContent';
@@ -12,11 +11,11 @@ import RecommendAccord from '../../components/Accord/Accord';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 
+import HomeInput from '../../components/@shared/HomeInput/HomeInput';
+
 const imagePath = require('../../assets/images/banner.png');
 
-// const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-
-type HomeScreenProps = NativeStackScreenProps<ParamListBase, 'Home'>;
+type HomeScreenProps = NativeStackScreenProps<ParamListBase, 'HomePage'>;
 const Home = ({ navigation: { navigate } }: HomeScreenProps) => {
   const month = new Date().getMonth() + 1;
   const [bannerPage, setBannerPage] = useState(0);
@@ -34,6 +33,7 @@ const Home = ({ navigation: { navigate } }: HomeScreenProps) => {
 
   return (
     <Container showsVerticalScrollIndicator={false}>
+      <HomeInput />
       <Carousel pages={pages} onChange={(page) => setBannerPage(page)} />
       <BannerContent />
       {/* 향수 추천 FlatList */}
@@ -42,11 +42,14 @@ const Home = ({ navigation: { navigate } }: HomeScreenProps) => {
       <RecommendBrand title="지금 사랑받고 있는 브랜드" text="전체보기" />
       {/* 어코드 FlatList */}
       <RecommendAccord title={`${month}월에 어울리는 핫한 어코드`} text="전체보기" />
-      <ProductAddButton onPress={() => navigate('Perfume', { screen: 'addPerfumeBrand' })} />
+      <ProductAddButton onPress={() => navigate('AddBrand')} />
     </Container>
   );
 };
 
 export default Home;
 
-const Container = styled.ScrollView`` as unknown as typeof ScrollView;
+const Container = styled.ScrollView`
+  background-color: white;
+  margin-top: 80px;
+`;

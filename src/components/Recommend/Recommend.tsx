@@ -73,7 +73,7 @@ const Recommend = () => {
       <Title>이런 향수는 어떠세요?</Title>
       <FlatList<IData>
         contentContainerStyle={{
-          paddingHorizontal: 12,
+          paddingHorizontal: 24,
         }}
         horizontal
         data={data}

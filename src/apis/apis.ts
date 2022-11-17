@@ -41,8 +41,14 @@ axios.interceptors.request.use(
 );
 
 const API = {
-  getAllPerfumes: () => {
-    return request({ method: 'GET' as Method, url: `${API_KEY}/perfume` });
+  getPerfumeInfo: () => {
+    return request({ method: 'GET' as Method, url: `${API_KEY}/perfume/information` });
+  },
+  getPerfume: ({ submitValue }: { submitValue: string }) => {
+    return request({
+      method: 'GET' as Method,
+      url: `${API_KEY}/perfume?name=${submitValue}&offset=0&limit=10`,
+    });
   },
   getAllNotes: () => {
     return request({ method: 'GET' as Method, url: `${API_KEY}/note` });
@@ -72,7 +78,14 @@ const API = {
   postUserEmailVerify: ({ email, code }: { email: string; code: string }) => {
     return request({
       method: 'POST' as Method,
-      url: `${API_KEY}/users/email-verify?email=${email && ''}&code=${code && ''}`,
+      url: `${API_KEY}/users/email-verify?email=${email}&code=${code}`,
+    });
+  },
+  postUserSignup: <D>(data: D) => {
+    return request({
+      method: 'POST' as Method,
+      url: `${API_KEY}/users/signup`,
+      data,
     });
   },
 };

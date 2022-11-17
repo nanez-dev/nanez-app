@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,7 +9,7 @@ import LoginPage from './src/screens/LoginPage/LoginPage';
 import RegisterPage from './src/screens/RegisterPage/RegisterPage';
 import HomeStack from './src/navigation/HomeStack';
 import SearchStack from './src/navigation/SearchStack';
-import MyPageStack from './src/navigation/MyPageStack';
+import MyPageStack from './src/navigation/ProfileStack';
 import OnboardingEmail from './src/screens/RegisterPage/OnboardingEmail';
 import OnboardingPw from './src/screens/RegisterPage/OnboardingPw';
 import OnboardingRePw from './src/screens/RegisterPage/OnboardingRePw';
@@ -18,25 +18,18 @@ import OnboardingAge from './src/screens/RegisterPage/OnboardingAge';
 import OnboardingNickname from './src/screens/RegisterPage/OnboardingNickname';
 import OnboardingAccord from './src/screens/RegisterPage/OnboardingAccord';
 import OnboardingResult from './src/screens/RegisterPage/OnboardingResult';
+import { useRecoilValue } from 'recoil';
+import { getLoginUser } from './src/atoms/user/selector';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const AppIndex = () => {
-  const [loginUser, setLoginUser] = useState();
-  const [isLogin, setIsLogin] = useState(false);
-
-  useEffect(() => {
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  // const isLogin = loginUser?.isLogin || false;
+  const loginUser = useRecoilValue(getLoginUser);
+  const isLoggedin = loginUser?.isLoggedin || false;
 
   return (
-    <NavigationContainer>{isLogin ? <PublicRouter /> : <PrivateRouter />}</NavigationContainer>
+    <NavigationContainer>{isLoggedin ? <PublicRouter /> : <PublicRouter />}</NavigationContainer>
   );
 };
 
@@ -68,16 +61,13 @@ const PublicRouter = () => {
           fontSize: 12,
           fontWeight: '600',
         },
+        headerShown: false,
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeStack}
         options={{
-          title: 'Na`nez',
-          headerTitleStyle: {
-            color: 'orange',
-          },
           tabBarIcon: ({ focused, color, size }) => {
             return <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={size} />;
           },
@@ -87,7 +77,6 @@ const PublicRouter = () => {
         name="SearchList"
         component={SearchStack}
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <Ionicons name={focused ? 'search' : 'search-outline'} color={color} size={size} />
@@ -96,10 +85,9 @@ const PublicRouter = () => {
         }}
       />
       <Tab.Screen
-        name="MyPage"
+        name="Profile"
         component={MyPageStack}
         options={{
-          title: '마이페이지',
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <Ionicons name={focused ? 'person' : 'person-outline'} color={color} size={size} />
@@ -114,7 +102,7 @@ const PublicRouter = () => {
 const PrivateRouter = () => {
   const navigation = useNavigation();
   return (
-    <Stack.Navigator initialRouteName="OnboardingAccord">
+    <Stack.Navigator initialRouteName="LoginPage">
       <Stack.Group screenOptions={{ headerShown: false }}>
         <Stack.Screen name="LoginPage" component={LoginPage} />
       </Stack.Group>

@@ -13,9 +13,7 @@ const ServiceTab = ({ icon, screen, title }: IServiceTabProps) => {
   const navigation = useNavigation();
   const goToMyPageList = () => {
     //@ts-ignore
-    navigation.navigate('MyPageList', {
-      screen: screen,
-    });
+    navigation.navigate(screen);
   };
   return (
     <ServiceWrapper onPress={goToMyPageList}>

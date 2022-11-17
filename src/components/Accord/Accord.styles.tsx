@@ -4,7 +4,8 @@ const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  padding: 0 16px;
+  margin-left: 24px;
+  margin-right: 13px;
   margin-bottom: 16px;
 `;
 const Title = styled.Text`

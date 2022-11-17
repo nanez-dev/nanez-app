@@ -13,14 +13,11 @@ interface IData {
 }
 
 const RecommendCard = ({ item }: { item: IData }) => {
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
   const goToDetail = () => {
     //@ts-ignore
-    navigation.navigate('Detail', {
-      screen: 'PerfumeDetail',
-      params: {
-        ...item,
-      },
+    navigate('PerfumeDetail', {
+      ...item,
     });
   };
   return (

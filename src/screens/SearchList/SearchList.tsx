@@ -1,27 +1,18 @@
 import React from 'react';
-import { View, Text, ScrollView, SafeAreaView } from 'react-native';
-import SearchInput from '../../components/@shared/SearchInput/SearchInput';
+
 import ProductAddButton from '../../components/@shared/Button/ProductAddButton/ProductAddButton';
 import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import SearchInput from '../../components/@shared/SearchInput/SearchInput';
 
-const SearchList = () => {
-  const navigation = useNavigation();
-  const goToPerfumeRegister = () => {
-    //@ts-ignore
-    navigation.navigate('Perfume', {
-      screen: 'addPerfumeBrand',
-    });
-  };
+type SearchListScreenProps = NativeStackScreenProps<ParamListBase, 'SearchPage'>;
+const SearchList = ({ navigation: { navigate } }: SearchListScreenProps) => {
   return (
-    <>
-      <Container>
-        <SafeAreaView>
-          <SearchInput />
-        </SafeAreaView>
-      </Container>
-      <ProductAddButton onPress={goToPerfumeRegister} />
-    </>
+    <Container>
+      <SearchInput />
+      <ProductAddButton onPress={() => navigate('AddBrand')} />
+    </Container>
   );
 };
 
@@ -29,4 +20,5 @@ export default SearchList;
 
 const Container = styled.View`
   flex: 1;
+  background-color: white;
 `;

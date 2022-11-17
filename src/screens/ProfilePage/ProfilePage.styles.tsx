@@ -2,14 +2,16 @@ import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 import COLORS from '../../constants/colors';
 
+const Container = styled.ScrollView`
+  background-color: white;
+`;
+
 const ProfileImage = styled.Image`
   width: 100px;
   height: 100px;
   border-radius: 50px;
   margin-bottom: 16px;
 ` as unknown as typeof FastImage;
-
-const Container = styled.ScrollView``;
 
 const Header = styled.View`
   display: flex;

@@ -9,7 +9,7 @@ const PerfumeImage = styled.Image`
 `;
 const Card = styled.View`
   padding: 110px 12px 0;
-  margin: 0 8px;
+  margin-right: 8px;
   width: 160px;
   height: 190px;
   border-radius: 8px;

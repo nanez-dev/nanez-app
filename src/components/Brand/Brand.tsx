@@ -44,7 +44,7 @@ const RecommendBrand = ({ title, text }: IRecommendBrand) => {
       <FlatList<{ image: ImageSourcePropType; name: string; id: number }>
         data={perfumeData}
         contentContainerStyle={{
-          paddingHorizontal: 12,
+          paddingHorizontal: 24,
         }}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => <BrandCard item={item} />}

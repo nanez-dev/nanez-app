@@ -18,8 +18,12 @@ import OnboardingAge from './src/screens/RegisterPage/OnboardingAge';
 import OnboardingNickname from './src/screens/RegisterPage/OnboardingNickname';
 import OnboardingAccord from './src/screens/RegisterPage/OnboardingAccord';
 import OnboardingResult from './src/screens/RegisterPage/OnboardingResult';
+import OnboardingEvent from './src/screens/RegisterPage/OnboardingEvent';
 import { useRecoilValue } from 'recoil';
 import { getLoginUser } from './src/atoms/user/selector';
+import ServicePage from './src/screens/ServicePage/ServicePage';
+import InformationPage from './src/screens/ServicePage/InformationPage';
+import PromotionPage from './src/screens/ServicePage/PromotionPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -29,7 +33,7 @@ const AppIndex = () => {
   const isLoggedin = loginUser?.isLoggedin || false;
 
   return (
-    <NavigationContainer>{isLoggedin ? <PublicRouter /> : <PublicRouter />}</NavigationContainer>
+    <NavigationContainer>{isLoggedin ? <PublicRouter /> : <PrivateRouter />}</NavigationContainer>
   );
 };
 
@@ -130,7 +134,13 @@ const PrivateRouter = () => {
         <Stack.Screen name="OnboardingAge" component={OnboardingAge} />
         <Stack.Screen name="OnboardingNickname" component={OnboardingNickname} />
         <Stack.Screen name="OnboardingAccord" component={OnboardingAccord} />
+        <Stack.Screen name="OnboardingEvent" component={OnboardingEvent} />
         <Stack.Screen name="OnboardingResult" component={OnboardingResult} />
+        <Stack.Group>
+          <Stack.Screen name="Service" component={ServicePage} />
+          <Stack.Screen name="Information" component={InformationPage} />
+          <Stack.Screen name="Promotion" component={PromotionPage} />
+        </Stack.Group>
       </Stack.Group>
     </Stack.Navigator>
   );

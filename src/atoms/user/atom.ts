@@ -6,7 +6,6 @@ const loginUserState = atom({
     isLoggedin: false,
     nickname: '',
     email: '',
-    password: '',
     gender: '',
     age_group: '',
     profile_image: '',

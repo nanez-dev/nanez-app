@@ -12,12 +12,11 @@ const getLoginUser = selector({
 
     return loginUser;
   },
-  set: ({ set }, { nickname, email, password, gender, age_group, profile_image }: any) => {
+  set: ({ set }, { nickname, email, gender, age_group, profile_image }: any) => {
     set(loginUserState, {
       isLoggedin: true,
       nickname,
       email,
-      password,
       gender,
       age_group,
       profile_image,

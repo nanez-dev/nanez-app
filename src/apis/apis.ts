@@ -36,6 +36,14 @@ const request = async (config: AxiosRequestConfig) => {
 
 axios.interceptors.request.use(
   (config) => {
+    if (!config.headers.Authorization) {
+      const token = getLocalStorageItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
+
     return config;
   },
   (error) => Promise.reject(error)

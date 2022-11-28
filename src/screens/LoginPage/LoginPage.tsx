@@ -9,6 +9,7 @@ import LoginBtn from '../../components/@shared/Button/LoginBtn/LoginBtn';
 import RegisterBtn from '../../components/@shared/Button/RegisterBtn/RegisterBtn';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import API from '../../apis/apis';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type LoginScreenProps = NativeStackScreenProps<ParamListBase, 'LoginPage'>;
 
@@ -21,19 +22,15 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
 
   const { mutate } = useMutation(() => API.postUserSignin({ email, password }), {
     onSuccess: (item) => {
-      setToken(item.access_token);
+      if (item) {
+        setToken(item.access_token);
+        AsyncStorage.setItem('refresh_token', item.refresh_token);
+      }
     },
     onError: () => {
       Alert.alert('이메일 및 비밀번호가 틀렸습니다.');
     },
   });
-
-  // const { refetch } = useQuery(['user'], () => API.getUserme(token), {
-  //   enabled: false,
-  //   onSuccess: (i) => {
-  //     console.log(i);
-  //   },
-  // });
 
   const onChangeEmailValue = (text: string) => {
     setEmail(text);
@@ -54,8 +51,6 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
       // refetch();
     }
   };
-
-  console.log(token);
 
   const goToRegister = () => {
     navigate('RegisterPage');

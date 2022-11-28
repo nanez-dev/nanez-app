@@ -47,8 +47,8 @@ const Home = ({ navigation: { navigate } }: HomeScreenProps) => {
           height: SCREEN_HEIGHT / 4,
         }}
       >
-        {homeBanner.map((i) => (
-          <Slide bannerPath={i.img} key={i.key} />
+        {homeBanner.map((el) => (
+          <Slide bannerPath={el.img} key={el.key} />
         ))}
       </Swiper>
       <BannerContent />

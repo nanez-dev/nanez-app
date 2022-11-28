@@ -12,10 +12,13 @@ import API from '../../apis/apis';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { getMyInfo } from '../../apis/auth/getMyInfo';
+import { useSetRecoilState } from 'recoil';
+import { getLoginUser } from '../../atoms/user/selector';
 
 type LoginScreenProps = NativeStackScreenProps<ParamListBase, 'LoginPage'>;
 
 const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
+  const setLoginUser = useSetRecoilState(getLoginUser);
   const passwordRef = useRef<TextInput>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +29,13 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
         AsyncStorage.setItem('refresh_token', item.refresh_token);
         EncryptedStorage.setItem('authCookie', item.access_token);
         await getMyInfo().then((res) => {
-          console.log(res);
+          setLoginUser({
+            nickname: res.data.nickname,
+            email: res.data.email,
+            gender: res.data.gender,
+            age_group: res.data.age_group,
+            profile_image: res.data.profile_image,
+          });
         });
       }
     },

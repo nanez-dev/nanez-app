@@ -7,9 +7,11 @@ import LoginLogo from '../../components/LoginLogo/LoginLogo';
 import IdAndPwInput from '../../components/IdAndPwInput/IdAndPwInput';
 import LoginBtn from '../../components/@shared/Button/LoginBtn/LoginBtn';
 import RegisterBtn from '../../components/@shared/Button/RegisterBtn/RegisterBtn';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import API from '../../apis/apis';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import { getMyInfo } from '../../apis/auth/getMyInfo';
 
 type LoginScreenProps = NativeStackScreenProps<ParamListBase, 'LoginPage'>;
 
@@ -18,13 +20,14 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [token, setToken] = useState('');
-
   const { mutate } = useMutation(() => API.postUserSignin({ email, password }), {
-    onSuccess: (item) => {
+    onSuccess: async (item) => {
       if (item) {
-        setToken(item.access_token);
         AsyncStorage.setItem('refresh_token', item.refresh_token);
+        EncryptedStorage.setItem('authCookie', item.access_token);
+        await getMyInfo().then((res) => {
+          console.log(res);
+        });
       }
     },
     onError: () => {

@@ -33,10 +33,8 @@ const AppIndex = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
-  // const loginUser = useRecoilValue(getLoginUser);
-  // const isLoggedin = loginUser?.isLoggedin || false;
-
-  const isLoggedin = false;
+  const loginUser = useRecoilValue(getLoginUser);
+  const isLoggedin = loginUser?.isLoggedin || false;
 
   return (
     <NavigationContainer>{isLoggedin ? <PublicRouter /> : <PrivateRouter />}</NavigationContainer>

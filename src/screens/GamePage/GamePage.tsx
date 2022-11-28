@@ -630,7 +630,7 @@ const GamePage = ({ navigation: { navigate } }: any) => {
     setStep((prev) => prev + 1);
     setTimeout(() => {
       if (step === 8) {
-        navigate('Tabs', { screen: 'Home' });
+        navigate('HomePage');
       }
     }, 3000);
   };

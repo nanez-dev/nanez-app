@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, ImageSourcePropType, Text } from 'react-native';
+import { Text } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Container, BrandImage } from './BrandCard.styles';
 
 interface IProps {
   item: {
-    image: ImageSourcePropType;
+    image: string;
     name: string;
   };
 }
@@ -13,7 +14,11 @@ const BrandCard = ({ item }: IProps) => {
   return (
     <Container>
       <BrandImage>
-        <Image style={{ width: 90, height: 48 }} resizeMode={'contain'} source={item.image} />
+        <FastImage
+          style={{ width: 90, height: 48 }}
+          resizeMode={'contain'}
+          source={{ uri: item.image }}
+        />
       </BrandImage>
       <Text>{item.name}</Text>
     </Container>

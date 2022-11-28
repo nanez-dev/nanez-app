@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 import BannerContent from '../../components/@shared/BannerContet/BannerContent';
-import Carousel from '../../components/Carousel/Carousel';
 import Recommend from '../../components/Recommend/Recommend';
 import RecommendBrand from '../../components/Brand/Brand';
 import ProductAddButton from '../../components/@shared/Button/ProductAddButton/ProductAddButton';
@@ -12,29 +11,46 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 
 import HomeInput from '../../components/@shared/HomeInput/HomeInput';
+import Swiper from 'react-native-swiper';
+import { Dimensions } from 'react-native';
+import Slide from '../../components/Slide/Slide';
 
-const imagePath = require('../../assets/images/banner.png');
+const banner_1 = require('../../assets/images/banner_img/rolling_banner_1.jpg');
+const banner_2 = require('../../assets/images/banner_img/rolling_banner_2.jpg');
+const banner_3 = require('../../assets/images/banner_img/rolling_banner_3.jpg');
+const banner_4 = require('../../assets/images/banner_img/rolling_banner_4.jpg');
 
 type HomeScreenProps = NativeStackScreenProps<ParamListBase, 'HomePage'>;
 const Home = ({ navigation: { navigate } }: HomeScreenProps) => {
+  const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+  const homeBanner = [
+    { img: banner_1, key: 1 },
+    { img: banner_2, key: 2 },
+    { img: banner_3, key: 3 },
+    { img: banner_4, key: 4 },
+  ];
   const month = new Date().getMonth() + 1;
-  const [bannerPage, setBannerPage] = useState(0);
-  console.log(bannerPage);
-
-  const pages = Array.from({ length: 5 }, (_, i) => ({
-    value: 'carousel_' + String(i),
-    img: imagePath,
-  }));
-
-  // const { isLoading: allPerfumeLoading, data: getAllPerfumeData } = useQuery(
-  //   ['perfume'],
-  //   API.getPerfumeData
-  // );
 
   return (
     <Container showsVerticalScrollIndicator={false}>
       <HomeInput />
-      <Carousel pages={pages} onChange={(page) => setBannerPage(page)} />
+      <Swiper
+        horizontal
+        loop
+        autoplay
+        activeDotColor="#424242"
+        activeDotStyle={{ width: 16 }}
+        autoplayTimeout={3.5}
+        showsPagination={true}
+        containerStyle={{
+          width: '100%',
+          height: SCREEN_HEIGHT / 4,
+        }}
+      >
+        {homeBanner.map((i) => (
+          <Slide bannerPath={i.img} key={i.key} />
+        ))}
+      </Swiper>
       <BannerContent />
       {/* 향수 추천 FlatList */}
       <Recommend />

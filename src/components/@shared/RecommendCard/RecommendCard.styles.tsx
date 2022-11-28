@@ -1,3 +1,4 @@
+import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
 import COLORS from '../../../constants/colors';
 
@@ -6,7 +7,8 @@ const PerfumeImage = styled.Image`
   position: absolute;
   width: 120px;
   z-index: 1;
-`;
+` as unknown as typeof FastImage;
+
 const Card = styled.View`
   padding: 110px 12px 0;
   margin-right: 8px;

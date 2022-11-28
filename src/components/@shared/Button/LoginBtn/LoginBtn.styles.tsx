@@ -9,6 +9,7 @@ const Container = styled.View`
 const Btn = styled.TouchableOpacity`
   width: 100%;
   padding: 12px;
+  margin-bottom: 20px;
   border-width: 1px;
   border-color: #efefef;
   border-radius: 40px;

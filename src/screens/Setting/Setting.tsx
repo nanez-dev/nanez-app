@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Dimensions, Switch } from 'react-native';
-import { ServiceWrapper } from './Setting.styles';
-// import { logout } from '@react-native-seoul/kakao-login';
 import { useSetRecoilState } from 'recoil';
-import { loginCheck } from '../../atoms/loginCheck';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { getLoginUser } from '../../atoms/user/selector';
+import { ServiceWrapper } from './Setting.styles';
 
-const STORAGE_KEY = '@accessToken';
-
-const Setting = ({ navigation: { setOptions } }: any) => {
+const Setting = () => {
   const { height } = Dimensions.get('window');
   const [isEnabled, setIsEnabled] = useState(false);
-  const setIsLogin = useSetRecoilState(loginCheck);
+  const setLoginUser = useSetRecoilState(getLoginUser);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  const handleLogout = () => {
+    setLoginUser((prev: any) => {
+      return {
+        ...prev,
+        isLoggedin: false,
+      };
+    });
+  };
 
   return (
     <View style={{ backgroundColor: 'white', height }}>
@@ -27,7 +31,7 @@ const Setting = ({ navigation: { setOptions } }: any) => {
           value={isEnabled}
         />
       </ServiceWrapper>
-      <ServiceWrapper>
+      <ServiceWrapper onPress={handleLogout}>
         <Text style={{ marginLeft: 6 }}>로그아웃</Text>
       </ServiceWrapper>
     </View>

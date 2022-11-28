@@ -9,7 +9,7 @@ import RegisterEmailInput from '../../components/@shared/RegisterEmailInput/Regi
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
 
 type OnboardingEmailScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingEmail'>;
-const OnboardingEmail = ({ navigation: { navigate } }: OnboardingEmailScreenProps) => {
+const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScreenProps) => {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [emailAuth, setEmailAuth] = useState(false);
@@ -28,10 +28,11 @@ const OnboardingEmail = ({ navigation: { navigate } }: OnboardingEmailScreenProp
   );
 
   const { mutate: onSubmitAuthNumber } = useMutation(
-    () => API.postUserEmailVerify({ email, code }),
+    () => API.postUserEmailVerify({ code, email }),
     {
       onSuccess: () => {
         navigate('OnboardingPw', {
+          ...route.params,
           email: email,
         });
       },

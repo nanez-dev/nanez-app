@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ProductAddButton from '../../components/@shared/Button/ProductAddButton/ProductAddButton';
 import styled from 'styled-components/native';
 import { ParamListBase } from '@react-navigation/native';

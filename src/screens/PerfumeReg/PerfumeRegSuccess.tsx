@@ -9,7 +9,6 @@ const RegLogo = require('../../assets/images/logo.jpeg');
 type RegSuccessScreenProps = NativeStackScreenProps<ParamListBase, 'AddSuccess'>;
 const PerfumeRegSuccess = ({ navigation: { navigate }, route }: RegSuccessScreenProps) => {
   const { height: screenHeight } = Dimensions.get('screen');
-  console.log(route);
 
   const goToHome = () => {
     navigate('HomePage');

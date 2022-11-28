@@ -7,22 +7,11 @@ import { FlatList, Text, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import FlexBox from '../FlexBox/FlexBox';
 
-// interface IData {
-//   brandKor: string;
-//   kor: string;
-//   eng: string;
-//   image: string;
-// }
-
 const SearchInput = () => {
   const [value, setValue] = useState('');
   const [submitValue, setSubmitValue] = useState('');
-  const [data, setData] = useState({
-    brandKor: '',
-    kor: '',
-    eng: '',
-    image: '',
-  });
+  const [data, setData] = useState<any>();
+  const [isSearch, setIsSearch] = useState(false);
 
   const handleSearchValue = (text: string) => {
     setValue(text);
@@ -32,36 +21,21 @@ const SearchInput = () => {
     setSubmitValue(value);
   };
 
-  useQuery(['searchPerfume'], () => API.getPerfume({ submitValue }), {
+  const { refetch } = useQuery(['searchPerfume'], () => API.getPerfume(submitValue), {
     onSuccess: (item: any) => {
-      console.log(item);
-      // setData({
-      //   brandKor: item.perfumes[0].brand.kor,
-      //   kor: item.perfumes[0].kor,
-      //   eng: item.perfumes[0].eng,
-      //   image: item.perfumes[0].web_image1,
-      // });
-      console.log('success');
+      setData(item);
+      setIsSearch(true);
     },
     onError: (error) => {
       console.log('error', error);
     },
   });
 
-  // console.log(data.perfumes[0].brand.eng);
-  // console.log(data.perfumes[0].brand.kor);
-  // console.log(data.perfumes[0].brand.image);
-  // console.log(data.perfumes[0].eng);
-  // console.log(data.perfumes[0].kor);
-
-  // console.log(data.perfumes[0].web_image1);
-  // console.log(data.perfumes[0].web_image2);
-
   return (
     <Container>
       <FlexBox alignItems="center">
         <SearchBox>
-          <Ionicons name="md-search-outline" size={24} color="#666666" />
+          <Ionicons name="md-search-outline" size={24} color="#666666" onPress={() => refetch()} />
           <SearchTextInput
             value={value}
             onSubmitEditing={handleSearchSubmitValue}
@@ -73,10 +47,29 @@ const SearchInput = () => {
             placeholderTextColor="#999999"
           />
         </SearchBox>
+        {!isSearch ? (
+          <>
+            <FastImage
+              source={require('../../../assets/images/search_banner_1.png')}
+              style={{ width: 350, height: 120 }}
+            />
+            <View style={{ flexDirection: 'row', marginTop: 12 }}>
+              <FastImage
+                source={require('../../../assets/images/search_banner_2.png')}
+                style={{ width: 168, height: 120, marginRight: 14 }}
+              />
+              <FastImage
+                source={require('../../../assets/images/search_banner_3.png')}
+                style={{ width: 168, height: 120 }}
+              />
+            </View>
+          </>
+        ) : null}
       </FlexBox>
+
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={data.perfumes}
+        data={data?.perfumes}
         renderItem={({ item }) => (
           <>
             <View style={{ flexDirection: 'row', padding: 22 }}>

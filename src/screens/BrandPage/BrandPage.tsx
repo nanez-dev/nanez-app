@@ -1,40 +1,43 @@
 import React from 'react';
-import { Image, ImageSourcePropType, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
 import FlexBox from '../../components/@shared/FlexBox/FlexBox';
 import RecommendBrand from '../../components/Brand/Brand';
-import perfumeData from '../../mocks/perfume';
 import COLORS from '../../constants/colors';
+import { useQuery } from '@tanstack/react-query';
+import API from '../../apis/apis';
+import FastImage from 'react-native-fast-image';
 
 interface IBrand {
-  image: ImageSourcePropType;
-  name: string;
-  enName: string;
+  image: string;
+  kor: string;
+  eng: string;
   id: number;
 }
 
 const BrandPage = () => {
+  const { data } = useQuery(['brand'], API.getAllBrands);
   return (
     <Container>
       <View style={{ borderBottomColor: COLORS.BORDER_COLOR, borderBottomWidth: 1 }}>
         <RecommendBrand title="지금 사랑받고 있는 브랜드" />
       </View>
       <Grid
-        data={perfumeData}
+        data={data.brands}
         keyExtractor={(item: IBrand) => item.id}
         renderItem={({ item }: { item: IBrand }) => (
           <GridContainer>
             <FlexBox flexDirection="row" alignItems="center">
               <ImageWrapper>
-                <Image
+                <FastImage
                   style={{ width: 50, height: 48 }}
                   resizeMode={'contain'}
-                  source={item.image}
+                  source={{ uri: item.image }}
                 />
               </ImageWrapper>
               <View>
-                <Text>{item.name}</Text>
-                <Text>{item.enName}</Text>
+                <Text style={{ fontSize: 12 }}>{item.kor}</Text>
+                <Text>{item.eng}</Text>
               </View>
             </FlexBox>
           </GridContainer>

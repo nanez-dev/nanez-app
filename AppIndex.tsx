@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -24,13 +24,19 @@ import { getLoginUser } from './src/atoms/user/selector';
 import ServicePage from './src/screens/ServicePage/ServicePage';
 import InformationPage from './src/screens/ServicePage/InformationPage';
 import PromotionPage from './src/screens/ServicePage/PromotionPage';
+import SplashScreen from 'react-native-splash-screen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const AppIndex = () => {
-  const loginUser = useRecoilValue(getLoginUser);
-  const isLoggedin = loginUser?.isLoggedin || false;
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+  // const loginUser = useRecoilValue(getLoginUser);
+  // const isLoggedin = loginUser?.isLoggedin || false;
+
+  const isLoggedin = false;
 
   return (
     <NavigationContainer>{isLoggedin ? <PublicRouter /> : <PrivateRouter />}</NavigationContainer>

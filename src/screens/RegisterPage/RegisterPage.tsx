@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
-import { Text, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 import CheckBox from '@react-native-community/checkbox';
@@ -10,30 +10,18 @@ import { ParamListBase } from '@react-navigation/native';
 
 type RegisterScreenProps = NativeStackScreenProps<ParamListBase, 'RegisterPage'>;
 const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-
-  // -1: 전체, 1: 필수, 2: 선택
-  const agreeList = [
-    {
-      type: -1,
-      content: '약관 전체 동의하기',
-    },
-    {
-      type: 1,
-      content: '(필수) 나네 서비스 이용 약관 동의',
-    },
-    {
-      type: 1,
-      content: '(필수) 개인정보 수집/이용 약관 동의',
-    },
-    {
-      type: 2,
-      content: '(선택) 홍보성 SMS/메일 수신 동의',
-    },
-  ];
+  const [allCheck, setAllCheck] = useState(false);
+  const [requireCheck, setRequireCheck] = useState(false);
+  const [optionCheck, setOptionCheck] = useState(false);
 
   const goToNext = () => {
-    navigate('OnboardingEmail');
+    if (requireCheck || allCheck) {
+      navigate('OnboardingEmail', {
+        is_accepted: optionCheck,
+      });
+    } else {
+      Alert.alert('약관에 동의해주세요');
+    }
   };
 
   return (
@@ -61,25 +49,63 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
         </Wrapper>
 
         <Wrapper>
-          {agreeList.map((i, index) => {
-            return (
-              <AgreeListContainer key={index} type={i.type}>
-                <Text>{i.content}</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  {i.type !== -1 && (
-                    <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
-                  )}
-                  <CheckBox
-                    lineWidth={0.5}
-                    boxType={'square'}
-                    disabled={false}
-                    value={toggleCheckBox}
-                    onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                  />
-                </View>
-              </AgreeListContainer>
-            );
-          })}
+          <AgreeListContainer type="all">
+            <Text>약관 전체 동의하기</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <CheckBox
+                lineWidth={0.5}
+                boxType={'square'}
+                disabled={false}
+                value={allCheck}
+                onValueChange={(newValue) => setAllCheck(newValue)}
+              />
+            </View>
+          </AgreeListContainer>
+          <AgreeListContainer type="require">
+            <Text>(필수)나네 서비스 이용 약관 동의</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => navigate('Service')}>
+                <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
+              </TouchableOpacity>
+              <CheckBox
+                lineWidth={0.5}
+                boxType={'square'}
+                disabled={false}
+                value={allCheck || requireCheck}
+                onValueChange={(newValue) => setRequireCheck(newValue)}
+              />
+            </View>
+          </AgreeListContainer>
+          <AgreeListContainer type="require">
+            <Text>(필수)개인정보 수집/이용 약관 동의</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => navigate('Information')}>
+                <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
+              </TouchableOpacity>
+              <CheckBox
+                lineWidth={0.5}
+                boxType={'square'}
+                disabled={false}
+                value={allCheck || requireCheck}
+                onValueChange={(newValue) => setRequireCheck(newValue)}
+              />
+            </View>
+          </AgreeListContainer>
+          <AgreeListContainer type="option">
+            <Text>(선택)홍보성 SMS/메일 수신 동의</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => navigate('Promotion')}>
+                <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
+              </TouchableOpacity>
+              <CheckBox
+                lineWidth={0.5}
+                boxType={'square'}
+                disabled={false}
+                value={allCheck || optionCheck}
+                onValueChange={(newValue) => setOptionCheck(newValue)}
+              />
+            </View>
+          </AgreeListContainer>
         </Wrapper>
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
           <NextBtn title="동의합니다" bgColor="#65BFC4" onPress={goToNext} />
@@ -102,11 +128,11 @@ const Wrapper = styled.View`
   justify-content: center;
 `;
 
-const AgreeListContainer = styled.View<{ type: number }>`
+const AgreeListContainer = styled.View<{ type: string }>`
   width: 350px;
   border-radius: 40px;
   height: 40px;
-  background-color: ${(props) => (props.type === -1 ? '#fafafd' : 'white')};
+  background-color: ${(props) => (props.type === 'all' ? '#fafafd' : 'white')};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

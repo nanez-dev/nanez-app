@@ -45,7 +45,7 @@ const ListCollection = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0px 30px;
+  padding: 0px 80px;
   margin-top: 40px;
   padding-bottom: 24px;
   border-bottom-width: 7px;

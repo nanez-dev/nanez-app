@@ -1,9 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, ScrollView, SafeAreaView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { isClick } from '../../atoms/atoms';
-import { useRecoilState } from 'recoil';
 import {
   ProductImage,
   ProductInfo,
@@ -18,57 +16,47 @@ import { ParamListBase } from '@react-navigation/native';
 import numberWithCommas from '../../utils/numberWithCommas';
 import API from '../../apis/apis';
 
-const imagePath1 = require('../../assets/images/perfume01.png');
-// const imagePath2 = require('../../assets/images/perfume02.png');
-// const imagePath3 = require('../../assets/images/perfume02.png');
-
 type DetailScreenProps = NativeStackScreenProps<ParamListBase, 'PerfumeDetail'>;
 const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScreenProps) => {
-  const { brand, kor, eng, volume, cost }: any = params;
-  const [isClickCheck, setIsClickCheck] = useRecoilState(isClick);
+  const { id }: any = params;
+
+  const { data, refetch } = useQuery(['perfumeDetail'], () => API.getDetailPerfume<number>(id), {
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const goToHome = () => {
     goBack();
   };
 
-  const handleClickCheck = () => {
-    setIsClickCheck((prev) => !prev);
-  };
-
-  const { isLoading: accordLoading, data: accordData } = useQuery(['accord'], API.getAllAccords);
-  const { isLoading: noteLoading, data: noteData } = useQuery(['note'], API.getAllNotes);
-  // const { isLoading: perfumeLoading, data: perfumeData } = useQuery(['note'], API.getPerfumeData);
-
-  const loading = accordLoading || noteLoading;
-  return loading ? (
-    <View>
-      <Text>Loading</Text>
-    </View>
-  ) : (
+  return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <SafeAreaView style={{ height: 1210 }}>
         <View style={{ alignItems: 'center' }}>
-          <ProductImage source={imagePath1} />
+          <ProductImage source={{ uri: data.perfume.image }} />
         </View>
         <ProductInfo>
           <View>
-            <Text style={{ fontSize: 11, fontWeight: '400', color: '#666666' }}>{brand}</Text>
-            <Text style={{ fontSize: 16, fontWeight: '700', marginTop: 4 }}>{eng}</Text>
+            <Text style={{ fontSize: 11, fontWeight: '400', color: '#666666' }}>
+              {data.perfume.brand.kor}
+            </Text>
+            <Text style={{ fontSize: 16, fontWeight: '700', marginTop: 4 }}>
+              {data.perfume.eng}
+            </Text>
             <Text style={{ fontSize: 16, fontWeight: '700', marginBottom: 8 }}>
-              {kor}
-              {volume}
+              {data.perfume.kor}
             </Text>
             <Text style={{ fontSize: 24, fontWeight: '700', color: '#F05028' }}>
-              {numberWithCommas(cost)}
+              {numberWithCommas(data.perfume.price)}
             </Text>
           </View>
           <Pressable style={{ flexDirection: 'row' }}>
-            <Ionicons
-              onPress={handleClickCheck}
-              color={isClickCheck ? 'tomato' : 'black'}
-              name="checkmark-circle-outline"
-              size={22}
-            />
+            <Ionicons color={'black'} name="checkmark-circle-outline" size={22} />
             <Ionicons name="heart-outline" size={22} />
           </Pressable>
         </ProductInfo>
@@ -81,9 +69,9 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
               justifyContent: 'space-between',
             }}
           >
-            <AccordImage source={{ uri: accordData.accords[0].image }} />
-            <AccordImage source={{ uri: accordData.accords[1].image }} />
-            <AccordImage source={{ uri: accordData.accords[2].image }} />
+            {data.perfume.perfume_accords.map((i: any) => (
+              <AccordImage key={i.id} source={{ uri: i.image }} />
+            ))}
           </View>
         </AccordInfo>
         <NoteInfo>
@@ -96,11 +84,10 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
           >
             <View>
               <Text style={{ fontSize: 16, fontWeight: '700', color: '#F27766', marginBottom: 4 }}>
-                가을의 정수
+                {data.perfume.title}
               </Text>
               <Text style={{ width: '90%', marginBottom: 16, fontSize: 14, fontWeight: '400' }}>
-                화이트 프리지아 부케향에 이제 막 익은 배의 신선함을 입히고 호박, 파출리, 우디향으로
-                은은함을 더했습니다.
+                {data.perfume.subtitle}
               </Text>
               <View style={{ marginBottom: 16 }}>
                 <Text style={{ fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
@@ -115,33 +102,17 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
               </View>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <View>
-                <NoteImage source={{ uri: noteData.notes[0].image }} />
-                <Text
-                  style={{ marginBottom: 5, fontSize: 12, fontWeight: '400', color: '#999999' }}
-                >
-                  Top Note
-                </Text>
-                <Text>Lemon</Text>
-              </View>
-              <View>
-                <NoteImage source={{ uri: noteData.notes[1].image }} />
-                <Text
-                  style={{ marginBottom: 5, fontSize: 12, fontWeight: '400', color: '#999999' }}
-                >
-                  Middle Note
-                </Text>
-                <Text>Freesia</Text>
-              </View>
-              <View>
-                <NoteImage source={{ uri: noteData.notes[2].image }} />
-                <Text
-                  style={{ marginBottom: 5, fontSize: 12, fontWeight: '400', color: '#999999' }}
-                >
-                  Base Note
-                </Text>
-                <Text>Pear</Text>
-              </View>
+              {data.perfume.perfume_notes.map((i: any) => (
+                <View key={i.id}>
+                  <NoteImage source={{ uri: i.note.image }} />
+                  <Text
+                    style={{ marginBottom: 5, fontSize: 12, fontWeight: '400', color: '#999999' }}
+                  >
+                    {i.type}
+                  </Text>
+                  <Text>{i.note.eng}</Text>
+                </View>
+              ))}
             </View>
           </View>
         </NoteInfo>

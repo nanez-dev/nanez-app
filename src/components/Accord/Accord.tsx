@@ -20,7 +20,7 @@ const RecommendAccord = ({ title, text }: IRecommendAccord) => {
       screen: 'AccordPage',
     });
   };
-  const { isLoading: accordLoading, data: accordData } = useQuery(['perfume'], API.getAllAccords);
+  const { isLoading: accordLoading, data: accordData } = useQuery(['accord'], API.getAllAccords);
 
   return accordLoading ? (
     <ActivityIndicator />
@@ -44,8 +44,8 @@ const RecommendAccord = ({ title, text }: IRecommendAccord) => {
           </View>
         </ShowAll>
       </Header>
-      <FlatList<{ image: string; kor: string }>
-        data={accordData.accords}
+      <FlatList
+        data={accordData?.accords}
         contentContainerStyle={{
           paddingHorizontal: 24,
         }}

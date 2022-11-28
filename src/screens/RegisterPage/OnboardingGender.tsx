@@ -8,7 +8,7 @@ import RegisterGenderInput from '../../components/@shared/RegisterGenderInput/Re
 
 type OnboardingGenderScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingGender'>;
 const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderScreenProps) => {
-  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedGender, setSelectedGender] = useState('F');
 
   const handleSelectedGender = (text: string) => {
     setSelectedGender(text);

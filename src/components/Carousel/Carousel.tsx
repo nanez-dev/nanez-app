@@ -1,3 +1,4 @@
+// 레거시
 import React, { useState } from 'react';
 import {
   Dimensions,
@@ -31,7 +32,9 @@ const Carousel = ({
   const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const newPage = Math.round(e.nativeEvent.contentOffset.x / (pageWidth + gap));
     setPage(newPage);
-    if (onChange) onChange(newPage);
+    if (onChange) {
+      onChange(newPage);
+    }
   };
   const [page, setPage] = useState(0);
   return (

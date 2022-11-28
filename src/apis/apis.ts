@@ -41,14 +41,24 @@ axios.interceptors.request.use(
 );
 
 const API = {
+  // GET
   getPerfumeInfo: () => {
     return request({ method: 'GET' as Method, url: `${API_KEY}/perfume/information` });
   },
-  getPerfume: ({ submitValue }: { submitValue: string }) => {
+  getPerfume: (submitValue?: string) => {
     return request({
       method: 'GET' as Method,
-      url: `${API_KEY}/perfume?name=${submitValue}&offset=0&limit=10`,
+      url: submitValue ? `${API_KEY}/perfume?name=${submitValue}` : `${API_KEY}/perfume`,
     });
+  },
+  getDetailPerfume: <I>(id: I) => {
+    return request({ method: 'GET' as Method, url: `${API_KEY}/perfume/${id}` });
+  },
+  getAllBrands: () => {
+    return request({ method: 'GET' as Method, url: `${API_KEY}/brand` });
+  },
+  getPopularBrand: () => {
+    return request({ method: 'GET' as Method, url: `${API_KEY}/brand/popular` });
   },
   getAllNotes: () => {
     return request({ method: 'GET' as Method, url: `${API_KEY}/note` });
@@ -56,18 +66,19 @@ const API = {
   getAllAccords: () => {
     return request({ method: 'GET' as Method, url: `${API_KEY}/accord` });
   },
-  getAllBrands: () => {
-    return request({ method: 'GET' as Method, url: `${API_KEY}/brand` });
-  },
   getNoteCategories: () => {
     return request({ method: 'GET' as Method, url: `${API_KEY}/note/category` });
   },
-  getDetailPerfume: (id: string) => {
-    return request({ method: 'GET' as Method, url: `${API_KEY}/perfume/${id}` });
+  getUserme: (token: string) => {
+    return request({
+      method: 'GET' as Method,
+      url: `${API_KEY}/users/me`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
-  getPerfumeData: () => {
-    return request({ method: 'GET' as Method, url: `${API_KEY}/perfume/information` });
-  },
+  // POST
   postUserEmailSend: <D>(data: D) => {
     return request({
       method: 'POST' as Method,
@@ -75,10 +86,12 @@ const API = {
       data,
     });
   },
-  postUserEmailVerify: ({ email, code }: { email: string; code: string }) => {
+  postUserEmailVerify: <D>(data: D) => {
     return request({
       method: 'POST' as Method,
-      url: `${API_KEY}/users/email-verify?email=${email}&code=${code}`,
+      url: `${API_KEY}/users/email-verify`,
+      data,
+      headers: { 'Content-Type': 'application/json' },
     });
   },
   postUserSignup: <D>(data: D) => {
@@ -86,6 +99,22 @@ const API = {
       method: 'POST' as Method,
       url: `${API_KEY}/users/signup`,
       data,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  },
+  postUserSignin: <D>(data: D) => {
+    return request({
+      method: 'POST' as Method,
+      url: `${API_KEY}/users/signin`,
+      data,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  },
+  postNicknameVerify: (nickname: string) => {
+    return request({
+      method: 'POST' as Method,
+      url: `${API_KEY}/users/nickname-verify?nickname=${nickname}`,
+      headers: { 'Content-Type': 'application/json' },
     });
   },
 };

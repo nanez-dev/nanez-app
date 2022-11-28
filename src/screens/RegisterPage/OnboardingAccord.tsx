@@ -14,7 +14,8 @@ type OnboardingAccordScreenProps = NativeStackScreenProps<ParamListBase, 'Onboar
 const OnboardingAccord = ({ navigation: { navigate }, route }: OnboardingAccordScreenProps) => {
   const { data } = useQuery<IAccords>(['accord'], API.getAllAccords);
   const [isClick, setIsClick] = useState(false);
-  const [selectedId, setSelectedId] = useState(0);
+  const [selectedAccordId, setSelectedAccordId] = useState(0);
+  const [selectedAccordImage, setSelectedAccordImage] = useState('');
   const [selectedAccord, setSelectedAccord] = useState('');
 
   useEffect(() => {
@@ -26,15 +27,17 @@ const OnboardingAccord = ({ navigation: { navigate }, route }: OnboardingAccordS
   }, [isClick]);
 
   const goToNext = () => {
-    navigate('OnboardingResult', {
-      selectedId,
+    navigate('OnboardingEvent', {
+      selectedAccordId,
+      selectedAccordImage,
       selectedAccord,
       ...route.params,
     });
   };
 
-  const handleAccordValue = (id: number, kor: string) => {
-    setSelectedId(id);
+  const handleAccordValue = (id: number, image: string, kor: string) => {
+    setSelectedAccordId(id);
+    setSelectedAccordImage(image);
     setSelectedAccord(kor);
     setIsClick(true);
   };
@@ -58,8 +61,12 @@ const OnboardingAccord = ({ navigation: { navigate }, route }: OnboardingAccordS
           renderItem={({ item }: { item: IAccord }) => (
             <TouchableOpacity
               activeOpacity={1}
-              onPress={handleAccordValue.bind(this, item.id, item.kor)}
-              style={{ flex: 0.2, alignItems: 'center', opacity: item.id === selectedId ? 1 : 0.3 }}
+              onPress={handleAccordValue.bind(this, item.id, item.image, item.kor)}
+              style={{
+                flex: 0.2,
+                alignItems: 'center',
+                opacity: item.id === selectedAccordId ? 1 : 0.3,
+              }}
             >
               <FastImage
                 source={{ uri: item?.image }}

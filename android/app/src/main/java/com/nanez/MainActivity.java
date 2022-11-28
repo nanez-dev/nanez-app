@@ -3,6 +3,8 @@ package com.nanez;
 import android.os.Build;
 import android.os.Bundle;
 
+import org.devio.rn.splashscreen.SplashScreen;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -16,7 +18,8 @@ public class MainActivity extends ReactActivity {
     // coloring the background, status bar, and navigation bar.
     // This is required for expo-splash-screen.
     setTheme(R.style.AppTheme);
-    super.onCreate(null);
+    SplashScreen.show(this);
+    super.onCreate(savedInstanceState);
   }
 
   /**

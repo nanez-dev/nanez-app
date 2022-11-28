@@ -4,12 +4,12 @@ const loginUserState = atom({
   key: 'loginUserState',
   default: {
     isLoggedin: false,
-    username: '',
-    name: '',
+    nickname: '',
     email: '',
     password: '',
     gender: '',
     age_group: '',
+    profile_image: '',
   },
 });
 

@@ -1,30 +1,29 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { ImageSourcePropType } from 'react-native';
 import { PerfumeImage, Card, Container, Brand, Name } from './RecommendCard.styles';
 
 interface IData {
-  brand: string;
+  id: number;
+  brand: {
+    kor: string;
+  };
   kor: string;
-  eng: string;
-  volume: string;
-  cost: number;
-  img: ImageSourcePropType;
+  image: string;
 }
 
 const RecommendCard = ({ item }: { item: IData }) => {
   const { navigate } = useNavigation();
-  const goToDetail = () => {
+  const goToDetail = (id: number) => {
     //@ts-ignore
     navigate('PerfumeDetail', {
-      ...item,
+      id,
     });
   };
   return (
-    <Container onPress={goToDetail}>
-      <PerfumeImage source={item.img} />
+    <Container onPress={goToDetail.bind(this, item.id)}>
+      <PerfumeImage source={{ uri: item.image }} />
       <Card>
-        <Brand>{item.brand}</Brand>
+        <Brand>{item.brand.kor}</Brand>
         <Name numberOfLines={2}>{item.kor}</Name>
       </Card>
     </Container>

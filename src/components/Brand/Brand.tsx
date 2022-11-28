@@ -1,12 +1,12 @@
 import React from 'react';
-import { FlatList, ImageSourcePropType, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BrandCard from '../@shared/BrandCard/BrandCard';
 import { Header, Title, ShowAll } from './Brand.styles';
 import { useNavigation } from '@react-navigation/native';
 
-// perfume mock data
-import perfumeData from '../../mocks/perfume';
+import { useQuery } from '@tanstack/react-query';
+import API from '../../apis/apis';
 
 interface IRecommendBrand {
   title: string;
@@ -14,6 +14,7 @@ interface IRecommendBrand {
 }
 
 const RecommendBrand = ({ title, text }: IRecommendBrand) => {
+  const { data } = useQuery(['brand'], API.getPopularBrand);
   const navigation = useNavigation();
   const goToBrand = () => {
     //@ts-ignore
@@ -41,8 +42,8 @@ const RecommendBrand = ({ title, text }: IRecommendBrand) => {
           </View>
         </ShowAll>
       </Header>
-      <FlatList<{ image: ImageSourcePropType; name: string; id: number }>
-        data={perfumeData}
+      <FlatList
+        data={data.brands}
         contentContainerStyle={{
           paddingHorizontal: 24,
         }}

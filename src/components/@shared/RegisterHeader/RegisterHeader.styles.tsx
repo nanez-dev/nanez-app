@@ -2,10 +2,11 @@ import styled from 'styled-components/native';
 
 const Container = styled.View``;
 
-const Title = styled.Text`
+const Title = styled.Text<{ type: string }>`
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
+  text-align: ${(props) => (props.type ? 'center' : null)};
 `;
 
 const Subtitle = styled.Text`

@@ -11,7 +11,7 @@ interface IRegisterGenderInput {
 
 const RegisterGenderInput = ({
   label,
-  selectedGender,
+  selectedGender = 'F',
   handleSelectedGender,
   goToNext,
 }: IRegisterGenderInput) => {
@@ -24,8 +24,8 @@ const RegisterGenderInput = ({
           selectedValue={selectedGender}
           onValueChange={handleSelectedGender}
         >
-          <Picker.Item label="여자" value="woman" />
-          <Picker.Item label="남자" value="man" />
+          <Picker.Item label="여자" value="F" />
+          <Picker.Item label="남자" value="M" />
         </Picker>
       </Input>
       <NextButton onPress={goToNext}>

@@ -1,11 +1,11 @@
-import { Image } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
 import COLORS from '../../constants/colors';
 
 const ProductImage = styled.Image`
   width: 350px;
   height: 350px;
-` as unknown as typeof Image;
+` as unknown as typeof FastImage;
 
 const ProductInfo = styled.View`
   background-color: white;
@@ -28,7 +28,7 @@ const AccordImage = styled.Image`
   height: 100px;
   border: 1px solid ${COLORS.BORDER_COLOR};
   border-radius: 8px;
-` as unknown as typeof Image;
+` as unknown as typeof FastImage;
 
 const NoteInfo = styled(AccordInfo)`
   margin-bottom: 10px;

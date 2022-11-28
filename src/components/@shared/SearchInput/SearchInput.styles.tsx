@@ -13,7 +13,8 @@ const SearchBox = styled.View`
   border-width: 1px;
   border-style: solid;
   border-color: #cccccc;
-  padding: 0 8px;
+  padding: 0px 8px;
+  margin-bottom: 22px;
   flex-direction: row;
   align-items: center;
 `;

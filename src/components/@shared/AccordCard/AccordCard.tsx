@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, Text } from 'react-native';
+import { Text } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Container, AccordImage } from './AccordCard.styles';
 
 interface IProps {
@@ -13,7 +14,7 @@ const AccordCard = ({ item }: IProps) => {
   return (
     <Container>
       <AccordImage>
-        <Image
+        <FastImage
           style={{ width: 90, height: 48 }}
           resizeMode={'contain'}
           source={{ uri: item.image }}

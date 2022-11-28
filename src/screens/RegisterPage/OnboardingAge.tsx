@@ -8,7 +8,7 @@ import RegisterAgeInput from '../../components/@shared/RegisterAgeInput/Register
 
 type OnboardingAgeScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingAge'>;
 const OnboardingAge = ({ navigation: { navigate }, route }: OnboardingAgeScreenProps) => {
-  const [selectedAge, setSelectedAge] = useState('');
+  const [selectedAge, setSelectedAge] = useState('7');
 
   const handleSelectedAge = (text: string) => {
     setSelectedAge(text);

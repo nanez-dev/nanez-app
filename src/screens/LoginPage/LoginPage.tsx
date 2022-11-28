@@ -7,6 +7,8 @@ import LoginLogo from '../../components/LoginLogo/LoginLogo';
 import IdAndPwInput from '../../components/IdAndPwInput/IdAndPwInput';
 import LoginBtn from '../../components/@shared/Button/LoginBtn/LoginBtn';
 import RegisterBtn from '../../components/@shared/Button/RegisterBtn/RegisterBtn';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import API from '../../apis/apis';
 
 type LoginScreenProps = NativeStackScreenProps<ParamListBase, 'LoginPage'>;
 
@@ -14,6 +16,24 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   const passwordRef = useRef<TextInput>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [token, setToken] = useState('');
+
+  const { mutate } = useMutation(() => API.postUserSignin({ email, password }), {
+    onSuccess: (item) => {
+      setToken(item.access_token);
+    },
+    onError: () => {
+      Alert.alert('이메일 및 비밀번호가 틀렸습니다.');
+    },
+  });
+
+  // const { refetch } = useQuery(['user'], () => API.getUserme(token), {
+  //   enabled: false,
+  //   onSuccess: (i) => {
+  //     console.log(i);
+  //   },
+  // });
 
   const onChangeEmailValue = (text: string) => {
     setEmail(text);
@@ -28,12 +48,14 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   };
   const onSubmitPasswordEditing = () => {
     if (email === '' || password === '') {
-      // 추후 모달창으로 디자인틱하게 변경하기
       return Alert.alert('로그인 에러');
     } else {
-      navigate('PublicRouter', { screen: 'Home' });
+      mutate();
+      // refetch();
     }
   };
+
+  console.log(token);
 
   const goToRegister = () => {
     navigate('RegisterPage');

@@ -29,6 +29,7 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
         AsyncStorage.setItem('refresh_token', item.refresh_token);
         EncryptedStorage.setItem('authCookie', item.access_token);
         await getMyInfo().then((res) => {
+          console.log(res.data);
           setLoginUser({
             nickname: res.data.nickname,
             email: res.data.email,

@@ -35,8 +35,6 @@ const OnboardingResult = ({ route }: any) => {
   }: any = route.params;
   const setLoginUser = useSetRecoilState(getLoginUser);
 
-  console.log(route.params);
-
   const { mutate: onSubmitSignup } = useMutation(
     () =>
       API.postUserSignup<IUser>({
@@ -55,7 +53,6 @@ const OnboardingResult = ({ route }: any) => {
         setLoginUser({
           nickname: nickname,
           email: email,
-          password: password,
           gender: gender,
           age_group: age_group,
           profile_image: profile_image,

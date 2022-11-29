@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 import CheckBox from '@react-native-community/checkbox';
@@ -36,14 +36,7 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
           <Text style={{ fontSize: 24, fontWeight: '700', marginTop: 20 }}>
             안녕하세요, <Text style={{ color: '#65BFC4' }}>나네</Text>입니다.
           </Text>
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 11,
-              fontWeight: '400',
-              marginTop: 8,
-            }}
-          >
+          <Text style={styles.subTitle}>
             나네 서비스 이용을 위한 {'\n'}필수 이용 약관 동의가 필요합니다.
           </Text>
         </Wrapper>
@@ -138,3 +131,12 @@ const AgreeListContainer = styled.View<{ type: string }>`
   justify-content: space-between;
   padding: 0px 20px;
 `;
+
+const styles = StyleSheet.create({
+  subTitle: {
+    textAlign: 'center',
+    fontSize: 11,
+    fontWeight: '400',
+    marginTop: 8,
+  },
+});

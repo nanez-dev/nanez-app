@@ -1,5 +1,11 @@
 import React from 'react';
-import { ImageSourcePropType, SafeAreaView } from 'react-native';
+import {
+  ImageSourcePropType,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {
   Container,
@@ -66,11 +72,13 @@ const ProfilePage = () => {
     },
   ];
 
-  return (
+  return userInfo ? (
     <Container>
       <SafeAreaView>
         <UserInfo>
-          <ProfileImage source={{ uri: userInfo.profile_image }} />
+          <ProfileImage
+            source={{ uri: userInfo.profile_image || 'https://picsum.photos/200/300' }}
+          />
           <UserName>{userInfo.nickname || '익명의 사용자'}님, 안녕하세요</UserName>
           <UserEmail>{userInfo.email || 'nanez.contact@gmail.com'}</UserEmail>
         </UserInfo>
@@ -87,7 +95,20 @@ const ProfilePage = () => {
         </ServiceCollection>
       </SafeAreaView>
     </Container>
+  ) : (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size="large" />
+    </View>
   );
 };
 
 export default ProfilePage;
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

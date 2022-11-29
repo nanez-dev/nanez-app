@@ -1,23 +1,21 @@
 import styled from 'styled-components/native';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { CSSProperties } from 'styled-components';
 
-export const ProductButton = styled.TouchableOpacity<CSSProperties>`
+export const ProductButton = styled.TouchableOpacity`
   width: 88%;
   height: 40px;
   background: #65bfc4;
   border-radius: 50px;
   justify-content: center;
   align-items: center;
-` as unknown as typeof TouchableOpacity;
+`;
 
-export const ButtonContent = styled.Text<CSSProperties>`
+export const ButtonContent = styled.Text`
   font-size: 14px;
   font-weight: bold;
   color: white;
-` as unknown as typeof Text;
+`;
 
-export const Wrap = styled.View<CSSProperties>`
+export const Wrap = styled.View`
   align-items: center;
   padding-bottom: 40px;
-` as unknown as typeof View;
+`;

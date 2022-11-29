@@ -18,9 +18,7 @@ const RecommendBrand = ({ title, text }: IRecommendBrand) => {
   const navigation = useNavigation();
   const goToBrand = () => {
     //@ts-ignore
-    navigation.navigate('Brand', {
-      screen: 'BrandPage',
-    });
+    navigation.navigate('Brand');
   };
   return (
     <View style={{ marginBottom: 24 }}>

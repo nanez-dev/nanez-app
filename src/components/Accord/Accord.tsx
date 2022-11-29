@@ -16,9 +16,7 @@ const RecommendAccord = ({ title, text }: IRecommendAccord) => {
   const navigation = useNavigation();
   const goToAccord = () => {
     //@ts-ignore
-    navigation.navigate('Accord', {
-      screen: 'AccordPage',
-    });
+    navigation.navigate('Accord');
   };
   const { isLoading: accordLoading, data: accordData } = useQuery(['accord'], API.getAllAccords);
 

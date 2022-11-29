@@ -6,7 +6,7 @@ const Title = styled.Text<{ type: string }>`
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
-  text-align: ${(props) => (props.type ? 'center' : null)};
+  text-align: ${(props) => (props.type === 'result' ? 'center' : 'left')};
 `;
 
 const Subtitle = styled.Text`

@@ -19,7 +19,6 @@ const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScr
     {
       onSuccess: () => {
         setEmailAuth(true);
-        console.log('success');
       },
       onError: (error) => {
         console.log('error', error);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { ButtonContent, NextButton } from './NextBtn.styles';
 
 interface NextBtnProps {
@@ -10,11 +10,11 @@ interface NextBtnProps {
 
 const NextBtn = ({ title, onPress, bgColor }: NextBtnProps) => {
   return (
-    <Pressable onPress={onPress} style={{ width: '100%', alignItems: 'center', flex: 0.4 }}>
+    <TouchableOpacity onPress={onPress} style={{ width: '100%', alignItems: 'center', flex: 0.4 }}>
       <NextButton color={bgColor}>
         <ButtonContent>{title}</ButtonContent>
       </NextButton>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

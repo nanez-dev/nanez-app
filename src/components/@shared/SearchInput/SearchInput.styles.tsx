@@ -1,28 +1,27 @@
-import { TextInput } from 'react-native';
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-const Container = styled.View`
-  flex: 1;
-  margin-top: 60px;
-`;
-
-const SearchBox = styled.View`
-  width: 90%;
-  height: 40px;
-  border-radius: 20px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #cccccc;
-  padding: 0px 8px;
-  margin-bottom: 22px;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const SearchTextInput = styled.TextInput`
-  font-size: 14px;
-  color: #999999;
-  margin-left: 8px;
-` as unknown as typeof TextInput;
-
-export { SearchBox, SearchTextInput, Container };
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 60,
+  },
+  flexWrapper: {
+    alignItems: 'center',
+  },
+  searchBox: {
+    width: '90%',
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    paddingHorizontal: 8,
+    marginBottom: 22,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchTextInput: {
+    fontSize: 14,
+    color: '#999999',
+    marginLeft: 8,
+  },
+});

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { SearchBox, SearchTextInput, Container } from './SearchInput.styles';
 import { Ionicons } from '@expo/vector-icons';
 import { useQuery } from '@tanstack/react-query';
 import API from '../../../apis/apis';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View, TextInput } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import FlexBox from '../FlexBox/FlexBox';
+import { styles } from './SearchInput.styles';
 
 const SearchInput = () => {
   const [value, setValue] = useState('');
@@ -32,11 +31,12 @@ const SearchInput = () => {
   });
 
   return (
-    <Container>
-      <FlexBox alignItems="center">
-        <SearchBox>
+    <View style={styles.container}>
+      <View style={styles.flexWrapper}>
+        <View style={styles.searchBox}>
           <Ionicons name="md-search-outline" size={24} color="#666666" onPress={() => refetch()} />
-          <SearchTextInput
+          <TextInput
+            style={styles.searchTextInput}
             value={value}
             onSubmitEditing={handleSearchSubmitValue}
             onChangeText={handleSearchValue}
@@ -46,8 +46,8 @@ const SearchInput = () => {
             placeholder="지금 나에게 맞는 향수를 찾아보세요"
             placeholderTextColor="#999999"
           />
-        </SearchBox>
-        {!isSearch ? (
+        </View>
+        {!isSearch && (
           <>
             <FastImage
               source={require('../../../assets/images/search_banner_1.png')}
@@ -64,8 +64,8 @@ const SearchInput = () => {
               />
             </View>
           </>
-        ) : null}
-      </FlexBox>
+        )}
+      </View>
 
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -93,7 +93,7 @@ const SearchInput = () => {
           </>
         )}
       />
-    </Container>
+    </View>
   );
 };
 

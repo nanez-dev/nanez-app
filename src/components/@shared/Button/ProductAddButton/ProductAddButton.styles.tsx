@@ -1,21 +1,21 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-export const ProductButton = styled.TouchableOpacity`
-  width: 88%;
-  height: 40px;
-  background: #65bfc4;
-  border-radius: 50px;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ButtonContent = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-`;
-
-export const Wrap = styled.View`
-  align-items: center;
-  padding-bottom: 40px;
-`;
+export const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    paddingBottom: 40,
+  },
+  addProductButton: {
+    width: '88%',
+    height: 40,
+    backgroundColor: '#65bfc4',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addProductCotent: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: 'white',
+  },
+});

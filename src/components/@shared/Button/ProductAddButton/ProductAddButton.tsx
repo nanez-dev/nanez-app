@@ -1,5 +1,6 @@
 import React from 'react';
-import { ProductButton, ButtonContent, Wrap } from './ProductAddButton.styles';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { styles } from './ProductAddButton.styles';
 
 interface ProductAddButtonProps {
   onPress: () => void;
@@ -7,11 +8,11 @@ interface ProductAddButtonProps {
 
 const ProductAddButton = ({ onPress }: ProductAddButtonProps) => {
   return (
-    <Wrap>
-      <ProductButton onPress={onPress}>
-        <ButtonContent>제품 등록 요청</ButtonContent>
-      </ProductButton>
-    </Wrap>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.addProductButton} onPress={onPress}>
+        <Text style={styles.addProductCotent}>제품 등록 요청</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

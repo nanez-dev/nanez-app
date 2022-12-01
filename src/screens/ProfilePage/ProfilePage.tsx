@@ -3,7 +3,6 @@ import {
   ImageSourcePropType,
   SafeAreaView,
   View,
-  StyleSheet,
   ActivityIndicator,
   ScrollView,
   Text,

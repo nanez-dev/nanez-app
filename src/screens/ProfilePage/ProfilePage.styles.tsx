@@ -35,7 +35,6 @@ export const styles = StyleSheet.create({
   },
   serviceCollection: {
     marginTop: 20,
-    height: 200,
     justifyContent: 'space-between',
   },
   serviceTitle: {

@@ -1,18 +1,16 @@
-import { TouchableOpacity } from 'react-native';
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import COLORS from '../../constants/colors';
 
-const ServiceWrapper = styled.TouchableOpacity`
-  padding: 16px 24px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-bottom-width: 1px;
-  border-bottom-color: ${COLORS.BORDER_COLOR};
-` as unknown as typeof TouchableOpacity;
-
-const Title = styled.Text`
-  margin-left: 8px;
-`;
-
-export { ServiceWrapper, Title };
+export const styles = StyleSheet.create({
+  touchContainer: {
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.BORDER_COLOR,
+  },
+  title: {
+    marginLeft: 8,
+  },
+});

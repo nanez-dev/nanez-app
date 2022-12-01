@@ -1,19 +1,19 @@
 import React from 'react';
-import { ImageSourcePropType } from 'react-native';
-import FlexBox from '../@shared/FlexBox/FlexBox';
-import { IconImg, TabName } from './MenuTab.styles';
+import { Text, View } from 'react-native';
+import FastImage, { Source } from 'react-native-fast-image';
+import { styles } from './MenuTab.styles';
 
 interface IMenuTabProps {
-  source: ImageSourcePropType;
+  source: number | Source | undefined;
   title: string;
 }
 
 const MenuTab = ({ source, title }: IMenuTabProps) => {
   return (
-    <FlexBox alignItems="center">
-      <IconImg source={source} />
-      <TabName>{title}</TabName>
-    </FlexBox>
+    <View style={styles.container}>
+      <FastImage source={source} style={styles.iconImage} />
+      <Text style={styles.tabName}>{title}</Text>
+    </View>
   );
 };
 

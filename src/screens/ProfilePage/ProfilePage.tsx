@@ -1,23 +1,16 @@
 import React from 'react';
-import {
-  ImageSourcePropType,
-  SafeAreaView,
-  View,
-  ActivityIndicator,
-  ScrollView,
-  Text,
-} from 'react-native';
+import { SafeAreaView, View, ActivityIndicator, ScrollView, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MenuTab from '../../components/MenuTab/MenuTab';
 import ServiceTab from '../../components/ServiceTab/ServiceTab';
 import { useRecoilValue } from 'recoil';
 import loginUserState from '../../atoms/user/atom';
-import FastImage from 'react-native-fast-image';
+import FastImage, { Source } from 'react-native-fast-image';
 import { styles } from './ProfilePage.styles';
 
 interface IMenuTabProps {
   id: number;
-  source: ImageSourcePropType;
+  source: number | Source | undefined;
   title: string;
 }
 

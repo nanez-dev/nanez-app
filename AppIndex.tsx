@@ -64,11 +64,6 @@ const PublicRouter = () => {
         headerTitleStyle: {
           color: isDark ? COLORS.WHITE_COLOR : COLORS.BLACK_COLOR,
         },
-        tabBarLabelStyle: {
-          marginTop: -5,
-          fontSize: 12,
-          fontWeight: '600',
-        },
         headerShown: false,
       }}
     >

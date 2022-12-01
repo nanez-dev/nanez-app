@@ -17,13 +17,10 @@ const HomeStack = () => {
   const navigation = useNavigation();
   return (
     <Stack.Navigator>
-      <Stack.Group
-        screenOptions={{
-          headerTransparent: true,
-        }}
-      >
+      <Stack.Group>
         <Stack.Screen
           options={{
+            headerTransparent: true,
             headerStyle: {
               backgroundColor: 'white',
             },

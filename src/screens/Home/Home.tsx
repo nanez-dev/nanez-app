@@ -12,7 +12,7 @@ import { ParamListBase } from '@react-navigation/native';
 
 import HomeInput from '../../components/@shared/HomeInput/HomeInput';
 import Swiper from 'react-native-swiper';
-import { Dimensions } from 'react-native';
+import { Dimensions, SafeAreaView } from 'react-native';
 import Slide from '../../components/Slide/Slide';
 
 const banner_1 = require('../../assets/images/banner_img/rolling_banner_1.jpg');
@@ -33,32 +33,34 @@ const Home = ({ navigation: { navigate } }: HomeScreenProps) => {
 
   return (
     <Container showsVerticalScrollIndicator={false}>
-      <HomeInput />
-      <Swiper
-        horizontal
-        loop
-        autoplay
-        activeDotColor="#424242"
-        activeDotStyle={{ width: 16 }}
-        autoplayTimeout={3.5}
-        showsPagination={true}
-        containerStyle={{
-          width: '100%',
-          height: SCREEN_HEIGHT / 4,
-        }}
-      >
-        {homeBanner.map((el) => (
-          <Slide bannerPath={el.img} key={el.key} />
-        ))}
-      </Swiper>
-      <BannerContent />
-      {/* 향수 추천 FlatList */}
-      <Recommend />
-      {/* 브랜드 FlatList */}
-      <RecommendBrand title="지금 사랑받고 있는 브랜드" text="전체보기" />
-      {/* 어코드 FlatList */}
-      <RecommendAccord title={`${month}월에 어울리는 핫한 어코드`} text="전체보기" />
-      <ProductAddButton onPress={() => navigate('AddBrand')} />
+      <SafeAreaView>
+        <HomeInput />
+        <Swiper
+          horizontal
+          loop
+          autoplay
+          activeDotColor="#424242"
+          activeDotStyle={{ width: 16 }}
+          autoplayTimeout={3.5}
+          showsPagination={true}
+          containerStyle={{
+            width: '100%',
+            height: SCREEN_HEIGHT / 4,
+          }}
+        >
+          {homeBanner.map((el) => (
+            <Slide bannerPath={el.img} key={el.key} />
+          ))}
+        </Swiper>
+        <BannerContent />
+        {/* 향수 추천 FlatList */}
+        <Recommend />
+        {/* 브랜드 FlatList */}
+        <RecommendBrand title="지금 사랑받고 있는 브랜드" text="전체보기" />
+        {/* 어코드 FlatList */}
+        <RecommendAccord title={`${month}월에 어울리는 핫한 어코드`} text="전체보기" />
+        <ProductAddButton onPress={() => navigate('AddBrand')} />
+      </SafeAreaView>
     </Container>
   );
 };
@@ -67,5 +69,5 @@ export default Home;
 
 const Container = styled.ScrollView`
   background-color: white;
-  margin-top: 80px;
+  padding-top: 40px;
 `;

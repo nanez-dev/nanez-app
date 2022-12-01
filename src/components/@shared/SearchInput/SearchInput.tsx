@@ -5,6 +5,7 @@ import API from '../../../apis/apis';
 import { FlatList, Text, View, TextInput } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { styles } from './SearchInput.styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SearchInput = () => {
   const [value, setValue] = useState('');
@@ -26,73 +27,71 @@ const SearchInput = () => {
       setIsSearch(true);
     },
     onError: (error) => {
-      console.log('error', error);
+      throw new Error(`Search fail error and error message: ${error}`);
     },
   });
 
   return (
     <View style={styles.container}>
-      <View style={styles.flexWrapper}>
-        <View style={styles.searchBox}>
-          <Ionicons name="md-search-outline" size={24} color="#666666" onPress={() => refetch()} />
-          <TextInput
-            style={styles.searchTextInput}
-            value={value}
-            onSubmitEditing={handleSearchSubmitValue}
-            onChangeText={handleSearchValue}
-            autoCapitalize="none"
-            autoCorrect={false}
-            autoFocus={false}
-            placeholder="지금 나에게 맞는 향수를 찾아보세요"
-            placeholderTextColor="#999999"
-          />
-        </View>
-        {!isSearch && (
-          <>
-            <FastImage
-              source={require('../../../assets/images/search_banner_1.png')}
-              style={{ width: 350, height: 120 }}
+      <SafeAreaView>
+        <View style={styles.flexWrapper}>
+          <View style={styles.searchBox}>
+            <Ionicons
+              name="md-search-outline"
+              size={24}
+              color="#666666"
+              onPress={() => refetch()}
             />
-            <View style={{ flexDirection: 'row', marginTop: 12 }}>
+            <TextInput
+              style={styles.searchTextInput}
+              value={value}
+              onSubmitEditing={handleSearchSubmitValue}
+              onChangeText={handleSearchValue}
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoFocus={false}
+              placeholder="지금 나에게 맞는 향수를 찾아보세요"
+              placeholderTextColor="#999999"
+            />
+          </View>
+          {!isSearch && (
+            <>
               <FastImage
-                source={require('../../../assets/images/search_banner_2.png')}
-                style={{ width: 168, height: 120, marginRight: 14 }}
+                source={require('../../../assets/images/search_banner_1.png')}
+                style={styles.bigBanner}
               />
-              <FastImage
-                source={require('../../../assets/images/search_banner_3.png')}
-                style={{ width: 168, height: 120 }}
-              />
-            </View>
-          </>
-        )}
-      </View>
-
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={data?.perfumes}
-        renderItem={({ item }) => (
-          <>
-            <View style={{ flexDirection: 'row', padding: 22 }}>
-              <FastImage
-                source={{ uri: item.web_image1 }}
-                style={{ width: 52, height: 52, marginRight: 24 }}
-              />
-              <View>
-                <Text
-                  style={{ color: '#666666', fontSize: 11, fontWeight: '400', marginBottom: 4 }}
-                >
-                  {item.brand.kor}
-                </Text>
-                <Text style={{ fontSize: 16, fontWeight: '700' }}>{item.eng}</Text>
-                <Text style={{ fontSize: 14, fontWeight: '400', color: '#333333' }}>
-                  {item.kor}
-                </Text>
+              <View style={styles.bannerWrapper}>
+                <FastImage
+                  source={require('../../../assets/images/search_banner_2.png')}
+                  style={styles.smallBannerLeft}
+                />
+                <FastImage
+                  source={require('../../../assets/images/search_banner_3.png')}
+                  style={styles.smallBannerRight}
+                />
               </View>
-            </View>
-            <View style={{ borderBottomWidth: 1, borderBottomColor: '#efefef' }} />
-          </>
-        )}
-      />
+            </>
+          )}
+        </View>
+
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={data?.perfumes}
+          renderItem={({ item }) => (
+            <>
+              <View style={styles.searchResultContainer}>
+                <FastImage source={{ uri: item.web_image1 }} style={styles.searchThumbnail} />
+                <View>
+                  <Text style={styles.searchBrand}>{item.brand.kor}</Text>
+                  <Text style={styles.searchPerfumeEng}>{item.eng}</Text>
+                  <Text style={styles.searchPerfumeKor}>{item.kor}</Text>
+                </View>
+              </View>
+              <View style={styles.searchUnderline} />
+            </>
+          )}
+        />
+      </SafeAreaView>
     </View>
   );
 };

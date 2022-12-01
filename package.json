@@ -1,6 +1,6 @@
 {
   "name": "nanez",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",
@@ -10,7 +10,7 @@
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
     "android:apk": "cd android && ./gradlew assembleRelease",
     "android:aab": "cd android && ./gradlew bundleRelease",
-    "test:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/"
+    "android:test": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -21,6 +21,7 @@
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.0",
+    "@sentry/react-native": "^4.10.0",
     "@tanstack/react-query": "^4.3.9",
     "axios": "^0.27.2",
     "expo": "~46.0.9",

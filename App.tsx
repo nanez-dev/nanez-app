@@ -5,6 +5,14 @@ import { ThemeProvider } from 'styled-components/native';
 import { darkTheme, lightTheme } from './theme';
 import { RecoilRoot } from 'recoil';
 import AppIndex from './AppIndex';
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: 'https://90ba4ed4a98e4938bf0bc303153de393@o4504253700046848.ingest.sentry.io/4504253707714560',
+  // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+  // We recommend adjusting this value in production.
+  tracesSampleRate: 1.0,
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,4 +45,4 @@ const App = () => {
   return <Nanez />;
 };
 
-export default App;
+export default Sentry.wrap(App);

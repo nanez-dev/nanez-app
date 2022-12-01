@@ -1,77 +1,53 @@
-import styled from 'styled-components/native';
-import FastImage from 'react-native-fast-image';
+import { StyleSheet } from 'react-native';
 import COLORS from '../../constants/colors';
 
-const Container = styled.ScrollView`
-  background-color: white;
-`;
-
-const ProfileImage = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-  margin-bottom: 16px;
-` as unknown as typeof FastImage;
-
-const Header = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 20px;
-  margin-bottom: 16px;
-`;
-
-const HeaderTitle = styled.Text`
-  font-size: 20px;
-  font-weight: 700;
-`;
-
-const UserInfo = styled.View`
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-`;
-
-const UserName = styled(HeaderTitle)``;
-
-const UserEmail = styled.Text`
-  color: #666666;
-  font-weight: 400;
-  font-size: 14px;
-`;
-
-const ListCollection = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0px 80px;
-  margin-top: 40px;
-  padding-bottom: 24px;
-  border-bottom-width: 7px;
-  border-bottom-color: ${COLORS.BORDER_COLOR};
-`;
-
-const ServiceCollection = styled.View`
-  margin-top: 20px;
-  height: 200px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ServiceTitle = styled(HeaderTitle)`
-  padding: 24px 16px;
-`;
-
-export {
-  ProfileImage,
-  Container,
-  Header,
-  HeaderTitle,
-  UserInfo,
-  UserName,
-  UserEmail,
-  ListCollection,
-  ServiceCollection,
-  ServiceTitle,
-};
+export const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 16,
+  },
+  userInfo: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  userName: {
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  userEmail: {
+    color: '#666666',
+    fontWeight: '400',
+    fontSize: 14,
+  },
+  listCollection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 80,
+    marginTop: 40,
+    paddingBottom: 24,
+    borderBottomWidth: 6,
+    borderBottomColor: COLORS.BORDER_COLOR,
+  },
+  serviceCollection: {
+    marginTop: 20,
+    height: 200,
+    justifyContent: 'space-between',
+  },
+  serviceTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

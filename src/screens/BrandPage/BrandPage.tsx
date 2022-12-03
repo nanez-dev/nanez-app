@@ -1,13 +1,10 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import styled from 'styled-components/native';
-import FlexBox from '../../components/@shared/FlexBox/FlexBox';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 import RecommendBrand from '../../components/Brand/Brand';
 import COLORS from '../../constants/colors';
 import { useQuery } from '@tanstack/react-query';
 import API from '../../apis/apis';
 import FastImage from 'react-native-fast-image';
-
 interface IBrand {
   image: string;
   kor: string;
@@ -18,54 +15,62 @@ interface IBrand {
 const BrandPage = () => {
   const { data } = useQuery(['brand'], API.getAllBrands);
   return (
-    <Container>
+    <View style={styles.container}>
       <View style={{ borderBottomColor: COLORS.BORDER_COLOR, borderBottomWidth: 1 }}>
         <RecommendBrand title="지금 사랑받고 있는 브랜드" />
       </View>
-      <Grid
+      <FlatList
         data={data.brands}
-        keyExtractor={(item: IBrand) => item.id}
+        keyExtractor={(item) => String(item.id)}
         renderItem={({ item }: { item: IBrand }) => (
-          <GridContainer>
-            <FlexBox flexDirection="row" alignItems="center">
-              <ImageWrapper>
+          <View style={styles.gridContainer}>
+            <View style={styles.flexWrapper}>
+              <View style={styles.imageWrapper}>
                 <FastImage
-                  style={{ width: 50, height: 48 }}
+                  style={styles.image}
                   resizeMode={'contain'}
                   source={{ uri: item.image }}
                 />
-              </ImageWrapper>
+              </View>
               <View>
                 <Text style={{ fontSize: 12 }}>{item.kor}</Text>
                 <Text>{item.eng}</Text>
               </View>
-            </FlexBox>
-          </GridContainer>
+            </View>
+          </View>
         )}
       />
-    </Container>
+    </View>
   );
 };
 
 export default BrandPage;
 
-const Container = styled.View`
-  padding-top: 20px;
-  background-color: white;
-  height: 100%;
-`;
-
-const Grid = styled.FlatList``;
-
-const GridContainer = styled.View`
-  padding: 16px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${COLORS.BORDER_COLOR};
-`;
-
-const ImageWrapper = styled.View`
-  padding: 0px 10px;
-  border: 1px solid ${COLORS.BORDER_COLOR};
-  border-radius: 8px;
-  margin-right: 20px;
-`;
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+    backgroundColor: 'white',
+    height: '100%',
+  },
+  gridContainer: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.BORDER_COLOR,
+  },
+  flexWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imageWrapper: {
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: COLORS.BORDER_COLOR,
+    borderRadius: 8,
+    marginRight: 20,
+  },
+  image: {
+    width: 50,
+    height: 48,
+  },
+});

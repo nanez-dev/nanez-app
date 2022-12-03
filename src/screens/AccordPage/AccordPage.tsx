@@ -3,8 +3,7 @@ import styled from 'styled-components/native';
 import RecommendAccord from '../../components/Accord/Accord';
 import API from '../../apis/apis';
 import { useQuery } from '@tanstack/react-query';
-import { ActivityIndicator, Image, Text, View } from 'react-native';
-import FlexBox from '../../components/@shared/FlexBox/FlexBox';
+import { ActivityIndicator, Image, Text, View, StyleSheet } from 'react-native';
 import COLORS from '../../constants/colors';
 
 export interface IAccords {
@@ -42,9 +41,9 @@ const AccordPage = () => {
               resizeMode={'contain'}
               source={{ uri: item.image }}
             />
-            <FlexBox justifyContent="center" alignItems="center">
+            <View style={styles.flexWrapper}>
               <Text>{item.kor}</Text>
-            </FlexBox>
+            </View>
           </View>
         )}
       />
@@ -61,3 +60,10 @@ const Container = styled.View`
 `;
 
 const Grid = styled.FlatList``;
+
+const styles = StyleSheet.create({
+  flexWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

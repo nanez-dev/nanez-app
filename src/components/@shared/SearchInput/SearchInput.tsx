@@ -62,23 +62,25 @@ const SearchInput = () => {
           )}
         </View>
 
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={data?.perfumes}
-          renderItem={({ item }) => (
-            <>
-              <View style={styles.searchResultContainer}>
-                <FastImage source={{ uri: item.web_image1 }} style={styles.searchThumbnail} />
-                <View>
-                  <Text style={styles.searchBrand}>{item.brand.kor}</Text>
-                  <Text style={styles.searchPerfumeEng}>{item.eng}</Text>
-                  <Text style={styles.searchPerfumeKor}>{item.kor}</Text>
+        {isSearch && (
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={data?.perfumes}
+            renderItem={({ item }) => (
+              <>
+                <View style={styles.searchResultContainer}>
+                  <FastImage source={{ uri: item.web_image1 }} style={styles.searchThumbnail} />
+                  <View>
+                    <Text style={styles.searchBrand}>{item.brand.kor}</Text>
+                    <Text style={styles.searchPerfumeEng}>{item.eng}</Text>
+                    <Text style={styles.searchPerfumeKor}>{item.kor}</Text>
+                  </View>
                 </View>
-              </View>
-              <View style={styles.searchUnderline} />
-            </>
-          )}
-        />
+                <View style={styles.searchUnderline} />
+              </>
+            )}
+          />
+        )}
       </SafeAreaView>
     </View>
   );

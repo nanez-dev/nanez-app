@@ -42,7 +42,7 @@ const API = {
   getPerfume: (submitValue?: string) => {
     return request({
       method: 'GET' as Method,
-      url: submitValue ? `${API_KEY}/perfume?name=${submitValue}` : `${API_KEY}/perfume`,
+      url: `${API_KEY}/perfume?name=${submitValue}`,
     });
   },
   getDetailPerfume: <I>(id: I) => {

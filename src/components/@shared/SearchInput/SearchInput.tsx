@@ -9,21 +9,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SearchInput = () => {
   const [value, setValue] = useState('');
-  const [submitValue, setSubmitValue] = useState('');
-  const [data, setData] = useState<any>();
   const [isSearch, setIsSearch] = useState(false);
 
   const handleSearchValue = (text: string) => {
     setValue(text);
   };
 
-  const handleSearchSubmitValue = () => {
-    setSubmitValue(value);
-  };
-
-  const { refetch } = useQuery(['searchPerfume'], () => API.getPerfume(submitValue), {
-    onSuccess: (item: any) => {
-      setData(item);
+  const { data, refetch } = useQuery(['searchPerfume', value], () => API.getPerfume(value), {
+    onSuccess: () => {
       setIsSearch(true);
     },
     onError: (error) => {
@@ -36,16 +29,11 @@ const SearchInput = () => {
       <SafeAreaView>
         <View style={styles.flexWrapper}>
           <View style={styles.searchBox}>
-            <Ionicons
-              name="md-search-outline"
-              size={24}
-              color="#666666"
-              onPress={() => refetch()}
-            />
+            <Ionicons name="md-search-outline" size={24} color="#666666" />
             <TextInput
               style={styles.searchTextInput}
               value={value}
-              onSubmitEditing={handleSearchSubmitValue}
+              onSubmitEditing={() => refetch()}
               onChangeText={handleSearchValue}
               autoCapitalize="none"
               autoCorrect={false}

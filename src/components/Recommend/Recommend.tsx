@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList } from 'react-native';
 import API from '../../apis/apis';
 import RecommendCard from '../@shared/RecommendCard/RecommendCard';
 import { Container, Title } from './Recommend.styles';

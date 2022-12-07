@@ -50,12 +50,12 @@ const ProfilePage = () => {
       screen: 'Setting',
       title: '설정',
     },
-    {
-      id: 3,
-      icon: 'game-controller',
-      screen: 'Game',
-      title: '게임(테스트 버전)',
-    },
+    // {
+    //   id: 3,
+    //   icon: 'game-controller',
+    //   screen: 'Game',
+    //   title: '게임(테스트 버전)',
+    // },
   ];
 
   return userInfo ? (

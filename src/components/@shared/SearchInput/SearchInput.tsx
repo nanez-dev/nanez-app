@@ -15,7 +15,7 @@ const SearchInput = () => {
     setValue(text);
   };
 
-  const { data, refetch } = useQuery(['searchPerfume', value], () => API.getPerfume(value), {
+  const { data, refetch } = useQuery(['searchPerfume'], () => API.getPerfume(value), {
     onSuccess: () => {
       setIsSearch(true);
     },

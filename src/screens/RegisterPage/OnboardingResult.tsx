@@ -59,7 +59,7 @@ const OnboardingResult = ({ route }: any) => {
         });
       },
       onError: (error) => {
-        console.log(error);
+        throw new Error(`OnboardingResult page signup ${error}`);
       },
     }
   );

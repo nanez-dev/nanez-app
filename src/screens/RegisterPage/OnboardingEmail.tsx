@@ -20,8 +20,8 @@ const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScr
       onSuccess: () => {
         setEmailAuth(true);
       },
-      onError: (error) => {
-        console.log('error', error);
+      onError: (error: any) => {
+        throw new Error(`OnboardingEmail page email send ${error}`);
       },
     }
   );
@@ -36,7 +36,7 @@ const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScr
         });
       },
       onError: (error) => {
-        console.log('error', error);
+        throw new Error(`OnboardingEmail page email verify ${error}`);
       },
     }
   );

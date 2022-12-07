@@ -39,10 +39,10 @@ const API = {
   getPerfumeInfo: () => {
     return request({ method: 'GET' as Method, url: `${API_KEY}/perfume/information` });
   },
-  getPerfume: (submitValue?: string) => {
+  getPerfume: (value?: string) => {
     return request({
       method: 'GET' as Method,
-      url: `${API_KEY}/perfume?name=${submitValue}`,
+      url: value ? `${API_KEY}/perfume?name=${value}` : `${API_KEY}/perfume`,
     });
   },
   getDetailPerfume: <I>(id: I) => {

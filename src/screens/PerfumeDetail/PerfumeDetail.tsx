@@ -21,8 +21,8 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
   const { id }: any = params;
 
   const { data, refetch } = useQuery(['perfumeDetail'], () => API.getDetailPerfume<number>(id), {
-    onError: (error) => {
-      console.log(error);
+    onError: (error: any) => {
+      throw new Error(`Detail Page error ${error}`);
     },
   });
 

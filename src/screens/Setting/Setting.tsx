@@ -1,10 +1,13 @@
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View, Text, Dimensions, Switch } from 'react-native';
 import { useSetRecoilState } from 'recoil';
 import { getLoginUser } from '../../atoms/user/selector';
 import { ServiceWrapper } from './Setting.styles';
 
-const Setting = () => {
+type SettingScreenProps = NativeStackScreenProps<ParamListBase, 'Setting'>;
+const Setting = ({ navigation: { navigate } }: SettingScreenProps) => {
   const { height } = Dimensions.get('window');
   const [isEnabled, setIsEnabled] = useState(false);
   const setLoginUser = useSetRecoilState(getLoginUser);
@@ -17,6 +20,10 @@ const Setting = () => {
         isLoggedin: false,
       };
     });
+  };
+
+  const goToWithdrawal = () => {
+    navigate('Withdrawal');
   };
 
   return (
@@ -33,6 +40,9 @@ const Setting = () => {
       </ServiceWrapper>
       <ServiceWrapper onPress={handleLogout}>
         <Text style={{ marginLeft: 6 }}>로그아웃</Text>
+      </ServiceWrapper>
+      <ServiceWrapper onPress={goToWithdrawal}>
+        <Text style={{ marginLeft: 6 }}>탈퇴하기</Text>
       </ServiceWrapper>
     </View>
   );

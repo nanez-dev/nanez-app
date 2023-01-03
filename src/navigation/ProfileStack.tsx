@@ -1,11 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MypageView from '../screens/ProfilePage/ProfilePage';
-import GamePage from '../screens/GamePage/GamePage';
 import Setting from '../screens/Setting/Setting';
 import NoticePage from '../screens/NoticePage/NoticePage';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import ReportPage from '../screens/ReportPage/ReportPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +30,8 @@ const ProfileStack = () => {
       >
         <Stack.Screen options={{ title: '공지사항' }} name="Notice" component={NoticePage} />
         <Stack.Screen options={{ title: '설정' }} name="Setting" component={Setting} />
-        <Stack.Screen options={{ title: '게임' }} name="Game" component={GamePage} />
+        {/* <Stack.Screen options={{ title: '게임' }} name="Game" component={GamePage} /> */}
+        <Stack.Screen options={{ title: '신고' }} name="Report" component={ReportPage} />
       </Stack.Group>
     </Stack.Navigator>
   );

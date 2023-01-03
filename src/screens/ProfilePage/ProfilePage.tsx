@@ -50,6 +50,12 @@ const ProfilePage = () => {
       screen: 'Setting',
       title: '설정',
     },
+    {
+      id: 3,
+      icon: 'alert-circle-outline',
+      screen: 'Report',
+      title: '신고',
+    },
     // {
     //   id: 3,
     //   icon: 'game-controller',

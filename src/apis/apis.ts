@@ -120,6 +120,15 @@ const API = {
       headers: { 'Content-Type': 'application/json' },
     });
   },
+  deleteUsersWithdrawal: (token: string) => {
+    return request({
+      method: 'DELETE' as Method,
+      url: `${API_KEY}/users/withdrawal`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };
 
 export default API;

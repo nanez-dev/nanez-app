@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import API from '../../apis/apis';
 import RecommendCard from '../@shared/RecommendCard/RecommendCard';
 import { Container, Title } from './Recommend.styles';
@@ -70,7 +70,11 @@ export interface IData {
 // ];
 
 const Recommend = () => {
-  const { data } = useQuery(['perfume'], () => API.getPerfume());
+  const { data } = useQuery(['perfume'], () => API.getPerfume(), {
+    onError: () => {
+      Alert.alert('데이터가 없습니다.');
+    },
+  });
 
   return (
     <Container>

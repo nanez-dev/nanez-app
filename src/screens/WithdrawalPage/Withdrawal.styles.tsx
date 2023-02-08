@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerWrap: {
-    flex: 0.5,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

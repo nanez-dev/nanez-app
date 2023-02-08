@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 22,
+    width: '100%',
   },
   modalView: {
     margin: 20,
@@ -23,12 +24,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 12,
     padding: 10,
     elevation: 2,
+    marginHorizontal: 15,
   },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
+  buttonAccept: {
+    backgroundColor: 'red',
   },
   buttonClose: {
     backgroundColor: '#2196F3',
@@ -39,8 +41,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
+    fontSize: 18,
+    fontWeight: '800',
     marginBottom: 15,
     textAlign: 'center',
+  },
+  buttonWrap: {
+    flexDirection: 'row',
+  },
+  withDrawalWrap: {
+    width: '80%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#65bfc4',
+    borderRadius: 50,
+  },
+  withDrawalTitle: {
+    fontSize: 30,
+    fontWeight: '600',
+    color: 'white',
   },
 });
 

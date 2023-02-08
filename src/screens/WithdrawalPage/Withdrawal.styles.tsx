@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 14,
     color: 'gray',
+    marginBottom: 20,
+  },
+  withDrawalUserInfo: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 15,
   },
   withDrawalWrap: {
     width: '80%',

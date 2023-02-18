@@ -5,9 +5,9 @@
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
 #import <React/RCTConvert.h>
-#import "RNSplashScreen.h"
 
 #import <React/RCTAppSetupUtils.h>
+#import "RNSplashScreen.h"
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -57,7 +57,6 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   [self.window makeKeyAndVisible];
 
   [super application:application didFinishLaunchingWithOptions:launchOptions];
-  
   [RNSplashScreen show];
 
   return YES;

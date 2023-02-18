@@ -24,6 +24,7 @@ const RegisterAgeInput = ({
           selectedValue={selectedAge}
           onValueChange={handleSelectedAge}
         >
+          <Picker.Item label="미입력" value="0" />
           <Picker.Item label="어린이" value="7" />
           <Picker.Item label="10대" value="10" />
           <Picker.Item label="20대" value="20" />

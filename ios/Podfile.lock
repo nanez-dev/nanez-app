@@ -32,15 +32,15 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.69.6)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - libwebp (1.2.3):
-    - libwebp/demux (= 1.2.3)
-    - libwebp/mux (= 1.2.3)
-    - libwebp/webp (= 1.2.3)
-  - libwebp/demux (1.2.3):
+  - libwebp (1.2.4):
+    - libwebp/demux (= 1.2.4)
+    - libwebp/mux (= 1.2.4)
+    - libwebp/webp (= 1.2.4)
+  - libwebp/demux (1.2.4):
     - libwebp/webp
-  - libwebp/mux (1.2.3):
+  - libwebp/mux (1.2.4):
     - libwebp/demux
-  - libwebp/webp (1.2.3)
+  - libwebp/webp (1.2.4)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -545,7 +545,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 957de82f66e31f2f14bbec34e37242282fdd26de
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
-  libwebp: 60305b2e989864154bd9be3d772730f08fc6a59c
+  libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
   RCT-Folly: b9d9fe1fc70114b751c076104e52f3b1b5e5a95a
   RCTRequired: c8c080849a3670601d5c7056023a2176067a69d8
   RCTTypeSafety: 710aef40f5ae246bc5fff7e873855b17ed11c180

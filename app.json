@@ -2,8 +2,11 @@
   "expo": {
     "name": "nanez",
     "slug": "nanez",
-    "version": "1.0.1",
-    "assetBundlePatterns": ["**/*"]
+    "version": "1.0.3",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "bundleIdentifier": "com.project.nanez"
+    }
   },
   "name": "nanez"
 }

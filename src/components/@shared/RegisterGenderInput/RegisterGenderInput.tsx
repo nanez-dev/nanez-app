@@ -24,6 +24,7 @@ const RegisterGenderInput = ({
           selectedValue={selectedGender}
           onValueChange={handleSelectedGender}
         >
+          <Picker.Item label="미입력" value="NO" />
           <Picker.Item label="여자" value="F" />
           <Picker.Item label="남자" value="M" />
         </Picker>

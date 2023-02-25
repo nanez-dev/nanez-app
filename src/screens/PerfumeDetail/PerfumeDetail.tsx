@@ -1,20 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, SafeAreaView, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import {
-  ProductImage,
-  ProductInfo,
-  AccordInfo,
-  AccordImage,
-  NoteInfo,
-  NoteImage,
-} from './PerfumeDetail.styles';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
+// import { Ionicons } from '@expo/vector-icons';
+import { styles } from './PerfumeDetail.styles';
 import { useQuery } from '@tanstack/react-query';
 import GoToHomeBtn from '../../components/@shared/Button/GoToHomeBtn/GoToHomeBtn';
 import { ParamListBase } from '@react-navigation/native';
 import numberWithCommas from '../../utils/numberWithCommas';
 import API from '../../apis/apis';
+import FastImage from 'react-native-fast-image';
 
 type DetailScreenProps = NativeStackScreenProps<ParamListBase, 'PerfumeDetail'>;
 const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScreenProps) => {
@@ -34,13 +28,25 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
     goBack();
   };
 
+  interface ItypeObject {
+    [key: string]: string;
+  }
+
+  const typeObject: ItypeObject = {
+    T: 'TOP',
+    M: 'Middle',
+    B: 'Base',
+  };
+
+  console.log(data.perfume.perfume_notes[0]);
+
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <SafeAreaView style={{ height: 1210 }}>
         <View style={{ alignItems: 'center' }}>
-          <ProductImage source={{ uri: data.perfume.image }} />
+          <FastImage source={{ uri: data.perfume.image }} style={styles.productImage} />
         </View>
-        <ProductInfo>
+        <View style={styles.productInfo}>
           <View>
             <Text style={{ fontSize: 11, fontWeight: '400', color: '#666666' }}>
               {data.perfume.brand.kor}
@@ -55,12 +61,12 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
               {numberWithCommas(data.perfume.price)}
             </Text>
           </View>
-          <Pressable style={{ flexDirection: 'row' }}>
+          {/* <Pressable style={{ flexDirection: 'row' }}>
             <Ionicons color={'black'} name="checkmark-circle-outline" size={22} />
             <Ionicons name="heart-outline" size={22} />
-          </Pressable>
-        </ProductInfo>
-        <AccordInfo>
+          </Pressable> */}
+        </View>
+        <View style={styles.accordInfo}>
           <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>Accord</Text>
           <View
             style={{
@@ -70,11 +76,11 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
             }}
           >
             {data.perfume.perfume_accords.map((i: any) => (
-              <AccordImage key={i.id} source={{ uri: i.image }} />
+              <FastImage key={i.id} source={{ uri: i.accord.image }} style={styles.accordImage} />
             ))}
           </View>
-        </AccordInfo>
-        <NoteInfo>
+        </View>
+        <View style={styles.noteInfo}>
           <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>Note</Text>
           <View
             style={{
@@ -90,32 +96,28 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
                 {data.perfume.subtitle}
               </Text>
               <View style={{ marginBottom: 16 }}>
-                <Text style={{ fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
-                  Top Note: Lemon, Basil, Tulip
-                </Text>
-                <Text style={{ fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
-                  Middle Note: Freesia, Pear
-                </Text>
-                <Text style={{ fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
-                  Base Note: Amber, Musk
-                </Text>
+                {data.perfume.perfume_notes.map((el: any) => (
+                  <Text style={{ fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
+                    {typeObject[el.type]} : {el.note.eng}
+                  </Text>
+                ))}
               </View>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               {data.perfume.perfume_notes.map((i: any) => (
                 <View key={i.id}>
-                  <NoteImage source={{ uri: i.note.image }} />
+                  <FastImage source={{ uri: i.note.image }} style={styles.noteImage} />
                   <Text
                     style={{ marginBottom: 5, fontSize: 12, fontWeight: '400', color: '#999999' }}
                   >
-                    {i.type}
+                    {typeObject[i.type]}
                   </Text>
-                  <Text>{i.note.eng}</Text>
+                  <Text style={styles.noteTitle}>{i.note.eng}</Text>
                 </View>
               ))}
             </View>
           </View>
-        </NoteInfo>
+        </View>
         <GoToHomeBtn onPress={goToHome} />
       </SafeAreaView>
     </ScrollView>

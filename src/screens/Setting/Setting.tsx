@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ParamListBase } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
-import { View, Text, Dimensions, Switch, DevSettings } from 'react-native';
+import React from 'react';
+import { View, Text, Dimensions, DevSettings } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { useSetRecoilState } from 'recoil';
 import { getLoginUser } from '../../atoms/user/selector';
@@ -11,9 +11,9 @@ import { ServiceWrapper } from './Setting.styles';
 type SettingScreenProps = NativeStackScreenProps<ParamListBase, 'Setting'>;
 const Setting = ({ navigation: { navigate } }: SettingScreenProps) => {
   const { height } = Dimensions.get('window');
-  const [isEnabled, setIsEnabled] = useState(false);
+  // const [isEnabled, setIsEnabled] = useState(false);
   const setLoginUser = useSetRecoilState(getLoginUser);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const handleLogout = async () => {
     setLoginUser((prev: any) => {
@@ -22,9 +22,13 @@ const Setting = ({ navigation: { navigate } }: SettingScreenProps) => {
         isLoggedin: false,
       };
     });
-    await AsyncStorage.clear();
-    await EncryptedStorage.clear();
-    DevSettings.reload();
+    await AsyncStorage.clear()
+      .then(() => {
+        EncryptedStorage.clear();
+      })
+      .then(() => {
+        DevSettings.reload();
+      });
   };
 
   const goToWithdrawal = () => {
@@ -33,7 +37,7 @@ const Setting = ({ navigation: { navigate } }: SettingScreenProps) => {
 
   return (
     <View style={{ backgroundColor: 'white', height }}>
-      <ServiceWrapper>
+      {/* <ServiceWrapper>
         <Text style={{ marginLeft: 6 }}>다크모드</Text>
         <Switch
           trackColor={{ false: '#767577', true: '#81b0ff' }}
@@ -42,7 +46,7 @@ const Setting = ({ navigation: { navigate } }: SettingScreenProps) => {
           onValueChange={toggleSwitch}
           value={isEnabled}
         />
-      </ServiceWrapper>
+      </ServiceWrapper> */}
       <ServiceWrapper onPress={handleLogout}>
         <Text style={{ marginLeft: 6 }}>로그아웃</Text>
       </ServiceWrapper>

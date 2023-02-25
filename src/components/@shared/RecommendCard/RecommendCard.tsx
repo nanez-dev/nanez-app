@@ -19,6 +19,7 @@ const RecommendCard = ({ item }: { item: IData }) => {
       id,
     });
   };
+
   return (
     <Container onPress={goToDetail.bind(this, item.id)}>
       <PerfumeImage source={{ uri: item.image }} />

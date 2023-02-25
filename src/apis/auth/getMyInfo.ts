@@ -1,9 +1,9 @@
-import instance from '..';
-import { responseType } from '../responseType';
+import { Method } from 'axios';
+import request from '..';
 
 export const getMyInfo = async () => {
-  return await instance
-    .get('/users/me')
-    .then((res: responseType) => res)
-    .catch((err) => err);
+  return await request({
+    url: '/users/me',
+    method: 'GET' as Method,
+  });
 };

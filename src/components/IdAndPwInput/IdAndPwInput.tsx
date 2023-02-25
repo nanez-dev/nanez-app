@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 import { TextInput, View } from 'react-native';
-import { IdInput, PwInput } from './IdAndPwInput.styles';
+import { styles } from './IdAndPwInput.styles';
 
 interface IIdAndPwInput {
   email: string;
@@ -23,7 +23,8 @@ const IdAndPwInput = ({
 }: IIdAndPwInput) => {
   return (
     <View>
-      <IdInput
+      <TextInput
+        style={styles.idInput}
         autoCapitalize="none"
         autoComplete={'off'}
         autoCorrect={false}
@@ -33,7 +34,8 @@ const IdAndPwInput = ({
         onSubmitEditing={onSubmitEmailEditing}
         keyboardType="email-address"
       />
-      <PwInput
+      <TextInput
+        style={styles.pwInput}
         ref={passwordRef}
         autoCapitalize="none"
         autoComplete={'off'}

@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "nanez.app"
-               BlueprintName = "&#xb098;&#xb124;"
-               ReferencedContainer = "container:&#x1102;&#x1161;&#x1102;&#x1166;.xcodeproj">
+               BlueprintName = "nanez"
+               ReferencedContainer = "container:nanez.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "nanezTests.xctest"
                BlueprintName = "nanezTests"
-               ReferencedContainer = "container:&#x1102;&#x1161;&#x1102;&#x1166;.xcodeproj">
+               ReferencedContainer = "container:nanez.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -56,8 +56,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "nanez.app"
-            BlueprintName = "&#xb098;&#xb124;"
-            ReferencedContainer = "container:&#x1102;&#x1161;&#x1102;&#x1166;.xcodeproj">
+            BlueprintName = "nanez"
+            ReferencedContainer = "container:nanez.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -73,8 +73,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "nanez.app"
-            BlueprintName = "&#xb098;&#xb124;"
-            ReferencedContainer = "container:&#x1102;&#x1161;&#x1102;&#x1166;.xcodeproj">
+            BlueprintName = "nanez"
+            ReferencedContainer = "container:nanez.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

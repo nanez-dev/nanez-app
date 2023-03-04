@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import OpinionCategory from '../../components/OpinionCategory/OpinionCategory';
 import styles from './ReportPage.styles';
 import { Ionicons } from '@expo/vector-icons';
+import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ParamListBase } from '@react-navigation/native';
 
-const ReportPage = () => {
-  const [email, setEmail] = useState('');
+type ReportScreenProps = NativeStackScreenProps<ParamListBase, 'ReportPage'>;
+const ReportPage = ({ navigation: { navigate } }: ReportScreenProps) => {
+  const [reportTitle, setReportTitle] = useState('');
+  const [reportValue, setReportValue] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [category, setCategory] = useState([
     {
@@ -33,12 +38,25 @@ const ReportPage = () => {
   const [categoryValue, setCategoryValue] = useState('신고 사유');
 
   const handleEmailValue = (text: string) => {
-    setEmail(text);
+    setReportTitle(text);
+  };
+
+  const handleReportValue = (text: string) => {
+    setReportValue(text);
   };
 
   const handleCategoryValueClick = (name: string) => {
     setCategoryValue(name);
     setModalVisible(false);
+  };
+
+  const handleReportPress = () => {
+    if (reportValue.length > 0 && reportTitle.length > 0) {
+      Alert.alert('신고 감사합니다. 확인 후 반영하도록 하겠습니다.');
+      navigate('Home');
+    } else {
+      Alert.alert('내용을 모두 작성해주세요.');
+    }
   };
 
   return (
@@ -49,7 +67,7 @@ const ReportPage = () => {
         placeholder="신고할 게시물 이름"
         autoCapitalize="none"
         autoCorrect={false}
-        value={email}
+        value={reportTitle}
         onChangeText={handleEmailValue}
       />
       <TouchableOpacity style={styles.report} onPress={() => setModalVisible((prev) => !prev)}>
@@ -69,6 +87,14 @@ const ReportPage = () => {
           })}
         </View>
       </BottomSheet>
+      <TextInput
+        value={reportValue}
+        onChangeText={handleReportValue}
+        style={styles.reportContent}
+        placeholder="상세 사유를 작성해주세요"
+        multiline={true}
+      />
+      <NextBtn bgColor={'#FF4D4F'} title="신고하기" onPress={handleReportPress} />
     </View>
   );
 };

@@ -8,7 +8,7 @@ import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 
-type ReportScreenProps = NativeStackScreenProps<ParamListBase, 'ReportPage'>;
+type ReportScreenProps = NativeStackScreenProps<ParamListBase, 'Report'>;
 const ReportPage = ({ navigation: { navigate } }: ReportScreenProps) => {
   const [reportTitle, setReportTitle] = useState('');
   const [reportValue, setReportValue] = useState('');

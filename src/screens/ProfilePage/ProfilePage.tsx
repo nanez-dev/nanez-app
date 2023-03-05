@@ -56,12 +56,12 @@ const ProfilePage = () => {
       screen: 'Report',
       title: '신고',
     },
-    {
-      id: 4,
-      icon: 'clipboard-outline',
-      screen: 'Opinion',
-      title: '의견보내기',
-    },
+    // {
+    //   id: 4,
+    //   icon: 'clipboard-outline',
+    //   screen: 'Opinion',
+    //   title: '의견보내기',
+    // },
     // {
     //   id: 3,
     //   icon: 'game-controller',

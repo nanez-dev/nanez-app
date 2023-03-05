@@ -2,17 +2,25 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useQuery } from '@tanstack/react-query';
 import API from '../../../apis/apis';
-import { FlatList, Text, View, TextInput } from 'react-native';
+import { FlatList, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { styles } from './SearchInput.styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchInput = () => {
   const [value, setValue] = useState('');
   const [isSearch, setIsSearch] = useState(false);
+  const { navigate } = useNavigation();
 
   const handleSearchValue = (text: string) => {
     setValue(text);
+  };
+  const goToDetail = (id: number) => {
+    //@ts-ignore
+    navigate('PerfumeDetail', {
+      id,
+    });
   };
 
   const { data, refetch } = useQuery(['searchPerfume'], () => API.getPerfume(value), {
@@ -66,8 +74,9 @@ const SearchInput = () => {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={data?.perfumes}
+            key={data.perfumes.id}
             renderItem={({ item }) => (
-              <>
+              <TouchableOpacity onPress={() => goToDetail(item.id)}>
                 <View style={styles.searchResultContainer}>
                   <FastImage source={{ uri: item.web_image1 }} style={styles.searchThumbnail} />
                   <View>
@@ -77,7 +86,7 @@ const SearchInput = () => {
                   </View>
                 </View>
                 <View style={styles.searchUnderline} />
-              </>
+              </TouchableOpacity>
             )}
           />
         )}

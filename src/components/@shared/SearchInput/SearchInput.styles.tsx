@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -58,6 +60,8 @@ export const styles = StyleSheet.create({
   searchPerfumeEng: {
     fontSize: 16,
     fontWeight: '700',
+    overflow: 'hidden',
+    width: width - 100,
   },
   searchPerfumeKor: {
     fontSize: 14,

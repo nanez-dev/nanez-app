@@ -6,7 +6,21 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import Report from '../screens/ReportPage/ReportPage';
 import Withdrawal from '../screens/WithdrawalPage/Withdrawal';
-import OpinionPage from '../screens/OpinionPage/OpinionPage';
+// import OpinionPage from '../screens/OpinionPage/OpinionPage';
+import LoginPage from '../screens/LoginPage/LoginPage';
+import RegisterPage from '../screens/RegisterPage/RegisterPage';
+import OnboardingEmail from '../screens/RegisterPage/OnboardingEmail';
+import OnboardingPw from '../screens/RegisterPage/OnboardingPw';
+import OnboardingRePw from '../screens/RegisterPage/OnboardingRePw';
+import OnboardingGender from '../screens/RegisterPage/OnboardingGender';
+import OnboardingAge from '../screens/RegisterPage/OnboardingAge';
+import OnboardingNickname from '../screens/RegisterPage/OnboardingNickname';
+import OnboardingAccord from '../screens/RegisterPage/OnboardingAccord';
+import OnboardingEvent from '../screens/RegisterPage/OnboardingEvent';
+import OnboardingResult from '../screens/RegisterPage/OnboardingResult';
+import ServicePage from '../screens/ServicePage/ServicePage';
+import InformationPage from '../screens/ServicePage/InformationPage';
+import PromotionPage from '../screens/ServicePage/PromotionPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +50,42 @@ const ProfileStack = () => {
           <Stack.Screen options={{ title: '신고' }} name="Report" component={Report} />
           {/* <Stack.Screen options={{ title: '의견보내기' }} name="Opinion" component={OpinionPage} /> */}
           <Stack.Screen options={{ title: '회원탈퇴' }} name="Withdrawal" component={Withdrawal} />
+        </Stack.Group>
+      </Stack.Group>
+      <Stack.Group
+        screenOptions={{
+          headerTitle: '로그인',
+          headerLeft: () => (
+            <Ionicons
+              name={'arrow-back'}
+              size={24}
+              //@ts-ignore
+              onPress={() => navigation.navigate('ProfilePage')}
+            />
+          ),
+        }}
+      >
+        <Stack.Screen name="LoginPage" component={LoginPage} />
+      </Stack.Group>
+      <Stack.Group
+        screenOptions={{
+          title: '회원가입',
+        }}
+      >
+        <Stack.Screen name="RegisterPage" component={RegisterPage} />
+        <Stack.Screen name="OnboardingEmail" component={OnboardingEmail} />
+        <Stack.Screen name="OnboardingPw" component={OnboardingPw} />
+        <Stack.Screen name="OnboardingRePw" component={OnboardingRePw} />
+        <Stack.Screen name="OnboardingGender" component={OnboardingGender} />
+        <Stack.Screen name="OnboardingAge" component={OnboardingAge} />
+        <Stack.Screen name="OnboardingNickname" component={OnboardingNickname} />
+        <Stack.Screen name="OnboardingAccord" component={OnboardingAccord} />
+        <Stack.Screen name="OnboardingEvent" component={OnboardingEvent} />
+        <Stack.Screen name="OnboardingResult" component={OnboardingResult} />
+        <Stack.Group>
+          <Stack.Screen name="Service" component={ServicePage} />
+          <Stack.Screen name="Information" component={InformationPage} />
+          <Stack.Screen name="Promotion" component={PromotionPage} />
         </Stack.Group>
       </Stack.Group>
     </Stack.Navigator>

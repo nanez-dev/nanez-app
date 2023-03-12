@@ -37,6 +37,7 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
             profile_image: res.data.profile_image,
           });
         });
+        navigate('ProfilePage');
       }
     },
     onError: () => {

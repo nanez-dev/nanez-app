@@ -1,5 +1,12 @@
 import React from 'react';
-import { SafeAreaView, View, ActivityIndicator, ScrollView, Text } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  ActivityIndicator,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 // import MenuTab from '../../components/MenuTab/MenuTab';
 import ServiceTab from '../../components/ServiceTab/ServiceTab';
@@ -7,6 +14,8 @@ import { useRecoilValue } from 'recoil';
 import loginUserState from '../../atoms/user/atom';
 import FastImage from 'react-native-fast-image';
 import { styles } from './ProfilePage.styles';
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // interface IMenuTabProps {
 //   id: number;
@@ -21,8 +30,11 @@ interface IServiceTabProps {
   title: string;
 }
 
-const ProfilePage = () => {
+type ProfileScreenProps = NativeStackScreenProps<ParamListBase, 'ProfilePage'>;
+const ProfilePage = ({ navigation: { navigate } }: ProfileScreenProps) => {
   const userInfo = useRecoilValue(loginUserState);
+
+  console.log(userInfo.email);
 
   // const ImageArr: IMenuTabProps[] = [
   //   {
@@ -70,17 +82,33 @@ const ProfilePage = () => {
     // },
   ];
 
+  const defaultProfileImage = require('../../assets/images/mypage_img/default_profile_image.png');
+
+  const goToJoin = () => {
+    navigate('LoginPage');
+  };
+
   return userInfo ? (
     <ScrollView style={styles.container}>
       <SafeAreaView>
         <View style={styles.userInfo}>
-          <FastImage
-            style={styles.profileImage}
-            source={{ uri: userInfo.profile_image || 'https://picsum.photos/200/300' }}
-          />
+          {userInfo.profile_image ? (
+            <FastImage
+              style={styles.profileImage}
+              source={{ uri: userInfo.profile_image || defaultProfileImage }}
+            />
+          ) : (
+            <FastImage style={styles.profileImage} source={defaultProfileImage} />
+          )}
           <Text style={styles.userName}>{userInfo.nickname || '익명의 사용자'}님, 안녕하세요</Text>
           <Text style={styles.userEmail}>{userInfo.email || 'nanez.contact@gmail.com'}</Text>
         </View>
+        {!userInfo.email && (
+          <TouchableOpacity style={styles.joinWrap} onPress={goToJoin}>
+            <Text style={styles.joinTitle}>로그인 및 회원가입</Text>
+          </TouchableOpacity>
+        )}
+
         {/* <View style={styles.listCollection}>
           {ImageArr.map((i) => (
             <MenuTab key={i.id} source={i.source} title={i.title} />

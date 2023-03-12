@@ -24,6 +24,17 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
   },
+  joinWrap: {
+    alignItems: 'flex-end',
+    marginTop: 15,
+    marginRight: 20,
+  },
+  joinTitle: {
+    backgroundColor: '#65bfc4',
+    color: 'white',
+    fontWeight: '700',
+    padding: 10,
+  },
   listCollection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -34,7 +45,7 @@ export const styles = StyleSheet.create({
     borderBottomColor: COLORS.BORDER_COLOR,
   },
   serviceCollection: {
-    marginTop: 20,
+    marginTop: 10,
     justifyContent: 'space-between',
   },
   serviceTitle: {

@@ -1,11 +1,11 @@
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components/native';
 import API from '../../apis/apis';
-import { getLoginUser } from '../../atoms/user/selector';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
 
 interface IUser {
@@ -20,8 +20,8 @@ interface IUser {
   profile_image: string;
 }
 
-// type OnboardingResultScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingResult'>;
-const OnboardingResult = ({ route }: any) => {
+type OnboardingResultScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingResult'>;
+const OnboardingResult = ({ navigation: { navigate }, route }: OnboardingResultScreenProps) => {
   const {
     nickname,
     email,
@@ -33,7 +33,6 @@ const OnboardingResult = ({ route }: any) => {
     selectedAccordImage: profile_image,
     is_accepted,
   }: any = route.params;
-  const setLoginUser = useSetRecoilState(getLoginUser);
 
   const { mutate: onSubmitSignup } = useMutation(
     () =>
@@ -50,13 +49,7 @@ const OnboardingResult = ({ route }: any) => {
       }),
     {
       onSuccess: () => {
-        setLoginUser({
-          nickname: nickname,
-          email: email,
-          gender: gender,
-          age_group: age_group,
-          profile_image: profile_image,
-        });
+        navigate('LoginPage');
       },
       onError: (error) => {
         throw new Error(`OnboardingResult page signup ${error}`);
@@ -88,7 +81,7 @@ const OnboardingResult = ({ route }: any) => {
             backgroundColor: '#65BFC4',
           }}
         >
-          <Text style={{ color: 'white', fontWeight: '700' }}>메인으로</Text>
+          <Text style={{ color: 'white', fontWeight: '700' }}>로그인하기</Text>
         </TouchableOpacity>
       </View>
     </Container>

@@ -66,7 +66,7 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   };
 
   const goToRegister = () => {
-    navigate('RegisterPage');
+    navigate('OnboardingResult');
   };
 
   return (

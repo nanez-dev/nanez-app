@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { responseType } from '../responseType';
 import API_KEY from '../../config/apiKey';
 
 export const getNewToken = async () => {
@@ -10,6 +9,6 @@ export const getNewToken = async () => {
         Authorization: `Bearer ${AsyncStorage.getItem('refresh_token')}`,
       },
     })
-    .then((res: responseType) => res)
+    .then((res) => res)
     .catch((err) => err);
 };

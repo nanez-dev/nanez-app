@@ -9,7 +9,6 @@ import LoginBtn from '../../components/@shared/Button/LoginBtn/LoginBtn';
 import RegisterBtn from '../../components/@shared/Button/RegisterBtn/RegisterBtn';
 import { useMutation } from '@tanstack/react-query';
 import API from '../../apis/apis';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { getMyInfo } from '../../apis/auth/getMyInfo';
 import { useSetRecoilState } from 'recoil';
@@ -26,7 +25,7 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   const { mutate } = useMutation(() => API.postUserSignin({ email, password }), {
     onSuccess: async (item) => {
       if (item) {
-        AsyncStorage.setItem('refresh_token', item.refresh_token);
+        EncryptedStorage.setItem('refresh_token', item.refresh_token);
         EncryptedStorage.setItem('authCookie', item.access_token);
         await getMyInfo().then((res) => {
           setLoginUser({
@@ -66,7 +65,7 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   };
 
   const goToRegister = () => {
-    navigate('OnboardingResult');
+    navigate('RegisterPage');
   };
 
   return (

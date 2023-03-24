@@ -15,7 +15,6 @@ interface IBrand {
 const BrandPage = () => {
   const { data } = useQuery(['brand'], API.getAllBrands);
 
-  console.log(data);
   return (
     <View style={styles.container}>
       <View style={{ borderBottomColor: COLORS.BORDER_COLOR, borderBottomWidth: 1 }}>

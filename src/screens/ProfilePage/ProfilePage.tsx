@@ -34,8 +34,6 @@ type ProfileScreenProps = NativeStackScreenProps<ParamListBase, 'ProfilePage'>;
 const ProfilePage = ({ navigation: { navigate } }: ProfileScreenProps) => {
   const userInfo = useRecoilValue(loginUserState);
 
-  console.log(userInfo.email);
-
   // const ImageArr: IMenuTabProps[] = [
   //   {
   //     id: 1,

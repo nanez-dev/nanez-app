@@ -38,8 +38,6 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
     B: 'Base',
   };
 
-  console.log(data.perfume.perfume_notes[0]);
-
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
       <SafeAreaView style={{ height: 1210 }}>

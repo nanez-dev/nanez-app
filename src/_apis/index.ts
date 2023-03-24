@@ -2,7 +2,6 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import API_KEY from '../config/apiKey';
 import { getNewToken } from './auth/getNewToken';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const instance = axios.create({
   baseURL: API_KEY,
@@ -33,7 +32,7 @@ instance.interceptors.response.use(
       const originalRequest = config;
       const newAccessToken = await getNewToken();
       if (newAccessToken.response && newAccessToken.response.status === 403) {
-        AsyncStorage.removeItem('refresh_token');
+        EncryptedStorage.removeItem('refresh_token');
         EncryptedStorage.removeItem('authCookie');
       } else {
         EncryptedStorage.setItem('authCookie', newAccessToken.data.access_token);

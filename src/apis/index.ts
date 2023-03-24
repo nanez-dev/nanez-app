@@ -1,8 +1,8 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import API_KEY from '../config/apiKey';
+import API_KEY, { REFRESH_TOKEN } from '../config/apiKey';
 import { getNewToken } from './auth/getNewToken';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import getCookieValue from '../utils/cookie';
 
 const instance = axios.create({
   baseURL: API_KEY,
@@ -13,13 +13,18 @@ const instance = axios.create({
 instance.interceptors.request.use(
   async (config: AxiosRequestConfig) => {
     const cookie = await EncryptedStorage.getItem('authCookie');
-    if (config.headers && cookie) {
-      config.headers.Authorization = `Bearer ${cookie}`;
-    }
+    config.headers = {
+      ...config.headers,
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Access-Control-Allow-Origin': '*',
+      [REFRESH_TOKEN]: getCookieValue(REFRESH_TOKEN),
+    };
+    config.headers.Authorization = `Bearer ${cookie}`;
     return config;
   },
   (error: AxiosError) => {
-    return Promise.reject(error);
+    Promise.reject(error);
   }
 );
 
@@ -33,7 +38,7 @@ instance.interceptors.response.use(
       const originalRequest = config;
       const newAccessToken = await getNewToken();
       if (newAccessToken.response && newAccessToken.response.status === 401) {
-        AsyncStorage.removeItem('refresh_token');
+        EncryptedStorage.removeItem('refresh_token');
         EncryptedStorage.removeItem('authCookie');
       } else {
         EncryptedStorage.setItem('authCookie', newAccessToken.data.access_token);

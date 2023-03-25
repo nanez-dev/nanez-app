@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Container, BrandImage } from './BrandCard.styles';
@@ -25,4 +25,4 @@ const BrandCard = ({ item }: IProps) => {
   );
 };
 
-export default BrandCard;
+export default memo(BrandCard);

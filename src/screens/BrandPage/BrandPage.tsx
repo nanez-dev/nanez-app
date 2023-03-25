@@ -14,6 +14,7 @@ interface IBrand {
 
 const BrandPage = () => {
   const { data } = useQuery(['brand'], API.getAllBrands);
+  console.log(data);
 
   return (
     <View style={styles.container}>
@@ -24,6 +25,7 @@ const BrandPage = () => {
         data={data.brands}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }: { item: IBrand }) => (
+          // TODO: memo를 이용하여서 렌더링 최적화 하기
           <View style={styles.gridContainer}>
             <View style={styles.flexWrapper}>
               <View style={styles.imageWrapper}>

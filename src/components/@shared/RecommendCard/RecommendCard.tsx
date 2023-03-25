@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { memo } from 'react';
 import { PerfumeImage, Card, Container, Brand, Name } from './RecommendCard.styles';
 
 interface IData {
@@ -31,4 +31,4 @@ const RecommendCard = ({ item }: { item: IData }) => {
   );
 };
 
-export default RecommendCard;
+export default memo(RecommendCard);

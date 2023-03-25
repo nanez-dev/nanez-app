@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Container, AccordImage } from './AccordCard.styles';
@@ -25,4 +25,4 @@ const AccordCard = ({ item }: IProps) => {
   );
 };
 
-export default AccordCard;
+export default memo(AccordCard);

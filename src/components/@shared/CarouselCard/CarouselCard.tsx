@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ImageSourcePropType, ViewStyle } from 'react-native';
 import { PageItem, Banner } from './CarouselCard.styles';
 
@@ -18,4 +18,4 @@ const CarouselCard = ({ item, style }: IProps) => {
   );
 };
 
-export default CarouselCard;
+export default memo(CarouselCard);

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Text } from 'react-native';
 
 const History = () => {
-  return <h1>History Page</h1>;
+  return <Text>History Page</Text>;
 };
 
 export default History;

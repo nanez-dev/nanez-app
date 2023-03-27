@@ -8,12 +8,37 @@ import HomeStack from './src/navigation/HomeStack';
 import SearchStack from './src/navigation/SearchStack';
 import MyPageStack from './src/navigation/ProfileStack';
 import SplashScreen from 'react-native-splash-screen';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import { getMyInfo } from './src/apis/auth/getMyInfo';
+import { useSetRecoilState } from 'recoil';
+import { getLoginUser } from './src/atoms/user/selector';
 
 const Tab = createBottomTabNavigator();
 
 const AppIndex = () => {
+  const setLoginUser = useSetRecoilState(getLoginUser);
   useEffect(() => {
     SplashScreen.hide();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await EncryptedStorage.getItem('authCookie').then((response) => {
+        if (response !== undefined) {
+          getMyInfo().then((res) => {
+            setLoginUser({
+              nickname: res.data.nickname,
+              email: res.data.email,
+              gender: res.data.gender,
+              age_group: res.data.age_group,
+              profile_image: res.data.profile_image,
+            });
+          });
+        } else {
+          return;
+        }
+      });
+    })();
   }, []);
 
   return (

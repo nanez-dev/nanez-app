@@ -47,9 +47,9 @@ const Setting = ({ navigation: { navigate } }: SettingScreenProps) => {
           value={isEnabled}
         />
       </ServiceWrapper> */}
-      {/* <ServiceWrapper onPress={handleLogout}>
+      <ServiceWrapper onPress={handleLogout}>
         <Text style={{ marginLeft: 6 }}>로그아웃</Text>
-      </ServiceWrapper> */}
+      </ServiceWrapper>
       <ServiceWrapper onPress={goToWithdrawal}>
         <Text style={{ marginLeft: 6 }}>탈퇴하기</Text>
       </ServiceWrapper>

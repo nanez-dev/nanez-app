@@ -21,6 +21,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 interface IMenuTabProps {
   id: number;
   source: number | Source | undefined;
+  screen: string;
   title: string;
 }
 
@@ -39,13 +40,21 @@ const ProfilePage = ({ navigation: { navigate } }: ProfileScreenProps) => {
     {
       id: 1,
       title: '위시리스트',
+      screen: 'Wish',
       source: require('../../assets/images/mypage_img/icon_wish.png'),
     },
     {
       id: 2,
       title: '보유리스트',
+      screen: 'Having',
       source: require('../../assets/images/mypage_img/icon_have.png'),
     },
+    // {
+    //   id: 3,
+    //   title: '최근 목록',
+    //   screen: 'History',
+    //   source: require('../../assets/images/mypage_img/icon_have.png'),
+    // },
   ];
 
   const serviceArr: IServiceTabProps[] = [
@@ -109,7 +118,7 @@ const ProfilePage = ({ navigation: { navigate } }: ProfileScreenProps) => {
         )}
         <View style={styles.listCollection}>
           {ImageArr.map((i) => (
-            <MenuTab key={i.id} source={i.source} title={i.title} />
+            <MenuTab key={i.id} source={i.source} title={i.title} screen={i.screen} />
           ))}
         </View>
         <View style={styles.serviceCollection}>

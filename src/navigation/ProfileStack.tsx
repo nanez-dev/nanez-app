@@ -21,6 +21,8 @@ import OnboardingResult from '../screens/RegisterPage/OnboardingResult';
 import ServicePage from '../screens/ServicePage/ServicePage';
 import InformationPage from '../screens/ServicePage/InformationPage';
 import PromotionPage from '../screens/ServicePage/PromotionPage';
+import Wish from '../screens/WishPage/Wish';
+import Having from '../screens/HavingPage/Having';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +53,11 @@ const ProfileStack = () => {
           {/* <Stack.Screen options={{ title: '의견보내기' }} name="Opinion" component={OpinionPage} /> */}
           <Stack.Screen options={{ title: '회원탈퇴' }} name="Withdrawal" component={Withdrawal} />
         </Stack.Group>
+      </Stack.Group>
+      <Stack.Group>
+        <Stack.Screen options={{ title: '위시리스트' }} name="Wish" component={Wish} />
+        <Stack.Screen options={{ title: '보유리스트' }} name="Having" component={Having} />
+        <Stack.Screen options={{ title: '최근리스트' }} name="History" component={Wish} />
       </Stack.Group>
       <Stack.Group
         screenOptions={{

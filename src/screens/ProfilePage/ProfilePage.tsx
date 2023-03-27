@@ -8,20 +8,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-// import MenuTab from '../../components/MenuTab/MenuTab';
+import MenuTab from '../../components/MenuTab/MenuTab';
 import ServiceTab from '../../components/ServiceTab/ServiceTab';
 import { useRecoilValue } from 'recoil';
 import loginUserState from '../../atoms/user/atom';
-import FastImage from 'react-native-fast-image';
+import FastImage, { Source } from 'react-native-fast-image';
 import { styles } from './ProfilePage.styles';
 import { ParamListBase } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+// import { getPerfumeMylist, patchPerfumeMylist } from '../../apis/perfume';
 
-// interface IMenuTabProps {
-//   id: number;
-//   source: number | Source | undefined;
-//   title: string;
-// }
+interface IMenuTabProps {
+  id: number;
+  source: number | Source | undefined;
+  title: string;
+}
 
 interface IServiceTabProps {
   id: number;
@@ -34,18 +35,18 @@ type ProfileScreenProps = NativeStackScreenProps<ParamListBase, 'ProfilePage'>;
 const ProfilePage = ({ navigation: { navigate } }: ProfileScreenProps) => {
   const userInfo = useRecoilValue(loginUserState);
 
-  // const ImageArr: IMenuTabProps[] = [
-  //   {
-  //     id: 1,
-  //     title: '위시리스트',
-  //     source: require('../../assets/images/mypage_img/icon_wish.png'),
-  //   },
-  //   {
-  //     id: 2,
-  //     title: '보유리스트',
-  //     source: require('../../assets/images/mypage_img/icon_have.png'),
-  //   },
-  // ];
+  const ImageArr: IMenuTabProps[] = [
+    {
+      id: 1,
+      title: '위시리스트',
+      source: require('../../assets/images/mypage_img/icon_wish.png'),
+    },
+    {
+      id: 2,
+      title: '보유리스트',
+      source: require('../../assets/images/mypage_img/icon_have.png'),
+    },
+  ];
 
   const serviceArr: IServiceTabProps[] = [
     // {
@@ -106,12 +107,11 @@ const ProfilePage = ({ navigation: { navigate } }: ProfileScreenProps) => {
             <Text style={styles.joinTitle}>로그인 및 회원가입</Text>
           </TouchableOpacity>
         )}
-
-        {/* <View style={styles.listCollection}>
+        <View style={styles.listCollection}>
           {ImageArr.map((i) => (
             <MenuTab key={i.id} source={i.source} title={i.title} />
           ))}
-        </View> */}
+        </View>
         <View style={styles.serviceCollection}>
           <Text style={styles.serviceTitle}>고객센터</Text>
           {serviceArr.map((i) => (

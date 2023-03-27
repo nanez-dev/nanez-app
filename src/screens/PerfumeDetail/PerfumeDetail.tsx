@@ -1,20 +1,23 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, SafeAreaView } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { styles } from './PerfumeDetail.styles';
 import { useQuery } from '@tanstack/react-query';
 import GoToHomeBtn from '../../components/@shared/Button/GoToHomeBtn/GoToHomeBtn';
 import { ParamListBase } from '@react-navigation/native';
 import numberWithCommas from '../../utils/numberWithCommas';
-import API from '../../apis/apis';
 import FastImage from 'react-native-fast-image';
+import { patchPerfumeMylist, getPerfumeDetailInfo } from '../../apis/perfume';
 
 type DetailScreenProps = NativeStackScreenProps<ParamListBase, 'PerfumeDetail'>;
 const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScreenProps) => {
   const { id }: any = params;
 
-  const { data, refetch } = useQuery(['perfumeDetail'], () => API.getDetailPerfume<number>(id), {
+  const {
+    data: { data },
+    refetch,
+  } = useQuery<any>(['perfumeDetail'], () => getPerfumeDetailInfo(id), {
     onError: (error: any) => {
       throw new Error(`Detail Page error ${error}`);
     },
@@ -26,6 +29,11 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
 
   const goToHome = () => {
     goBack();
+  };
+
+  const handleWishHavingButtonClick = async (btnType: string) => {
+    await patchPerfumeMylist(data.perfume.id, btnType);
+    refetch();
   };
 
   interface ItypeObject {
@@ -59,10 +67,20 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
               {numberWithCommas(data.perfume.price)}
             </Text>
           </View>
-          {/* <Pressable style={{ flexDirection: 'row' }}>
-            <Ionicons color={'black'} name="checkmark-circle-outline" size={22} />
-            <Ionicons name="heart-outline" size={22} />
-          </Pressable> */}
+          <TouchableOpacity onPress={handleWishHavingButtonClick.bind(this, 'having')}>
+            <Ionicons
+              color={data.perfume.is_having ? 'red' : 'black'}
+              name="checkmark-circle-outline"
+              size={22}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleWishHavingButtonClick.bind(this, 'wish')}>
+            <Ionicons
+              color={data.perfume.is_wish ? 'red' : 'black'}
+              name="heart-outline"
+              size={22}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.accordInfo}>
           <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>Accord</Text>
@@ -95,7 +113,7 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
               </Text>
               <View style={{ marginBottom: 16 }}>
                 {data.perfume.perfume_notes.map((el: any) => (
-                  <Text style={{ fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
+                  <Text key={el.id} style={{ fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
                     {typeObject[el.type]} : {el.note.eng}
                   </Text>
                 ))}

@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
 import APPLICATION_ERROR_CODE from '../constants/applicationErrorCode';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import API_KEY from '../config/apiKey';
 
@@ -69,15 +68,6 @@ const API = {
       url: `${API_KEY}/users/me`,
       headers: {
         Authorization: `Bearer ${token}`,
-      },
-    });
-  },
-  getNewToken: () => {
-    return request({
-      method: 'GET' as Method,
-      url: `${API_KEY}/users/access-token`,
-      headers: {
-        Authorization: `Bearer ${AsyncStorage.getItem('refresh_token')}`,
       },
     });
   },

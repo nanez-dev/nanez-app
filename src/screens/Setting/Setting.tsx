@@ -1,8 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ParamListBase } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, Text, Dimensions, DevSettings } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { useSetRecoilState } from 'recoil';
 import { getLoginUser } from '../../atoms/user/selector';
@@ -16,19 +15,15 @@ const Setting = ({ navigation: { navigate } }: SettingScreenProps) => {
   // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const handleLogout = async () => {
-    setLoginUser((prev: any) => {
-      return {
-        ...prev,
-        isLoggedin: false,
-      };
+    setLoginUser({
+      nickname: '',
+      email: '',
+      gender: '',
+      age_group: '',
+      isLoggedin: false,
     });
-    await AsyncStorage.clear()
-      .then(() => {
-        EncryptedStorage.clear();
-      })
-      .then(() => {
-        DevSettings.reload();
-      });
+    await EncryptedStorage.clear();
+    navigate('ProfilePage');
   };
 
   const goToWithdrawal = () => {

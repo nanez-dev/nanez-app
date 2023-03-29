@@ -8,13 +8,14 @@ import FastImage from 'react-native-fast-image';
 
 const Wish = () => {
   const userState = useRecoilValue(loginUserState);
+  const [isData, setIsData] = useState(false);
+
   useEffect(() => {
     refetch();
     if (userState.email !== '') {
       setIsData(true);
     }
   }, []);
-  const [isData, setIsData] = useState(false);
 
   const { data, refetch } = useQuery(['wish'], () => getPerfumeMylist('wish'));
 

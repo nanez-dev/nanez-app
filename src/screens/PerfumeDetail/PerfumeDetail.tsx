@@ -1,17 +1,19 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { styles } from './PerfumeDetail.styles';
 import { useQuery } from '@tanstack/react-query';
 import GoToHomeBtn from '../../components/@shared/Button/GoToHomeBtn/GoToHomeBtn';
 import { ParamListBase } from '@react-navigation/native';
 import numberWithCommas from '../../utils/numberWithCommas';
 import FastImage from 'react-native-fast-image';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import { patchPerfumeMylist, getPerfumeDetailInfo } from '../../apis/perfume';
+import { styles } from './PerfumeDetail.styles';
 
 type DetailScreenProps = NativeStackScreenProps<ParamListBase, 'PerfumeDetail'>;
 const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScreenProps) => {
+  const prepareImg = require('../../assets/images/detail_img/prepare.png');
   const { id }: any = params;
 
   const {
@@ -32,8 +34,13 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
   };
 
   const handleWishHavingButtonClick = async (btnType: string) => {
-    await patchPerfumeMylist(data.perfume.id, btnType);
-    refetch();
+    const cookie = await EncryptedStorage.getItem('authCookie');
+    if (cookie === undefined) {
+      Alert.alert('로그인을 해주세요.');
+    } else {
+      await patchPerfumeMylist(data.perfume.id, btnType);
+      refetch();
+    }
   };
 
   interface ItypeObject {
@@ -53,7 +60,7 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
           <FastImage source={{ uri: data.perfume.image }} style={styles.productImage} />
         </View>
         <View style={styles.productInfo}>
-          <View>
+          <View style={styles.productInfoTitleWrap}>
             <Text style={{ fontSize: 11, fontWeight: '400', color: '#666666' }}>
               {data.perfume.brand.kor}
             </Text>
@@ -67,20 +74,25 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
               {numberWithCommas(data.perfume.price)}
             </Text>
           </View>
-          <TouchableOpacity onPress={handleWishHavingButtonClick.bind(this, 'having')}>
-            <Ionicons
-              color={data.perfume.is_having ? 'red' : 'black'}
-              name="checkmark-circle-outline"
-              size={22}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleWishHavingButtonClick.bind(this, 'wish')}>
-            <Ionicons
-              color={data.perfume.is_wish ? 'red' : 'black'}
-              name="heart-outline"
-              size={22}
-            />
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity
+              onPress={handleWishHavingButtonClick.bind(this, 'having')}
+              style={{ marginRight: 10 }}
+            >
+              <Ionicons
+                color={data.perfume.is_having ? 'red' : 'black'}
+                name="checkmark-circle-outline"
+                size={30}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleWishHavingButtonClick.bind(this, 'wish')}>
+              <Ionicons
+                color={data.perfume.is_wish ? 'red' : 'black'}
+                name="heart-outline"
+                size={30}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.accordInfo}>
           <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>Accord</Text>
@@ -105,7 +117,14 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
             }}
           >
             <View>
-              <Text style={{ fontSize: 16, fontWeight: '700', color: '#F27766', marginBottom: 4 }}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: '700',
+                  color: '#F27766',
+                  marginBottom: 4,
+                }}
+              >
                 {data.perfume.title}
               </Text>
               <Text style={{ width: '90%', marginBottom: 16, fontSize: 14, fontWeight: '400' }}>
@@ -122,7 +141,11 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               {data.perfume.perfume_notes.map((i: any) => (
                 <View key={i.id}>
-                  <FastImage source={{ uri: i.note.image }} style={styles.noteImage} />
+                  {i.note.image === null ? (
+                    <FastImage source={prepareImg} style={styles.noteImage} />
+                  ) : (
+                    <FastImage source={{ uri: i.note.image }} style={styles.noteImage} />
+                  )}
                   <Text
                     style={{ marginBottom: 5, fontSize: 12, fontWeight: '400', color: '#999999' }}
                   >

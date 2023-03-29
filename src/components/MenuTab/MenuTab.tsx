@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, Alert } from 'react-native';
 import FastImage, { Source } from 'react-native-fast-image';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import { styles } from './MenuTab.styles';
 
 interface IMenuTabProps {
@@ -12,9 +13,14 @@ interface IMenuTabProps {
 
 const MenuTab = ({ source, title, screen }: IMenuTabProps) => {
   const navigation = useNavigation();
-  const goToMenuList = () => {
-    //@ts-ignore
-    navigation.navigate(screen);
+  const goToMenuList = async () => {
+    const cookie = await EncryptedStorage.getItem('authCookie');
+    if (cookie === undefined) {
+      Alert.alert('로그인시 이용가능합니다.');
+    } else {
+      //@ts-ignore
+      navigation.navigate(screen);
+    }
   };
   return (
     <TouchableOpacity style={styles.container} onPress={goToMenuList}>

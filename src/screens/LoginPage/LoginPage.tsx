@@ -39,8 +39,12 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
         navigate('ProfilePage');
       }
     },
-    onError: () => {
-      Alert.alert('이메일 및 비밀번호가 틀렸습니다.');
+    onError: (error: any) => {
+      if (error.detail === 'DELETE_USER') {
+        Alert.alert('탈퇴한 유저 입니다.');
+      } else {
+        Alert.alert('이메일 및 비밀번호가 틀렸습니다.');
+      }
     },
   });
 
@@ -60,7 +64,6 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
       return Alert.alert('로그인 에러');
     } else {
       mutate();
-      // refetch();
     }
   };
 

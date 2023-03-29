@@ -17,6 +17,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  productInfoTitleWrap: {
+    width: '80%',
+  },
   accordInfo: {
     backgroundColor: 'white',
     paddingVertical: 24,

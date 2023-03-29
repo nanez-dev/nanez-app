@@ -13,7 +13,7 @@ import { styles } from './PerfumeDetail.styles';
 
 type DetailScreenProps = NativeStackScreenProps<ParamListBase, 'PerfumeDetail'>;
 const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScreenProps) => {
-  const prepareImg = require('../../assets/images/detail_img/prepare.png');
+  const prepareImg = require('../../assets/images/detail_img/prepare.jpeg');
   const { id }: any = params;
 
   const {

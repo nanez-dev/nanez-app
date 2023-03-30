@@ -35,7 +35,7 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
 
   const handleWishHavingButtonClick = async (btnType: string) => {
     const cookie = await EncryptedStorage.getItem('authCookie');
-    if (cookie === undefined) {
+    if (!cookie) {
       Alert.alert('로그인을 해주세요.');
     } else {
       await patchPerfumeMylist(data.perfume.id, btnType);

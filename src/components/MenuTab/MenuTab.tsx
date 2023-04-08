@@ -15,7 +15,7 @@ const MenuTab = ({ source, title, screen }: IMenuTabProps) => {
   const navigation = useNavigation();
   const goToMenuList = async () => {
     const cookie = await EncryptedStorage.getItem('authCookie');
-    if (cookie === undefined) {
+    if (cookie === undefined || cookie === null) {
       Alert.alert('로그인시 이용가능합니다.');
     } else {
       //@ts-ignore

@@ -48,6 +48,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@react-native-community/eslint-config": "^3.1.0",
+    "@slack/web-api": "^6.8.1",
     "@types/react": "^18.0.20",
     "@types/react-native": "^0.70.1",
     "@types/react-test-renderer": "^18.0.0",

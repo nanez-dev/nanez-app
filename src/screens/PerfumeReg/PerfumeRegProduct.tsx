@@ -6,12 +6,14 @@ import { ParamListBase } from '@react-navigation/native';
 import { useRecoilState } from 'recoil';
 import { isTextWrite } from '../../atoms/atoms';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { sendMessage } from '../../apis/message';
 
 type RegProductScreenProps = NativeStackScreenProps<ParamListBase, 'AddProduct'>;
 const PerfumeRegProduct = ({ navigation: { navigate }, route }: RegProductScreenProps) => {
   const { height: screenHeight } = Dimensions.get('screen');
   const [inputCheck, setInputCheck] = useRecoilState(isTextWrite);
   const [textValue, setTextValue] = useState('');
+
   useEffect(() => {
     if (textValue.length > 1) {
       setInputCheck(true);
@@ -21,6 +23,7 @@ const PerfumeRegProduct = ({ navigation: { navigate }, route }: RegProductScreen
   }, [setInputCheck, textValue.length]);
 
   const goToNextStep = () => {
+    sendMessage(textValue);
     if (textValue.length > 1) {
       navigate('AddSuccess', {
         product: textValue,

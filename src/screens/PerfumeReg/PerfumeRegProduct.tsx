@@ -6,13 +6,15 @@ import { ParamListBase } from '@react-navigation/native';
 import { useRecoilState } from 'recoil';
 import { isTextWrite } from '../../atoms/atoms';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { sendMessage } from '../../apis/message';
+import { postSlackMessage } from '../../apis/message';
 
 type RegProductScreenProps = NativeStackScreenProps<ParamListBase, 'AddProduct'>;
 const PerfumeRegProduct = ({ navigation: { navigate }, route }: RegProductScreenProps) => {
   const { height: screenHeight } = Dimensions.get('screen');
   const [inputCheck, setInputCheck] = useRecoilState(isTextWrite);
   const [textValue, setTextValue] = useState('');
+  const { brand }: any = route.params;
+  const [slackMessage, setSlackMessage] = useState('');
 
   useEffect(() => {
     if (textValue.length > 1) {
@@ -22,8 +24,12 @@ const PerfumeRegProduct = ({ navigation: { navigate }, route }: RegProductScreen
     }
   }, [setInputCheck, textValue.length]);
 
+  useEffect(() => {
+    setSlackMessage(`*[향수추가요청]* 브랜드: \`${brand}\` // 향수: \`${textValue}\``);
+  }, [brand, textValue]);
+
   const goToNextStep = () => {
-    sendMessage(textValue);
+    postSlackMessage(slackMessage);
     if (textValue.length > 1) {
       navigate('AddSuccess', {
         product: textValue,

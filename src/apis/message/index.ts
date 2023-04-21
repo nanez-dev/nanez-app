@@ -1,14 +1,13 @@
-import axios from 'axios';
+import axios, { Method } from 'axios';
+import REQUEST_URL from '../../constants/requestUrl';
 
-export const sendMessage = async (text: string) => {
-  const WEBHOOK_URL =
-    'https://hooks.slack.com/services/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';
+export const postSlackMessage = async (text: string) => {
   const headers = {
     'Content-Type': 'application/json',
   };
   const { data } = await axios({
-    method: 'POST',
-    url: WEBHOOK_URL,
+    method: 'POST' as Method,
+    url: REQUEST_URL.WEBHOOK_URL,
     headers,
     data: {
       blocks: [

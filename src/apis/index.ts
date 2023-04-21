@@ -20,7 +20,7 @@ instance.interceptors.request.use(
       'Access-Control-Allow-Origin': '*',
       [REFRESH_TOKEN]: getCookieValue(REFRESH_TOKEN),
     };
-    if ((config.headers && cookie && cookie !== undefined) || cookie !== null) {
+    if (config.headers && cookie && cookie !== undefined) {
       config.headers.Authorization = `Bearer ${cookie}`;
     }
     return config;

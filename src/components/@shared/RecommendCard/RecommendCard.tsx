@@ -13,6 +13,7 @@ interface IData {
 
 const RecommendCard = ({ item }: { item: IData }) => {
   const { navigate } = useNavigation();
+
   const goToDetail = (id: number) => {
     //@ts-ignore
     navigate('PerfumeDetail', {

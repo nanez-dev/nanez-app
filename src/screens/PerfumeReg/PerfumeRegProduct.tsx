@@ -23,6 +23,7 @@ const PerfumeRegProduct = ({ navigation: { navigate }, route }: RegProductScreen
       setInputCheck(false);
     }
   }, [setInputCheck, textValue.length]);
+  console.log('test');
 
   useEffect(() => {
     setSlackMessage(`*[향수추가요청]* 브랜드: \`${brand}\` // 향수: \`${textValue}\``);

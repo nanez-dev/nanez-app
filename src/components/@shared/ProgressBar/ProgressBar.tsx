@@ -6,7 +6,7 @@ interface IProgressBar {
   totalStep: number;
 }
 
-function ProgressBar({ step, totalStep }: IProgressBar) {
+const ProgressBar = ({ step, totalStep }: IProgressBar) => {
   const screenWidth = Dimensions.get('screen').width;
   const width = totalStep ? Math.round(screenWidth / totalStep) * step : 0;
 
@@ -33,6 +33,6 @@ function ProgressBar({ step, totalStep }: IProgressBar) {
       />
     </View>
   );
-}
+};
 
 export default ProgressBar;

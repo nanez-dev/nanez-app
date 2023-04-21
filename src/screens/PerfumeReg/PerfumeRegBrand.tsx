@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Dimensions } from 'react-native';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
-import { useRecoilState } from 'recoil';
-import { isTextWrite } from '../../atoms/atoms';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 
 type RegBrandScreenProps = NativeStackScreenProps<ParamListBase, 'AddBrand'>;
 const PerfumeRegBrand = ({ navigation: { navigate } }: RegBrandScreenProps) => {
   const { height: screenHeight } = Dimensions.get('screen');
-  const [inputCheck, setInputCheck] = useRecoilState(isTextWrite);
+  const [inputCheck, setInputCheck] = useState(false);
   const [textValue, setTextValue] = useState<string>('');
 
   useEffect(() => {

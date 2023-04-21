@@ -3,15 +3,13 @@ import { View, Text, TextInput, Dimensions } from 'react-native';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
 import { ParamListBase } from '@react-navigation/native';
-import { useRecoilState } from 'recoil';
-import { isTextWrite } from '../../atoms/atoms';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { postSlackMessage } from '../../apis/message';
 
 type RegProductScreenProps = NativeStackScreenProps<ParamListBase, 'AddProduct'>;
 const PerfumeRegProduct = ({ navigation: { navigate }, route }: RegProductScreenProps) => {
   const { height: screenHeight } = Dimensions.get('screen');
-  const [inputCheck, setInputCheck] = useRecoilState(isTextWrite);
+  const [inputCheck, setInputCheck] = useState(false);
   const [textValue, setTextValue] = useState('');
   const { brand }: any = route.params;
   const [slackMessage, setSlackMessage] = useState('');

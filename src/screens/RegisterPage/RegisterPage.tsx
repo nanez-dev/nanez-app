@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import { Alert, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import FastImage from 'react-native-fast-image';
 import CheckBox from '@react-native-community/checkbox';
 import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
+import { WithLocalSvg } from 'react-native-svg';
 
 type RegisterScreenProps = NativeStackScreenProps<ParamListBase, 'RegisterPage'>;
 const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
@@ -29,9 +29,10 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
       <ProgressBar step={1} totalStep={8} />
       <Container>
         <Wrapper>
-          <FastImage
-            source={require('../../assets/images/auth_img/register_logo.png')}
-            style={{ width: 72, height: 72 }}
+          <WithLocalSvg
+            asset={require('../../assets/images/auth_img/register_logo.svg')}
+            width={72}
+            height={72}
           />
           <Text style={{ fontSize: 24, fontWeight: '700', marginTop: 20 }}>
             안녕하세요, <Text style={{ color: '#65BFC4' }}>나네</Text>입니다.

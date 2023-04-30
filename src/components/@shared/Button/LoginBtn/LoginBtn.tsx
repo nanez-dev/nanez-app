@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+// import { Text } from 'react-native';
 import { Container, Btn, BtnContent } from './LoginBtn.styles';
 
 interface ILoginBtn {
@@ -12,7 +12,7 @@ const LoginBtn = ({ onSubmitPasswordEditing }: ILoginBtn) => {
       <Btn onPress={onSubmitPasswordEditing}>
         <BtnContent>로그인</BtnContent>
       </Btn>
-      <Text>회원 정보를 잊으셨나요?</Text>
+      {/* <Text>회원 정보를 잊으셨나요?</Text> */}
     </Container>
   );
 };

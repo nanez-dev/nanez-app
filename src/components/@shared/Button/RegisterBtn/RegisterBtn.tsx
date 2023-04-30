@@ -1,6 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { Container } from './RegisterBtn.styles';
+import { TouchableOpacity, Text, View } from 'react-native';
+import styles from './RegisterBtn.styles';
 
 interface IRegisterBtn {
   onPress: () => void;
@@ -8,12 +8,12 @@ interface IRegisterBtn {
 
 const RegisterBtn = ({ onPress }: IRegisterBtn) => {
   return (
-    <Container>
-      <Text style={{ marginRight: 8 }}>나네를 아직 시작하지 않으셨나요?</Text>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={{ color: '#287EFF', textDecorationLine: 'underline' }}>회원가입</Text>
+    <View style={styles.container}>
+      <Text style={{ marginBottom: 12 }}>나네를 아직 시작하지 않으셨나요?</Text>
+      <TouchableOpacity onPress={onPress} style={styles.registerWrap}>
+        <Text style={styles.registerContent}>회원가입</Text>
       </TouchableOpacity>
-    </Container>
+    </View>
   );
 };
 

@@ -24,6 +24,8 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
     }
   };
 
+  const agreeCheck = allCheck || requireCheck ? '#65BFC4' : '#CCCCCC';
+
   return (
     <>
       <ProgressBar step={1} totalStep={8} />
@@ -44,7 +46,7 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
 
         <Wrapper>
           <AgreeListContainer type="all">
-            <Text>약관 전체 동의하기</Text>
+            <Text style={{ fontWeight: '700', fontSize: 18 }}>약관 전체 동의하기</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <CheckBox
                 lineWidth={0.5}
@@ -56,7 +58,9 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
             </View>
           </AgreeListContainer>
           <AgreeListContainer type="require">
-            <Text>(필수)나네 서비스 이용 약관 동의</Text>
+            <Text>
+              <Text style={{ color: '#FF0000' }}>(필수)</Text> 나네 서비스 이용 약관 동의
+            </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity onPress={() => navigate('Service')}>
                 <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
@@ -71,7 +75,9 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
             </View>
           </AgreeListContainer>
           <AgreeListContainer type="require">
-            <Text>(필수)개인정보 수집/이용 약관 동의</Text>
+            <Text>
+              <Text style={{ color: '#FF0000' }}>(필수)</Text> 개인정보 수집/이용 약관 동의
+            </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity onPress={() => navigate('Information')}>
                 <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
@@ -86,7 +92,7 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
             </View>
           </AgreeListContainer>
           <AgreeListContainer type="option">
-            <Text>(선택)홍보성 SMS/메일 수신 동의</Text>
+            <Text>(선택) 홍보성 SMS/메일 수신 동의</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity onPress={() => navigate('Promotion')}>
                 <Text style={{ marginRight: 22, fontSize: 12, color: '#B3B3B7' }}>보기</Text>
@@ -102,7 +108,7 @@ const RegisterPage = ({ navigation: { navigate } }: RegisterScreenProps) => {
           </AgreeListContainer>
         </Wrapper>
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-          <NextBtn title="동의합니다" bgColor="#65BFC4" onPress={goToNext} />
+          <NextBtn title="동의합니다" bgColor={agreeCheck} onPress={goToNext} />
         </View>
       </Container>
     </>

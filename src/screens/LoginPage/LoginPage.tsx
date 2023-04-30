@@ -1,7 +1,7 @@
 import { ParamListBase } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useRef, useState } from 'react';
-import { TextInput, Alert } from 'react-native';
+import { TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import styled from 'styled-components/native';
 import LoginLogo from '../../components/LoginLogo/LoginLogo';
 import IdAndPwInput from '../../components/IdAndPwInput/IdAndPwInput';
@@ -72,24 +72,26 @@ const LoginPage = ({ navigation: { navigate } }: LoginScreenProps) => {
   };
 
   return (
-    <Container>
-      {/* 로그인 로고 */}
-      <LoginLogo />
-      {/* id, pw */}
-      <IdAndPwInput
-        email={email}
-        onChangeEmailValue={onChangeEmailValue}
-        onSubmitEmailEditing={onSubmitEmailEditing}
-        passwordRef={passwordRef}
-        password={password}
-        onChangePasswordValue={onChangePasswordValue}
-        onSubmitPasswordEditing={onSubmitPasswordEditing}
-      />
-      {/* login btn */}
-      <LoginBtn onSubmitPasswordEditing={onSubmitPasswordEditing} />
-      {/* register */}
-      <RegisterBtn onPress={goToRegister} />
-    </Container>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        {/* 로그인 로고 */}
+        <LoginLogo />
+        {/* id, pw */}
+        <IdAndPwInput
+          email={email}
+          onChangeEmailValue={onChangeEmailValue}
+          onSubmitEmailEditing={onSubmitEmailEditing}
+          passwordRef={passwordRef}
+          password={password}
+          onChangePasswordValue={onChangePasswordValue}
+          onSubmitPasswordEditing={onSubmitPasswordEditing}
+        />
+        {/* login btn */}
+        <LoginBtn onSubmitPasswordEditing={onSubmitPasswordEditing} />
+        {/* register */}
+        <RegisterBtn onPress={goToRegister} />
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 

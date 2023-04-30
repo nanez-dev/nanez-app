@@ -9,7 +9,7 @@ interface IRegisterBtn {
 const RegisterBtn = ({ onPress }: IRegisterBtn) => {
   return (
     <View style={styles.container}>
-      <Text style={{ marginBottom: 12 }}>나네를 아직 시작하지 않으셨나요?</Text>
+      <Text style={{ marginBottom: 12, color: '#999999' }}>나네를 아직 시작하지 않으셨나요?</Text>
       <TouchableOpacity onPress={onPress} style={styles.registerWrap}>
         <Text style={styles.registerContent}>회원가입</Text>
       </TouchableOpacity>

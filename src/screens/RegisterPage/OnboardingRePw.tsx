@@ -1,7 +1,7 @@
 import { ParamListBase } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
@@ -31,19 +31,21 @@ const OnboardingRePw = ({ navigation: { navigate }, route }: OnboardingRePwScree
   return (
     <>
       <ProgressBar step={3} totalStep={8} />
-      <Container>
-        <RegisterHeader
-          title={'비밀번호를\n다시 한 번 입력해주세요!'}
-          subtitle={'숫자, 영문, 특수문자 8자 ~ 16자 입니다'}
-        />
-        <RegisterPwInput
-          placeholder="숫자, 영문, 특수문자 8~ 16자 입력"
-          label="비밀번호 확인"
-          password={rePassword}
-          handlePasswordValue={handleRePasswordValue}
-          goToNext={goToNext}
-        />
-      </Container>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <RegisterHeader
+            title={'비밀번호를\n다시 한 번 입력해주세요!'}
+            subtitle={'숫자, 영문, 특수문자 8자 ~ 16자 입니다'}
+          />
+          <RegisterPwInput
+            placeholder="숫자, 영문, 특수문자 8~ 16자 입력"
+            label="비밀번호 확인"
+            password={rePassword}
+            handlePasswordValue={handleRePasswordValue}
+            goToNext={goToNext}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
     </>
   );
 };

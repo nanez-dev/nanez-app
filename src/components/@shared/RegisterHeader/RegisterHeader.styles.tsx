@@ -3,9 +3,9 @@ import styled from 'styled-components/native';
 const Container = styled.View``;
 
 const Title = styled.Text<{ type: string }>`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
-  line-height: 40px;
+  line-height: 32px;
   text-align: ${(props) => (props.type === 'result' ? 'center' : 'left')};
 `;
 

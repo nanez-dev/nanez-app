@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Label, Input, NextButton, ButtonText } from './RegisterPwInput.styles';
 
-interface IRegisterPwInput {
-  label: string;
+export interface IRegisterPwInput {
+  label?: string;
   placeholder: string;
+  rePlaceholder?: string;
   password: string;
   handlePasswordValue: (text: string) => void;
   goToNext: () => void;
@@ -12,6 +13,7 @@ interface IRegisterPwInput {
 const RegisterPwInput = ({
   label,
   placeholder,
+  rePlaceholder,
   password,
   handlePasswordValue,
   goToNext,
@@ -33,6 +35,16 @@ const RegisterPwInput = ({
         autoCorrect={false}
         placeholderTextColor={'#999999'}
         placeholder={placeholder}
+        value={password}
+        onChangeText={handlePasswordValue}
+        secureTextEntry={true}
+      />
+      <Input
+        autoCapitalize="none"
+        autoComplete={'off'}
+        autoCorrect={false}
+        placeholderTextColor={'#999999'}
+        placeholder={rePlaceholder}
         value={password}
         onChangeText={handlePasswordValue}
         secureTextEntry={true}

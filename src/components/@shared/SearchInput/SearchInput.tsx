@@ -41,7 +41,7 @@ const SearchInput = () => {
             <TextInput
               style={styles.searchTextInput}
               value={value}
-              onSubmitEditing={() => refetch()}
+              onSubmitEditing={() => value.length > 0 && refetch()}
               onChangeText={handleSearchValue}
               autoCapitalize="none"
               autoCorrect={false}
@@ -69,7 +69,6 @@ const SearchInput = () => {
             </>
           )}
         </View>
-
         {isSearch && (
           <FlatList
             showsVerticalScrollIndicator={false}

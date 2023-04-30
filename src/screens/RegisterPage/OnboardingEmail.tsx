@@ -7,6 +7,7 @@ import API from '../../apis/apis';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import RegisterEmailInput from '../../components/@shared/RegisterEmailInput/RegisterEmailInput';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 type OnboardingEmailScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingEmail'>;
 const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScreenProps) => {
@@ -52,24 +53,26 @@ const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScr
   return (
     <>
       <ProgressBar step={2} totalStep={8} />
-      <Container>
-        <RegisterHeader
-          title={'로그인에 사용할\n이메일을 입력해주세요!'}
-          subtitle={'아이디로 사용됩니다.'}
-        />
-        <RegisterEmailInput
-          label="이메일"
-          emailPlaceholder="이메일을 입력해주세요"
-          authPlaceholder="인증번호를 입력해주세요."
-          emailValue={email}
-          authValue={code}
-          handleEmailValue={handleEmailValue}
-          handleAuthValue={handleAuthValue}
-          onSubmitEmail={onSubmitEmail}
-          onSubmitAuthNumber={onSubmitAuthNumber}
-          emailAuth={emailAuth}
-        />
-      </Container>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <RegisterHeader
+            title={'로그인에 사용할\n이메일을 입력해주세요!'}
+            subtitle={'아이디로 사용됩니다.'}
+          />
+          <RegisterEmailInput
+            label="이메일"
+            emailPlaceholder="이메일을 입력해주세요."
+            authPlaceholder="인증번호를 입력해주세요."
+            emailValue={email}
+            authValue={code}
+            handleEmailValue={handleEmailValue}
+            handleAuthValue={handleAuthValue}
+            onSubmitEmail={onSubmitEmail}
+            onSubmitAuthNumber={onSubmitAuthNumber}
+            emailAuth={emailAuth}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
     </>
   );
 };

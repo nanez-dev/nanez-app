@@ -5,7 +5,7 @@ import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import RegisterPwInput from '../../components/@shared/RegisterPwInput/RegisterPwInput';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
-import { Alert } from 'react-native';
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 type OnboardingPwScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingPw'>;
 const OnboardingPw = ({ navigation: { navigate }, route }: OnboardingPwScreenProps) => {
@@ -31,19 +31,22 @@ const OnboardingPw = ({ navigation: { navigate }, route }: OnboardingPwScreenPro
   return (
     <>
       <ProgressBar step={3} totalStep={8} />
-      <Container>
-        <RegisterHeader
-          title={'로그인에 사용할\n비밀번호를 입력해주세요!'}
-          subtitle={'숫자, 영문, 특수문자 8자 ~ 16자 입니다.'}
-        />
-        <RegisterPwInput
-          placeholder="숫자, 영문, 특수문자 8~ 16자 입력"
-          label="비밀번호"
-          password={password}
-          handlePasswordValue={handlePasswordValue}
-          goToNext={goToNext}
-        />
-      </Container>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <RegisterHeader
+            title={'로그인에 사용할\n비밀번호를 입력해주세요!'}
+            subtitle={'숫자, 영문, 특수문자 8자 ~ 16자 입니다.'}
+          />
+          <RegisterPwInput
+            placeholder="숫자, 영문, 특수문자 8~ 16자 입력"
+            rePlaceholder="비밀번호를 다시 한 번 입력해주세요."
+            label="비밀번호"
+            password={password}
+            handlePasswordValue={handlePasswordValue}
+            goToNext={goToNext}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
     </>
   );
 };

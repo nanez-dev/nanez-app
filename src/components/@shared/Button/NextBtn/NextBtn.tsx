@@ -10,7 +10,10 @@ interface NextBtnProps {
 
 const NextBtn = ({ title, onPress, bgColor }: NextBtnProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={{ width: '100%', alignItems: 'center', flex: 0.4 }}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{ width: '100%', alignItems: 'center', flex: 0.4, paddingHorizontal: 16 }}
+    >
       <NextButton color={bgColor}>
         <ButtonContent>{title}</ButtonContent>
       </NextButton>

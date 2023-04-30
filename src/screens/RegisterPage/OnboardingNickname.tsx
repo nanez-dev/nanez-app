@@ -1,7 +1,7 @@
 import { ParamListBase } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
@@ -32,16 +32,18 @@ const OnboardingNickname = ({ navigation: { navigate }, route }: OnboardingNickn
   return (
     <>
       <ProgressBar step={6} totalStep={8} />
-      <Container>
-        <RegisterHeader title={'나네에서 부를\n이름을 정해주세요!'} subtitle="별명도 좋아요" />
-        <RegisterNicknameInput
-          label="이름"
-          placeholder="불리고 싶은 이름을 작성해주세요!"
-          nickname={nickname}
-          handleNicknameValue={handleNicknameValue}
-          goToNext={goToNext}
-        />
-      </Container>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <RegisterHeader title={'나네에서 부를\n이름을 정해주세요!'} subtitle="별명도 좋아요" />
+          <RegisterNicknameInput
+            label="이름"
+            placeholder="불리고 싶은 이름을 작성해주세요!"
+            nickname={nickname}
+            handleNicknameValue={handleNicknameValue}
+            goToNext={goToNext}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
     </>
   );
 };

@@ -5,6 +5,7 @@ import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import styled from 'styled-components/native';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
 import RegisterAgeInput from '../../components/@shared/RegisterAgeInput/RegisterAgeInput';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 type OnboardingAgeScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingAge'>;
 const OnboardingAge = ({ navigation: { navigate }, route }: OnboardingAgeScreenProps) => {
@@ -24,15 +25,17 @@ const OnboardingAge = ({ navigation: { navigate }, route }: OnboardingAgeScreenP
   return (
     <>
       <ProgressBar step={5} totalStep={8} />
-      <Container>
-        <RegisterHeader title={'연령대를 \n선택해주세요'} subtitle="향수 추천에 사용됩니다." />
-        <RegisterAgeInput
-          label="연령대"
-          selectedAge={selectedAge}
-          handleSelectedAge={handleSelectedAge}
-          goToNext={goToNext}
-        />
-      </Container>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <RegisterHeader title={'연령대를 \n선택해주세요'} subtitle="향수 추천에 사용됩니다." />
+          <RegisterAgeInput
+            label="연령대"
+            selectedAge={selectedAge}
+            handleSelectedAge={handleSelectedAge}
+            goToNext={goToNext}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
     </>
   );
 };

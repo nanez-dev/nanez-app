@@ -65,6 +65,14 @@ const ProfileStack = () => {
       <Stack.Group
         screenOptions={{
           title: '회원가입',
+          headerLeft: () => (
+            <Ionicons
+              name={'chevron-back-outline'}
+              size={24}
+              //@ts-ignore
+              onPress={() => navigation.navigate('ProfilePage')}
+            />
+          ),
         }}
       >
         <Stack.Screen name="RegisterPage" component={RegisterPage} />

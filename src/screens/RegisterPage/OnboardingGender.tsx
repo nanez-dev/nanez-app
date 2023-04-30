@@ -5,6 +5,7 @@ import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHead
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 import RegisterGenderInput from '../../components/@shared/RegisterGenderInput/RegisterGenderInput';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 type OnboardingGenderScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingGender'>;
 const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderScreenProps) => {
@@ -24,15 +25,17 @@ const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderS
   return (
     <>
       <ProgressBar step={4} totalStep={8} />
-      <Container>
-        <RegisterHeader title={'성별을\n선택해주세요!'} subtitle={'향수 추천에 사용됩니다'} />
-        <RegisterGenderInput
-          handleSelectedGender={handleSelectedGender}
-          selectedGender={selectedGender}
-          label="성별"
-          goToNext={goToNext}
-        />
-      </Container>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <RegisterHeader title={'성별을\n선택해주세요!'} subtitle={'향수 추천에 사용됩니다'} />
+          <RegisterGenderInput
+            handleSelectedGender={handleSelectedGender}
+            selectedGender={selectedGender}
+            label="성별"
+            goToNext={goToNext}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
     </>
   );
 };

@@ -48,9 +48,9 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
   }
 
   const typeObject: ItypeObject = {
-    T: 'TOP',
-    M: 'Middle',
-    B: 'Base',
+    T: 'Top Note',
+    M: 'Middle Note',
+    B: 'Base Note',
   };
 
   return (
@@ -80,14 +80,14 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
               style={{ marginRight: 10 }}
             >
               <Ionicons
-                color={data.perfume.is_having ? 'red' : 'black'}
+                color={data.perfume.is_having ? '#65BFC4' : 'black'}
                 name="checkmark-circle-outline"
                 size={30}
               />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleWishHavingButtonClick.bind(this, 'wish')}>
               <Ionicons
-                color={data.perfume.is_wish ? 'red' : 'black'}
+                color={data.perfume.is_wish ? '#65BFC4' : 'black'}
                 name="heart-outline"
                 size={30}
               />
@@ -95,7 +95,7 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
           </View>
         </View>
         <View style={styles.accordInfo}>
-          <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>Accord</Text>
+          <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>어코드</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -109,7 +109,7 @@ const PerfumeDetail = ({ navigation: { goBack }, route: { params } }: DetailScre
           </View>
         </View>
         <View style={styles.noteInfo}>
-          <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>Note</Text>
+          <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 16 }}>노트</Text>
           <View
             style={{
               alignContent: 'center',

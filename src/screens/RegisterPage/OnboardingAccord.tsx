@@ -52,11 +52,12 @@ const OnboardingAccord = ({ navigation: { navigate }, route }: OnboardingAccordS
         />
         <Grid
           showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
           data={data?.accords}
           numColumns={5}
           keyExtractor={(item: IAccord) => item.id}
           columnWrapperStyle={{
-            paddingVertical: 13,
+            paddingVertical: 10,
           }}
           renderItem={({ item }: { item: IAccord }) => (
             <TouchableOpacity
@@ -87,7 +88,7 @@ const OnboardingAccord = ({ navigation: { navigate }, route }: OnboardingAccordS
 export default OnboardingAccord;
 
 const Container = styled.View`
-  padding: 0px 16px;
+  padding: 26px 16px;
   padding-top: 44px;
   flex: 1;
   background-color: white;
@@ -102,7 +103,6 @@ const NextButton = styled.TouchableOpacity<{ isClick: boolean }>`
   align-items: center;
   justify-content: center;
   padding: 12px 16px;
-  margin-bottom: 50px;
 `;
 
 const ButtonText = styled.Text`

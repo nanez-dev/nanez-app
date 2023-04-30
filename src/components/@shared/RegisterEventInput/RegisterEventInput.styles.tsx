@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  margin-top: 70px;
 `;
 
 const Label = styled.Text`
@@ -22,8 +21,17 @@ const Input = styled.TextInput`
   margin-bottom: 8px;
 `;
 
-const NextButton = styled.TouchableOpacity`
-  background-color: #65bfc4;
+// export const Indicator = styled.View<{ focused: boolean }>`
+//   margin: 0px 4px;
+//   background-color: #333333;
+//   opacity: ${(props) => (props.focused ? '1' : '0.5')};
+//   width: ${(props) => (props.focused ? '12px' : '6px')};
+//   height: 6px;
+//   border-radius: 3px;
+// `;
+
+const NextButton = styled.TouchableOpacity<{ codeWrite: boolean }>`
+  background-color: ${(props) => (props.codeWrite ? '#65bfc4' : '#cccccc')};
   width: 100%;
   border-radius: 50px;
   align-items: center;

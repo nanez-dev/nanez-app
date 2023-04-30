@@ -49,7 +49,7 @@ const OnboardingNickname = ({ navigation: { navigate }, route }: OnboardingNickn
             setCheckPass={setCheckPass}
           />
           <NextButton onPress={goToNext} isWrite={isWrite}>
-            <ButtonText>정했어요!</ButtonText>
+            <ButtonText>다음으로</ButtonText>
           </NextButton>
         </Container>
       </TouchableWithoutFeedback>

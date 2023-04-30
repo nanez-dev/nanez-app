@@ -1,26 +1,48 @@
 import { ParamListBase } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import RegisterEventInput from '../../components/@shared/RegisterEventInput/RegitsterEventInput';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import {
+  ButtonText,
+  NextButton,
+} from '../../components/@shared/RegisterEventInput/RegisterEventInput.styles';
 
 type OnboardingEventScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingEvent'>;
 const OnboardingEvent = ({ navigation: { navigate }, route }: OnboardingEventScreenProps) => {
   const [code, setCode] = useState('');
+  const [codeWrite, setCodeWrite] = useState(false);
 
   const handleCodeValue = (text: string) => {
     setCode(text);
   };
 
   const goToNext = () => {
+    if (codeWrite) {
+      navigate('OnboardingResult', {
+        code,
+        ...route.params,
+      });
+    } else {
+      Alert.alert('입력된 값이 없습니다.');
+    }
+  };
+
+  const goToPass = () => {
     navigate('OnboardingResult', {
       code,
       ...route.params,
     });
   };
+
+  useEffect(() => {
+    if (code.length > 0) {
+      setCodeWrite(true);
+    }
+  }, [code]);
   return (
     <>
       <ProgressBar step={8} totalStep={8} />
@@ -35,8 +57,13 @@ const OnboardingEvent = ({ navigation: { navigate }, route }: OnboardingEventScr
             placeholder="전달받으신 이벤트 코드를 입력해주세요."
             code={code}
             handleCodeValue={handleCodeValue}
-            goToNext={goToNext}
           />
+          <NextButton onPress={goToNext} codeWrite={codeWrite}>
+            <ButtonText>입력완료</ButtonText>
+          </NextButton>
+          <NextButton onPress={goToPass} codeWrite={true}>
+            <ButtonText>건너뛰기</ButtonText>
+          </NextButton>
         </Container>
       </TouchableWithoutFeedback>
     </>
@@ -46,7 +73,7 @@ const OnboardingEvent = ({ navigation: { navigate }, route }: OnboardingEventScr
 export default OnboardingEvent;
 
 const Container = styled.View`
-  padding: 0px 16px;
+  padding: 26px 16px;
   padding-top: 44px;
   flex: 1;
   background-color: white;

@@ -22,17 +22,21 @@ const RegisterNicknameInput = ({
   handleNicknameValue,
   setIsWrite,
   checkPass,
+  setCheckPass,
 }: IRegisterNicknameInput) => {
   const { mutate } = useMutation(() => API.postNicknameVerify(nickname), {
     onSuccess: (res) => {
-      if (res.detail === 'INVALID_NICKNAME') {
-        Alert.alert('입력된 값이 없습니다.');
-      }
       if (res) {
         Alert.alert('사용 가능합니다.');
+        setCheckPass(true);
         setIsWrite(true);
       } else {
         Alert.alert('중복입니다.');
+      }
+    },
+    onError: (res) => {
+      if (res) {
+        Alert.alert('입력된 값이 없습니다.');
       }
     },
   });

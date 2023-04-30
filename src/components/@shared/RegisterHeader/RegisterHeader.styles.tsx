@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 
-const Container = styled.View``;
+const Container = styled.View`
+  padding-bottom: 40px;
+`;
 
 const Title = styled.Text<{ type: string }>`
   font-size: 24px;

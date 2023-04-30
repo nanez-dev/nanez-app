@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  margin-top: 70px;
 `;
 
 const Label = styled.Text`

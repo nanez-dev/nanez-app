@@ -78,7 +78,6 @@ const ProfileStack = () => {
         <Stack.Screen name="RegisterPage" component={RegisterPage} />
         <Stack.Screen name="OnboardingEmail" component={OnboardingEmail} />
         <Stack.Screen name="OnboardingPw" component={OnboardingPw} />
-        <Stack.Screen name="OnboardingRePw" component={OnboardingRePw} />
         <Stack.Screen name="OnboardingGender" component={OnboardingGender} />
         <Stack.Screen name="OnboardingAge" component={OnboardingAge} />
         <Stack.Screen name="OnboardingNickname" component={OnboardingNickname} />

@@ -12,7 +12,7 @@ const NextBtn = ({ title, onPress, bgColor }: NextBtnProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{ width: '100%', alignItems: 'center', flex: 0.4, paddingHorizontal: 16 }}
+      style={{ width: '100%', alignItems: 'center', marginBottom: 26 }}
     >
       <NextButton color={bgColor}>
         <ButtonContent>{title}</ButtonContent>

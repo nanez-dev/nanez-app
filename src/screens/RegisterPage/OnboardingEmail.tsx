@@ -7,13 +7,15 @@ import API from '../../apis/apis';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import RegisterEmailInput from '../../components/@shared/RegisterEmailInput/RegisterEmailInput';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import NextBtn from '../../components/@shared/Button/NextBtn/NextBtn';
 
 type OnboardingEmailScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingEmail'>;
 const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScreenProps) => {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [emailAuth, setEmailAuth] = useState(false);
+  const [isClear, setIsClear] = useState(false);
 
   const { mutate: onSubmitEmail } = useMutation(
     () => API.postUserEmailSend<{ email: string }>({ email }),
@@ -30,11 +32,10 @@ const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScr
   const { mutate: onSubmitAuthNumber } = useMutation(
     () => API.postUserEmailVerify({ code, email }),
     {
-      onSuccess: () => {
-        navigate('OnboardingPw', {
-          ...route.params,
-          email: email,
-        });
+      onSuccess: (res) => {
+        if (res) {
+          setIsClear(true);
+        }
       },
       onError: (error) => {
         throw new Error(`OnboardingEmail page email verify ${error}`);
@@ -48,6 +49,16 @@ const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScr
 
   const handleAuthValue = (text: string) => {
     setCode(text);
+  };
+
+  const goToNextStep = () => {
+    if (isClear) {
+      navigate('OnboardingPw', {
+        ...route.params,
+        email: email,
+      });
+    }
+    return;
   };
 
   return (
@@ -71,6 +82,13 @@ const OnboardingEmail = ({ navigation: { navigate }, route }: OnboardingEmailScr
             onSubmitAuthNumber={onSubmitAuthNumber}
             emailAuth={emailAuth}
           />
+          <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <NextBtn
+              title="다음으로"
+              bgColor={isClear ? '#65BFC4' : '#CCCCCC'}
+              onPress={goToNextStep}
+            />
+          </View>
         </Container>
       </TouchableWithoutFeedback>
     </>

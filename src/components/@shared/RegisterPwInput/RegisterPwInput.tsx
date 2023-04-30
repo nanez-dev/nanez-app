@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Label, Input, NextButton, ButtonText } from './RegisterPwInput.styles';
+import React from 'react';
+import { Container, Label, Input } from './RegisterPwInput.styles';
 
 export interface IRegisterPwInput {
   label?: string;
   placeholder: string;
   rePlaceholder?: string;
   password: string;
+  rePassword: string;
   handlePasswordValue: (text: string) => void;
+  handleRePasswordValue: (text: string) => void;
   goToNext: () => void;
 }
 
@@ -15,17 +17,10 @@ const RegisterPwInput = ({
   placeholder,
   rePlaceholder,
   password,
+  rePassword,
   handlePasswordValue,
-  goToNext,
+  handleRePasswordValue,
 }: IRegisterPwInput) => {
-  useEffect(() => {
-    if (password.length > 7) {
-      setIsWrite(true);
-    } else {
-      setIsWrite(false);
-    }
-  }, [password]);
-  const [isWrite, setIsWrite] = useState(false);
   return (
     <Container>
       <Label>{label}</Label>
@@ -45,13 +40,10 @@ const RegisterPwInput = ({
         autoCorrect={false}
         placeholderTextColor={'#999999'}
         placeholder={rePlaceholder}
-        value={password}
-        onChangeText={handlePasswordValue}
+        value={rePassword}
+        onChangeText={handleRePasswordValue}
         secureTextEntry={true}
       />
-      <NextButton onPress={isWrite ? goToNext : null} isWrite={isWrite}>
-        <ButtonText>다음으로</ButtonText>
-      </NextButton>
     </Container>
   );
 };

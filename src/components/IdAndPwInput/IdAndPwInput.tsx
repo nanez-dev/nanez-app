@@ -22,7 +22,7 @@ const IdAndPwInput = ({
   onSubmitPasswordEditing,
 }: IIdAndPwInput) => {
   return (
-    <View style={{ marginTop: 100 }}>
+    <View style={styles.container}>
       <TextInput
         style={styles.idInput}
         autoCapitalize="none"

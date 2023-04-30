@@ -59,19 +59,7 @@ const ProfileStack = () => {
         <Stack.Screen options={{ title: '보유리스트' }} name="Having" component={Having} />
         <Stack.Screen options={{ title: '최근리스트' }} name="History" component={Wish} />
       </Stack.Group>
-      <Stack.Group
-        screenOptions={{
-          headerTitle: '로그인',
-          headerLeft: () => (
-            <Ionicons
-              name={'arrow-back'}
-              size={24}
-              //@ts-ignore
-              onPress={() => navigation.navigate('ProfilePage')}
-            />
-          ),
-        }}
-      >
+      <Stack.Group screenOptions={{ headerShown: false }}>
         <Stack.Screen name="LoginPage" component={LoginPage} />
       </Stack.Group>
       <Stack.Group

@@ -98,5 +98,6 @@ export default LoginPage;
 const Container = styled.View`
   flex: 1;
   padding: 0px 16px;
+  padding-top: 100px;
   background-color: white;
 `;

@@ -109,7 +109,7 @@ const ProfilePage = ({ navigation: { navigate } }: ProfileScreenProps) => {
             <FastImage style={styles.profileImage} source={defaultProfileImage} />
           )}
           <Text style={styles.userName}>{userInfo.nickname || '익명의 사용자'}님, 안녕하세요</Text>
-          <Text style={styles.userEmail}>{userInfo.email || 'nanez.contact@gmail.com'}</Text>
+          <Text style={styles.userEmail}>{userInfo.email}</Text>
         </View>
         {!userInfo.email && (
           <TouchableOpacity style={styles.joinWrap} onPress={goToJoin}>

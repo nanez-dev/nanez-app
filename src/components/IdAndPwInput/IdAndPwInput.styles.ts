@@ -2,14 +2,16 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   idInput: {
-    padding: 12,
+    height: 52,
     borderWidth: 1,
+    paddingHorizontal: 16,
     borderColor: '#efefef',
     borderRadius: 40,
     marginBottom: 8,
   },
   pwInput: {
-    padding: 12,
+    height: 52,
+    paddingHorizontal: 16,
     borderWidth: 1,
     borderColor: '#efefef',
     borderRadius: 40,

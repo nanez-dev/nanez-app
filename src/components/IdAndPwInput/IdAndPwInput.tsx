@@ -22,13 +22,13 @@ const IdAndPwInput = ({
   onSubmitPasswordEditing,
 }: IIdAndPwInput) => {
   return (
-    <View>
+    <View style={{ marginTop: 100 }}>
       <TextInput
         style={styles.idInput}
         autoCapitalize="none"
         autoComplete={'off'}
         autoCorrect={false}
-        placeholder="아이디를 입력해주세요"
+        placeholder="이메일을 입력해주세요"
         value={email}
         onChangeText={onChangeEmailValue}
         onSubmitEditing={onSubmitEmailEditing}

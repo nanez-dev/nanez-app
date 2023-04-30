@@ -9,6 +9,7 @@ import FastImage from 'react-native-fast-image';
 const Wish = () => {
   const userState = useRecoilValue(loginUserState);
   const [isData, setIsData] = useState(false);
+  const { data, refetch } = useQuery(['wish'], () => getPerfumeMylist('wish'));
 
   useEffect(() => {
     refetch();
@@ -16,8 +17,6 @@ const Wish = () => {
       setIsData(true);
     }
   }, []);
-
-  const { data, refetch } = useQuery(['wish'], () => getPerfumeMylist('wish'));
 
   if (isData === false) {
     return (

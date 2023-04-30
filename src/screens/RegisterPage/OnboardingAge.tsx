@@ -6,6 +6,10 @@ import styled from 'styled-components/native';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
 import RegisterAgeInput from '../../components/@shared/RegisterAgeInput/RegisterAgeInput';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import {
+  ButtonText,
+  NextButton,
+} from '../../components/@shared/RegisterAgeInput/RegisterAgeInput.styles';
 
 type OnboardingAgeScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingAge'>;
 const OnboardingAge = ({ navigation: { navigate }, route }: OnboardingAgeScreenProps) => {
@@ -34,6 +38,9 @@ const OnboardingAge = ({ navigation: { navigate }, route }: OnboardingAgeScreenP
             handleSelectedAge={handleSelectedAge}
             goToNext={goToNext}
           />
+          <NextButton onPress={goToNext}>
+            <ButtonText>다음으로</ButtonText>
+          </NextButton>
         </Container>
       </TouchableWithoutFeedback>
     </>
@@ -43,7 +50,7 @@ const OnboardingAge = ({ navigation: { navigate }, route }: OnboardingAgeScreenP
 export default OnboardingAge;
 
 const Container = styled.View`
-  padding: 0px 16px;
+  padding: 26px 16px;
   padding-top: 44px;
   flex: 1;
   background-color: white;

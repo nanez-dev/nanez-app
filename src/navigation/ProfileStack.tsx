@@ -11,7 +11,6 @@ import LoginPage from '../screens/LoginPage/LoginPage';
 import RegisterPage from '../screens/RegisterPage/RegisterPage';
 import OnboardingEmail from '../screens/RegisterPage/OnboardingEmail';
 import OnboardingPw from '../screens/RegisterPage/OnboardingPw';
-import OnboardingRePw from '../screens/RegisterPage/OnboardingRePw';
 import OnboardingGender from '../screens/RegisterPage/OnboardingGender';
 import OnboardingAge from '../screens/RegisterPage/OnboardingAge';
 import OnboardingNickname from '../screens/RegisterPage/OnboardingNickname';
@@ -75,7 +74,7 @@ const ProfileStack = () => {
           ),
         }}
       >
-        <Stack.Screen name="RegisterPage" component={RegisterPage} />
+        <Stack.Screen name="RegisterPage" component={OnboardingNickname} />
         <Stack.Screen name="OnboardingEmail" component={OnboardingEmail} />
         <Stack.Screen name="OnboardingPw" component={OnboardingPw} />
         <Stack.Screen name="OnboardingGender" component={OnboardingGender} />

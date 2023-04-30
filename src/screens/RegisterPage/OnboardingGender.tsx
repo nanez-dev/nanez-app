@@ -6,6 +6,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 import RegisterGenderInput from '../../components/@shared/RegisterGenderInput/RegisterGenderInput';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import {
+  ButtonText,
+  NextButton,
+} from '../../components/@shared/RegisterGenderInput/RegisterGenderInput.styles';
 
 type OnboardingGenderScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingGender'>;
 const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderScreenProps) => {
@@ -34,6 +38,9 @@ const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderS
             label="성별"
             goToNext={goToNext}
           />
+          <NextButton onPress={goToNext}>
+            <ButtonText>다음으로</ButtonText>
+          </NextButton>
         </Container>
       </TouchableWithoutFeedback>
     </>
@@ -43,7 +50,7 @@ const OnboardingGender = ({ navigation: { navigate }, route }: OnboardingGenderS
 export default OnboardingGender;
 
 const Container = styled.View`
-  padding: 0px 16px;
+  padding: 26px 16px;
   padding-top: 44px;
   flex: 1;
   background-color: white;

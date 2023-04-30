@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { Alert, Text, TouchableOpacity } from 'react-native';
 import API from '../../../apis/apis';
-import { Container, Label, Input, NextButton, ButtonText } from './RegisterNicknameInput.styles';
+import { Container, Label, Input } from './RegisterNicknameInput.styles';
 
 interface IRegisterNicknameInput {
   label: string;
@@ -10,6 +10,9 @@ interface IRegisterNicknameInput {
   nickname: string;
   handleNicknameValue: (text: string) => void;
   goToNext: () => void;
+  setIsWrite: Dispatch<SetStateAction<boolean>>;
+  checkPass: boolean;
+  setCheckPass: Dispatch<SetStateAction<boolean>>;
 }
 
 const RegisterNicknameInput = ({
@@ -17,29 +20,31 @@ const RegisterNicknameInput = ({
   placeholder,
   nickname,
   handleNicknameValue,
-  goToNext,
+  setIsWrite,
+  checkPass,
 }: IRegisterNicknameInput) => {
-  const [isOverlap, setIsOverlap] = useState(false);
-
   const { mutate } = useMutation(() => API.postNicknameVerify(nickname), {
-    onSuccess: (item: boolean) => {
-      setIsOverlap(item);
-      if (item === false) {
-        Alert.alert('중복입니다.');
-      } else {
+    onSuccess: (res) => {
+      if (res.detail === 'INVALID_NICKNAME') {
+        Alert.alert('입력된 값이 없습니다.');
+      }
+      if (res) {
         Alert.alert('사용 가능합니다.');
+        setIsWrite(true);
+      } else {
+        Alert.alert('중복입니다.');
       }
     },
   });
 
   useEffect(() => {
-    if (nickname.length > 0 && isOverlap === true) {
+    if (nickname.length > 0 && checkPass === true) {
       setIsWrite(true);
     } else {
       setIsWrite(false);
     }
-  }, [nickname, isOverlap]);
-  const [isWrite, setIsWrite] = useState(false);
+  }, [nickname, checkPass]);
+
   return (
     <Container>
       <Label>{label}</Label>
@@ -58,9 +63,6 @@ const RegisterNicknameInput = ({
       >
         <Text style={{ color: '#1890FF' }}>중복확인</Text>
       </TouchableOpacity>
-      <NextButton onPress={isWrite ? goToNext : null} isWrite={isWrite}>
-        <ButtonText>정했어요!</ButtonText>
-      </NextButton>
     </Container>
   );
 };

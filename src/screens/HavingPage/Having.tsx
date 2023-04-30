@@ -8,15 +8,14 @@ import FastImage from 'react-native-fast-image';
 
 const Having = () => {
   const userState = useRecoilValue(loginUserState);
+  const { data, refetch } = useQuery(['having'], () => getPerfumeMylist('having'));
+  const [isData, setIsData] = useState(false);
   useEffect(() => {
     refetch();
     if (userState.email !== '') {
       setIsData(true);
     }
   }, []);
-  const [isData, setIsData] = useState(false);
-
-  const { data, refetch } = useQuery(['having'], () => getPerfumeMylist('having'));
 
   if (isData === false) {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { Container, Label, Input, NextButton, ButtonText } from './RegisterAgeInput.styles';
+import { Container, Label, Input } from './RegisterAgeInput.styles';
 
 interface IRegisterAgeInput {
   label: string;
@@ -9,12 +9,7 @@ interface IRegisterAgeInput {
   goToNext: () => void;
 }
 
-const RegisterAgeInput = ({
-  label,
-  selectedAge = '7',
-  handleSelectedAge,
-  goToNext,
-}: IRegisterAgeInput) => {
+const RegisterAgeInput = ({ label, selectedAge = '7', handleSelectedAge }: IRegisterAgeInput) => {
   return (
     <Container>
       <Label>{label}</Label>
@@ -36,9 +31,6 @@ const RegisterAgeInput = ({
           <Picker.Item label="80대" value="80" />
         </Picker>
       </Input>
-      <NextButton onPress={goToNext}>
-        <ButtonText>다음으로</ButtonText>
-      </NextButton>
     </Container>
   );
 };

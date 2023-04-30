@@ -6,20 +6,23 @@ import styled from 'styled-components/native';
 import ProgressBar from '../../components/@shared/ProgressBar/ProgressBar';
 import RegisterHeader from '../../components/@shared/RegisterHeader/RegisterHeader';
 import RegisterNicknameInput from '../../components/@shared/RegisterNicknameInput/RegisterNicknameInput';
+import {
+  ButtonText,
+  NextButton,
+} from '../../components/@shared/RegisterNicknameInput/RegisterNicknameInput.styles';
 
 type OnboardingNicknameScreenProps = NativeStackScreenProps<ParamListBase, 'OnboardingNickname'>;
 const OnboardingNickname = ({ navigation: { navigate }, route }: OnboardingNicknameScreenProps) => {
   const [nickname, setNickname] = useState('');
-  // 자음, 모음, 숫자 불가능
-  const nicknameRegExp = /([^가-힣\x20])/i;
-  const nicknameRegExpCheck = nicknameRegExp.test(nickname);
+  const [isWrite, setIsWrite] = useState(false);
+  const [checkPass, setCheckPass] = useState(false);
 
   const handleNicknameValue = (text: string) => {
     setNickname(text);
   };
 
   const goToNext = () => {
-    if (nickname && !nicknameRegExpCheck) {
+    if (nickname && checkPass) {
       navigate('OnboardingAccord', {
         nickname,
         ...route.params,
@@ -41,7 +44,13 @@ const OnboardingNickname = ({ navigation: { navigate }, route }: OnboardingNickn
             nickname={nickname}
             handleNicknameValue={handleNicknameValue}
             goToNext={goToNext}
+            setIsWrite={setIsWrite}
+            checkPass={checkPass}
+            setCheckPass={setCheckPass}
           />
+          <NextButton onPress={goToNext} isWrite={isWrite}>
+            <ButtonText>정했어요!</ButtonText>
+          </NextButton>
         </Container>
       </TouchableWithoutFeedback>
     </>
@@ -51,7 +60,7 @@ const OnboardingNickname = ({ navigation: { navigate }, route }: OnboardingNickn
 export default OnboardingNickname;
 
 const Container = styled.View`
-  padding: 0px 16px;
+  padding: 26px 16px;
   padding-top: 44px;
   flex: 1;
   background-color: white;

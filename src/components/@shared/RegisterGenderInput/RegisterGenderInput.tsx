@@ -1,6 +1,6 @@
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { Container, Label, Input, NextButton, ButtonText } from './RegisterGenderInput.styles';
+import { Container, Label, Input } from './RegisterGenderInput.styles';
 
 interface IRegisterGenderInput {
   label: string;
@@ -13,7 +13,6 @@ const RegisterGenderInput = ({
   label,
   selectedGender = 'F',
   handleSelectedGender,
-  goToNext,
 }: IRegisterGenderInput) => {
   return (
     <Container>
@@ -29,9 +28,6 @@ const RegisterGenderInput = ({
           <Picker.Item label="남자" value="M" />
         </Picker>
       </Input>
-      <NextButton onPress={goToNext}>
-        <ButtonText>다음으로</ButtonText>
-      </NextButton>
     </Container>
   );
 };

@@ -1,13 +1,14 @@
 import React from 'react';
-import FastImage from 'react-native-fast-image';
-import { Container, LogoImage } from './LoginLogo.styles';
+import { Container } from './LoginLogo.styles';
+import { WithLocalSvg } from 'react-native-svg';
 
 const LoginLogo = () => {
   return (
     <Container>
-      <LogoImage
-        source={require('../../assets/images/auth_img/login_logo.png')}
-        resizeMode={FastImage.resizeMode.contain}
+      <WithLocalSvg
+        asset={require('../../assets/images/auth_img/login_logo.svg')}
+        width={175}
+        height={100}
       />
     </Container>
   );
